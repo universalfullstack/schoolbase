@@ -1,0 +1,140 @@
+<div class="container-fluid py-4">
+  <!-- Greeting -->
+  <div class="mb-4">
+    <h1 class="h3">{{user.role}} Dashboard</h1>
+    {{#unless user.emailVerified}}
+      <div class="alert alert-warning d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <div>Email not verified</div>
+      </div>
+    {{/unless}}
+  </div>
+
+  <!-- Stat cards -->
+  <div class="row g-3 mb-4">
+    <!-- Schools -->
+    <div class="col-6 col-md-3">
+      <div class="card text-white bg-primary shadow-sm p-3 h-100">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-building fs-2 me-3"></i>
+          <div>
+            <small>Schools</small>
+            <h4>{{stats.totalSchools}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- School Admins -->
+    <div class="col-6 col-md-3">
+      <div class="card text-white bg-warning shadow-sm p-3 h-100">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-person-badge fs-2 me-3"></i>
+          <div>
+            <small>School Admins</small>
+            <h4>{{stats.totalSchoolAdmins}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Staff -->
+    <div class="col-6 col-md-3">
+      <div class="card text-white bg-purple shadow-sm p-3 h-100">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-people-fill fs-2 me-3"></i>
+          <div>
+            <small>Staff</small>
+            <h4>{{stats.totalStaff}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Students -->
+    <div class="col-6 col-md-3">
+      <div class="card text-white bg-info shadow-sm p-3 h-100">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-mortarboard fs-2 me-3"></i>
+          <div>
+            <small>Students</small>
+            <h4>{{stats.totalStudents}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subscription & Revenue Stats -->
+  <div class="row g-3 mb-4">
+    <!-- Active Subscriptions -->
+    <div class="col-6 col-md-3">
+      <div class="card text-white bg-success shadow-sm p-3 h-100">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-card-checklist fs-2 me-3"></i>
+          <div>
+            <small>Active Subscriptions</small>
+            <h4>{{stats.totalSubscriptions}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Revenue -->
+    <div class="col-6 col-md-3">
+      <div class="card text-white bg-teal shadow-sm p-3 h-100">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-cash-stack fs-2 me-3"></i>
+          <div>
+            <small>Total Revenue</small>
+            <h4>₦{{stats.totalRevenue}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Latest subscriptions table -->
+  <div class="card shadow-sm p-3">
+    <h5 class="mb-3">Latest Subscriptions</h5>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>School</th>
+            <th>Plan</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each latestSubscriptions}}
+          <tr>
+            <td>{{this.school}}</td>
+            <td>{{this.plan}}</td>
+            <td>{{this.startDate}}</td>
+            <td>{{this.endDate}}</td>
+            <td>{{this.status}}</td>
+          </tr>
+          {{else}}
+          <tr><td colspan="5" class="text-muted">No subscriptions yet</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{{#section "styles"}}
+<style>
+  .bg-purple { background-color: #6f42c1 !important; }
+  .bg-teal { background-color: #20c997 !important; }
+</style>
+{{/section}}
+
+{{#section "scripts"}}
+<script>
+  console.log("Dashboard loaded successfully");
+</script>
+{{/section}}

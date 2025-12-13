@@ -1,0 +1,133 @@
+<div class="container-fluid py-4">
+  <h1 class="h3 mb-4">My Profile</h1>
+
+  <!-- Alerts -->
+  {{#if success}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{success}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  {{/if}}
+  {{#if error}}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{error}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  {{/if}}
+
+  <div class="row">
+    <!-- Profile Form + Image -->
+    <form action="/super-admin/profile" method="POST" enctype="multipart/form-data" class="row w-100">
+      <!-- Profile Image Card -->
+      <div class="col-lg-4 mb-4">
+        <div class="card shadow-sm p-3 text-center">
+          <h5 class="card-title">Profile Picture</h5>
+          <div 
+            id="profile-dropzone" 
+            class="profile-image-wrapper mx-auto mb-3 rounded-circle border position-relative"
+            style="width: 180px; height: 180px; overflow: hidden; cursor: pointer;"
+          >
+            <img 
+              id="profilePreview" 
+              src="{{#if user.profileImage}}{{user.profileImage}}{{else}}/images/user-default.png{{/if}}" 
+              class="img-fluid w-100 h-100" 
+              style="object-fit: cover;"
+            >
+            <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-25 text-white" style="opacity:0; transition:opacity 0.2s;">
+              <i class="bi bi-camera fs-1"></i>
+            </div>
+          </div>
+          <input type="file" id="profileImageInput" name="profileImage" class="form-control d-none">
+          <p class="text-muted small">Drag & drop or click to upload</p>
+        </div>
+      </div>
+
+      <!-- Profile Form Fields -->
+      <div class="col-lg-8">
+        <div class="card shadow-sm p-4">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">First Name</label>
+              <input type="text" name="firstName" class="form-control" value="{{user.firstName}}" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Middle Name</label>
+              <input type="text" name="middleName" class="form-control" value="{{user.middleName}}">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Last Name</label>
+              <input type="text" name="lastName" class="form-control" value="{{user.lastName}}" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Gender</label>
+              <select name="gender" class="form-select" required>
+                <option value="">Select gender</option>
+                <option value="Male" {{#ifCond user.gender "Male"}}selected{{/ifCond}}>Male</option>
+                <option value="Female" {{#ifCond user.gender "Female"}}selected{{/ifCond}}>Female</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" name="dateOfBirth" class="form-control" value="{{user.dateOfBirth}}">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Phone</label>
+              <input type="text" name="phone" class="form-control" value="{{user.phone}}" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" value="{{user.email}}" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Address</label>
+              <input type="text" name="address" class="form-control" value="{{user.address}}">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-4 w-100">Update Profile</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Drag & Drop Script -->
+<script>
+  const dropzone = document.getElementById('profile-dropzone');
+  const fileInput = document.getElementById('profileImageInput');
+  const preview = document.getElementById('profilePreview');
+  const overlay = dropzone.querySelector('.overlay');
+
+  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('mouseenter', () => overlay.style.opacity = 1);
+  dropzone.addEventListener('mouseleave', () => overlay.style.opacity = 0);
+
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onload = e => preview.src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    overlay.style.opacity = 1;
+  });
+  dropzone.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    overlay.style.opacity = 0;
+  });
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    overlay.style.opacity = 0;
+    const file = e.dataTransfer.files[0];
+    if(file) {
+      fileInput.files = e.dataTransfer.files;
+      const reader = new FileReader();
+      reader.onload = e => preview.src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+</script>

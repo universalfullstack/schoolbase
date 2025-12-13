@@ -1,0 +1,61 @@
+<div class="container-fluid py-4">
+  <h1 class="h3 mb-4">{{school.name}}</h1>
+
+  <div class="row g-4">
+
+    <!-- Logo -->
+    <div class="col-lg-4">
+      <div class="card shadow-sm p-3 text-center">
+        <h5 class="card-title">School Logo</h5>
+        <img
+          src="{{school.logo}}"
+          class="img-fluid border rounded p-2"
+          style="max-height: 200px; object-fit: contain;"
+        >
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="col-lg-8">
+      <div class="card shadow-sm p-4">
+
+        <div class="mb-3">
+          <label class="fw-semibold">Name</label>
+          <p>{{school.name}}</p>
+        </div>
+
+        <div class="mb-3">
+          <label class="fw-semibold">Subdomain</label>
+          <p>{{school.subdomain}}</p>
+        </div>
+
+        <div class="mb-3">
+          <label class="fw-semibold">Email</label>
+          <p>{{school.email}}</p>
+        </div>
+
+        <div class="mb-3">
+          <label class="fw-semibold">Phone</label>
+          <p>{{school.phone}}</p>
+        </div>
+
+        <div class="mb-3">
+          <label class="fw-semibold">Address</label>
+          <p>{{school.address}}</p>
+        </div>
+
+        <div class="mb-3">
+          <label class="fw-semibold">Status</label>
+          <span class="badge bg-primary">{{school.status}}</span>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+              <a href="/super-admin/schools" class="btn btn-secondary w-100">Back</a>
+              <a href="/super-admin/schools/edit/{{school._id}}" class="btn btn-primary w-100">Edit School</a>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

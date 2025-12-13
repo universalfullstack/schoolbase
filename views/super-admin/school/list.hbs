@@ -1,0 +1,88 @@
+<div class="container-fluid py-4">
+
+  <!-- Page Header -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+    <h1 class="h3 mb-3 mb-md-0">
+      Schools
+    </h1>
+
+    <a href="/super-admin/schools/create/new" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i>
+      Create New School
+    </a>
+  </div>
+
+  <!-- Responsive Table Wrapper -->
+  <div class="table-responsive shadow-sm rounded-3">
+    <table class="table table-hover table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th class="text-nowrap">Logo</th>
+          <th class="text-nowrap">Name</th>
+          <th class="text-nowrap">Subdomain</th>
+          <th class="text-nowrap">Email</th>
+          <th class="text-nowrap">Phone</th>
+          <th class="text-nowrap">Status</th>
+          <th class="text-nowrap text-center" style="min-width:150px;">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each schools}}
+        <tr>
+          <td>
+            {{#if this.logo}}
+              <img 
+                src="{{this.logo}}" 
+                alt="logo" 
+                class="rounded" 
+                style="width:45px; height:45px; object-fit:cover;"
+              >
+            {{else}}
+              <span class="text-muted small">N/A</span>
+            {{/if}}
+          </td>
+
+          <td>{{this.name}}</td>
+          <td>{{this.subdomain}}</td>
+          <td class="text-break">{{this.email}}</td>
+          <td>{{this.phone}}</td>
+          <td>
+            <span class="badge {{#if (eq this.status 'Active')}}bg-success{{else}}bg-secondary{{/if}}">
+              {{this.status}}
+            </span>
+          </td>
+
+          <td class="text-center">
+            <div class="d-flex gap-2 flex-wrap justify-content-center">
+              <a href="/super-admin/schools/view/{{this._id}}" class="btn btn-sm btn-info">
+                <i class="bi bi-eye"></i>
+              </a>
+
+              <a href="/super-admin/schools/edit/{{this._id}}" class="btn btn-sm btn-warning">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+
+              <form action="/super-admin/schools/delete/{{this._id}}" method="POST" onsubmit="return confirm('Are you sure?')" class="d-inline">
+                <button class="btn btn-sm btn-danger" type="submit">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+
+        </tr>
+
+        {{else}}
+        <tr>
+          <td colspan="7" class="text-center py-4 text-muted">
+            No schools found
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

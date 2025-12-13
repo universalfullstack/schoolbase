@@ -1,0 +1,11 @@
+
+$primary: navy;
+$secondary: orange;
+
+// Import Bootstrap SCSS
+@use "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Your custom styles below
+body {
+  background: #f5f5f5;
+}

@@ -1,0 +1,281 @@
+<div class="container-fluid py-4">
+
+  <h1 class="h4 mb-4">
+    <i class="bi bi-gear-fill me-2"></i>App Settings
+  </h1>
+
+  {{> flashMessages }}
+
+  <form method="POST" enctype="multipart/form-data">
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" role="tablist">
+      <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#general" type="button">
+          <i class="bi bi-info-circle me-1"></i>General
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#branding" type="button">
+          <i class="bi bi-palette me-1"></i>Branding
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#messaging" type="button">
+          <i class="bi bi-envelope me-1"></i>Messaging
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- ================= GENERAL ================= -->
+      <div class="tab-pane fade show active" id="general">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h6 class="text-muted mb-3">System Information</h6>
+
+            <div class="mb-3">
+              <label class="form-label">System Name</label>
+              <input type="text" class="form-control" name="systemName"
+                     value="{{settings.general.systemName}}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Abbreviation</label>
+              <input type="text" class="form-control" name="abbreviation"
+                     value="{{settings.general.abbreviation}}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" rows="3"
+                        name="description">{{settings.general.description}}</textarea>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Currency</label>
+                <input type="text" class="form-control" name="currency"
+                       value="{{settings.general.currency}}">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Timezone</label>
+                <input type="text" class="form-control" name="timezone"
+                       value="{{settings.general.timezone}}">
+              </div>
+            </div>
+
+            <hr>
+
+            <h6 class="text-muted mb-3">Contact Information</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Support Email</label>
+              <input type="email" class="form-control" name="contactEmail"
+                     value="{{settings.contact.email}}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Support Phone</label>
+              <input type="text" class="form-control" name="contactPhone"
+                     value="{{settings.contact.phone}}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Office Address</label>
+              <textarea class="form-control" rows="2"
+                        name="contactAddress">{{settings.contact.address}}</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= BRANDING ================= -->
+      <div class="tab-pane fade" id="branding">
+        <div class="card mb-4">
+          <div class="card-body">
+
+            <h6 class="text-muted mb-3">Identity & Appearance</h6>
+
+            <div class="row g-4">
+
+              <!-- Logo -->
+              <div class="col-md-6">
+                <label class="form-label">Logo</label>
+                <div 
+                  id="logoDropzone" 
+                  class="image-dropzone border rounded position-relative mb-2"
+                  style="width:150px; height:150px; cursor:pointer; overflow:hidden; display:flex; align-items:center; justify-content:center;"
+                >
+                  <img 
+                    id="logoPreview" 
+                    src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{/if}}" 
+                    style="width:100%; height:100%; object-fit:cover;"
+                  >
+                  <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-25" style="opacity:0; transition:opacity 0.2s;">
+                    <i class="bi bi-camera fs-1 text-white"></i>
+                  </div>
+                </div>
+                <input type="file" id="logoInput" name="logo" class="form-control d-none" accept=".png,.jpg,.jpeg">
+                <p class="text-muted small">Recommended: square PNG or JPG, max 150x150px</p>
+              </div>
+
+              <!-- Favicon -->
+              <div class="col-md-6">
+                <label class="form-label">Favicon</label>
+                <div 
+                  id="faviconDropzone" 
+                  class="image-dropzone border rounded position-relative mb-2"
+                  style="width:80px; height:80px; cursor:pointer; overflow:hidden; display:flex; align-items:center; justify-content:center;"
+                >
+                  <img 
+                    id="faviconPreview" 
+                    src="{{#if settings.branding.favicon}}{{settings.branding.favicon}}{{/if}}" 
+                    style="width:100%; height:100%; object-fit:cover;"
+                  >
+                  <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-25" style="opacity:0; transition:opacity 0.2s;">
+                    <i class="bi bi-camera fs-1 text-white"></i>
+                  </div>
+                </div>
+                <input type="file" id="faviconInput" name="favicon" class="form-control d-none" accept=".png,.jpg,.jpeg">
+                <p class="text-muted small">Recommended: square PNG or JPG, max 80x80px</p>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Primary Color</label>
+                <input type="color" class="form-control form-control-color"
+                       name="primaryColor"
+                       value="{{settings.branding.primaryColor}}">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Secondary Color</label>
+                <input type="color" class="form-control form-control-color"
+                       name="secondaryColor"
+                       value="{{settings.branding.secondaryColor}}">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= MESSAGING ================= -->
+      <div class="tab-pane fade" id="messaging">
+        <div class="card mb-4">
+          <div class="card-body">
+
+            <h6 class="text-muted mb-3">Welcome Message</h6>
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <input type="text" class="form-control"
+                     name="welcomeSubject"
+                     value="{{settings.messaging.general.welcome.subject}}">
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Message Body</label>
+              <textarea class="form-control" rows="4"
+                        name="welcomeBody">{{settings.messaging.general.welcome.body}}</textarea>
+            </div>
+
+            <hr>
+
+            <h6 class="text-muted mb-3">Account Activation</h6>
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <input type="text" class="form-control"
+                     name="activationSubject"
+                     value="{{settings.messaging.account.activation.subject}}">
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Message Body</label>
+              <textarea class="form-control" rows="4"
+                        name="activationBody">{{settings.messaging.account.activation.body}}</textarea>
+            </div>
+
+            <hr>
+
+            <h6 class="text-muted mb-3">Subscription Expiry Warning</h6>
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <input type="text" class="form-control"
+                     name="subscriptionExpirySubject"
+                     value="{{settings.messaging.subscription.expiryWarning.subject}}">
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Message Body</label>
+              <textarea class="form-control" rows="4"
+                        name="subscriptionExpiryBody">{{settings.messaging.subscription.expiryWarning.body}}</textarea>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-save me-1"></i>Save Settings
+    </button>
+
+  </form>
+</div>
+
+{{#section "scripts"}}
+<script>
+  function setupImageDropzone(dropzoneId, inputId, previewId) {
+    const dropzone = document.getElementById(dropzoneId);
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const overlay = dropzone.querySelector('.overlay');
+
+    dropzone.addEventListener('click', () => input.click());
+    dropzone.addEventListener('mouseenter', () => overlay.style.opacity = 1);
+    dropzone.addEventListener('mouseleave', () => overlay.style.opacity = 0);
+
+    input.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if(file) {
+        if(!file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = e => preview.src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
+
+    dropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      overlay.style.opacity = 1;
+    });
+    dropzone.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      overlay.style.opacity = 0;
+    });
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      overlay.style.opacity = 0;
+      const file = e.dataTransfer.files[0];
+      if(file && file.type.startsWith('image/')) {
+        input.files = e.dataTransfer.files;
+        const reader = new FileReader();
+        reader.onload = e => preview.src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setupImageDropzone('logoDropzone', 'logoInput', 'logoPreview');
+    setupImageDropzone('faviconDropzone', 'faviconInput', 'faviconPreview');
+  });
+</script>
+{{/section}}
