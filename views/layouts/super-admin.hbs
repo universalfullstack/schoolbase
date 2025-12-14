@@ -4,136 +4,150 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>{{title}} &mdash; {{#if settings.general.systemName}}{{settings.general.systemName}}{{else}}My School System{{/if}} Super Admin</title>
+  <title>
+    {{title}} — 
+    {{#if settings.general.systemName}}
+      {{settings.general.systemName}}
+    {{else}}
+      My School System
+    {{/if}} Super Admin
+  </title>
 
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Custom Styles -->
   <link href="/css/style.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
-    body { min-height: 100vh; }
+    body { background: #f5f6f8; }
 
     .layout {
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 260px 1fr;
       min-height: 100vh;
     }
 
     .sidebar {
       background: #fff;
-      border-right: 1px solid #dee2e6;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
+      border-right: 1px solid #e0e0e0;
+      padding: 20px;
     }
 
-    main.content {
-      padding: 1.5rem;
-      background: #f8f9fa;
-      overflow-x: hidden;
+    .content {
+      padding: 24px;
     }
 
     .user-img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
-    @media (max-width: 991.98px) {
-      .layout { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
+    @media (max-width: 992px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 
   {{{_sections.styles}}}
 </head>
 
-<body class="bg-light">
+<body>
 
-<header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
+<!-- ================= TOP NAV ================= -->
+<nav class="white z-depth-1">
+  <div class="nav-wrapper container-fluid">
 
-    <div class="d-flex align-items-center">
-      <button class="btn btn-outline-primary d-lg-none me-2"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#mobileSidebar">
-        <i class="bi bi-list"></i>
-      </button>
+    <!-- Mobile Menu -->
+    <a href="#" data-target="mobile-sidebar" class="sidenav-trigger show-on-large">
+      <i class="material-icons blue-text">menu</i>
+    </a>
 
-      <a href="/" class="navbar-brand fw-bold text-dark">
-        {{settings.general.systemName}}
-      </a>
-    </div>
+    <!-- Brand -->
+    <a href="/" class="brand-logo black-text" style="margin-left: 10px">
+      {{settings.general.systemName}}
+    </a>
 
-    <div class="dropdown">
-      <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
-         href="#"
-         data-bs-toggle="dropdown">
-        <img src="{{user.profileImage}}" class="user-img me-2">
-        <span class="d-none d-md-inline">{{user.firstName}} {{user.lastName}}</span>
-      </a>
-
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="/super-admin/profile">Profile</a></li>
-        <li><a class="dropdown-item" href="/super-admin/settings">Settings</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
-      </ul>
-    </div>
+    <!-- User Dropdown -->
+    <ul class="right">
+      <li>
+        <a class="dropdown-trigger black-text" href="#!" data-target="user-dropdown">
+          <img src="{{user.profileImage}}" class="user-img valign-wrapper">
+          <span class="hide-on-small-only">
+            {{user.firstName}} {{user.lastName}}
+          </span>
+          <i class="material-icons right">arrow_drop_down</i>
+        </a>
+      </li>
+    </ul>
 
   </div>
-</header>
+</nav>
 
+<!-- User Dropdown -->
+<ul id="user-dropdown" class="dropdown-content">
+  <li><a href="/super-admin/profile">Profile</a></li>
+  <li><a href="/super-admin/settings">Settings</a></li>
+  <li class="divider"></li>
+  <li><a href="/logout" class="red-text">Logout</a></li>
+</ul>
+
+<!-- ================= DESKTOP LAYOUT ================= -->
 <div class="layout">
-  <!-- Desktop Sidebar -->
-  <nav class="sidebar d-none d-lg-flex flex-column p-3">
-    <div class="d-flex align-items-center mb-4">
-      <img src="{{user.profileImage}}" class="user-img me-2">
-      <div>
-        <div>{{user.firstName}} {{user.lastName}}</div>
-        <small class="text-muted">{{user.role}}</small>
+
+  <!-- Sidebar -->
+  <aside class="sidebar hide-on-med-and-down">
+    <div class="valign-wrapper" style="margin-bottom: 24px">
+      <img src="{{user.profileImage}}" class="user-img">
+      <div style="margin-left: 10px">
+        <strong>{{user.firstName}} {{user.lastName}}</strong><br>
+        <small class="grey-text">{{user.role}}</small>
       </div>
     </div>
 
     {{> super-admin-navLinks }}
 
-    <div class="mt-auto text-muted small">
+    <div class="grey-text text-darken-1" style="margin-top: 40px; font-size: 0.85rem">
       &copy; {{year}} {{school.name}}
     </div>
-  </nav>
+  </aside>
 
-  <!-- Main -->
+  <!-- Main Content -->
   <main class="content">
     {{{body}}}
   </main>
 </div>
 
-<!-- Mobile Sidebar -->
-<div class="offcanvas offcanvas-start d-lg-none" id="mobileSidebar">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title">{{school.name}}</h5>
-    <button class="btn-close" data-bs-dismiss="offcanvas"></button>
-  </div>
+<!-- ================= MOBILE SIDEBAR ================= -->
+<ul class="sidenav" id="mobile-sidebar">
+  <li class="user-view">
+    <div class="background blue darken-2"></div>
+    <img class="circle" src="{{user.profileImage}}">
+    <span class="white-text name">{{user.firstName}} {{user.lastName}}</span>
+    <span class="white-text email">{{user.role}}</span>
+  </li>
 
-  <div class="offcanvas-body p-0">
-    <nav class="sidebar d-flex flex-column p-3 border-0">
-      <div class="d-flex align-items-center mb-4">
-        <img src="{{user.profileImage}}" class="user-img me-2">
-        <div>
-          <div>{{user.firstName}} {{user.lastName}}</div>
-          <small class="text-muted">{{user.role}}</small>
-        </div>
-      </div>
+  {{> super-admin-navLinks }}
+</ul>
 
-      {{> super-admin-navLinks }}
-    </nav>
-  </div>
-</div>
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    M.Sidenav.init(document.querySelectorAll('.sidenav'));
+    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {
+      coverTrigger: false,
+      constrainWidth: false
+    });
+  });
+</script>
+
 {{{_sections.scripts}}}
 </body>
 </html>
+
