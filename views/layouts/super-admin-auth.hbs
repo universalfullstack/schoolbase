@@ -1,3 +1,4 @@
+<!-- ===================== auth.layout.hbs ===================== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,32 +7,26 @@
 
   <title>{{title}}</title>
 
-  <!-- UIkit CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.20.6/dist/css/uikit.min.css" />
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Optional: Custom App Styles -->
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="/css/style.css" />
 
-  <!-- Page-specific styles -->
   {{{_sections.styles}}}
 </head>
-<body class="uk-background-primary uk-light uk-height-viewport">
+<body class="blue darken-2 white-text">
 
-  <!-- App Layout -->
-  <div class="uk-flex uk-flex-column uk-height-viewport">
-
-    <!-- Main Content -->
-    <main class="uk-flex-1 uk-padding">
+  <main class="valign-wrapper" style="min-height: 100vh;">
+    <div class="container">
       {{{body}}}
-    </main>
+    </div>
+  </main>
 
-  </div>
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-  <!-- UIkit JS -->
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.6/dist/js/uikit.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.6/dist/js/uikit-icons.min.js"></script>
-
-  <!-- Page-specific scripts -->
   {{{_sections.scripts}}}
 </body>
 </html>
