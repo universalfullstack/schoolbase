@@ -1,23 +1,98 @@
+{{!-- ================= FLASH MESSAGES (SINGLE FILE) ================= --}}
+
+<style>
+  /* Flash Message Container */
+  .flash-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 280px;
+    max-width: 360px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    z-index: 9999;
+
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideIn 0.4s ease forwards;
+  }
+
+  /* Variants */
+  .flash-success {
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+  }
+
+  .flash-error {
+    background: linear-gradient(135deg, #c62828, #e53935);
+  }
+
+  /* Close button */
+  .flash-close {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 12px;
+    line-height: 1;
+  }
+
+  /* Animations */
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideOut {
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+</style>
+
 {{#if success}}
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      M.toast({
-        html: '{{success}}',
-        classes: 'green darken-2 white-text',
-        displayLength: 4000
-      });
-    });
-  </script>
+  <div class="flash-message flash-success" data-timeout="4000">
+    <span>{{success}}</span>
+    <button class="flash-close">&times;</button>
+  </div>
 {{/if}}
 
 {{#if error}}
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      M.toast({
-        html: '{{error}}',
-        classes: 'red darken-2 white-text',
-        displayLength: 5000
-      });
-    });
-  </script>
+  <div class="flash-message flash-error" data-timeout="5000">
+    <span>{{error}}</span>
+    <button class="flash-close">&times;</button>
+  </div>
 {{/if}}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const flashes = document.querySelectorAll('.flash-message');
+
+    flashes.forEach(flash => {
+      const timeout = flash.dataset.timeout || 4000;
+
+      // Auto dismiss
+      setTimeout(() => closeFlash(flash), timeout);
+
+      // Manual close
+      const closeBtn = flash.querySelector('.flash-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => closeFlash(flash));
+      }
+    });
+
+    function closeFlash(flash) {
+      flash.style.animation = 'slideOut 0.3s ease forwards';
+      setTimeout(() => flash.remove(), 300);
+    }
+  });
+</script>
