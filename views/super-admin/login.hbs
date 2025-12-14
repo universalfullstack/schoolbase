@@ -1,75 +1,79 @@
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+<div class="uk-flex uk-flex-center uk-flex-middle uk-height-viewport">
+  <div class="uk-card uk-card-default uk-card-body uk-box-shadow-large" style="max-width: 400px; width: 100%;">
 
-    <div class="text-center mb-4">
-      <img src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}" alt="School Logo" class="img-fluid" style="max-height: 80px;">
-      <h3 class="mt-2">Super Admin Login</h3>
-      <p class="text-muted">Enter your credentials to continue</p>
+    <!-- Header -->
+    <div class="uk-text-center uk-margin-bottom">
+      <img src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}" 
+           alt="School Logo" 
+           class="uk-margin-small-bottom" 
+           style="max-height: 80px;" />
+      <h3 class="uk-margin-remove">Super Admin Login</h3>
+      <p class="uk-text-muted uk-margin-small-top">Enter your credentials to continue</p>
     </div>
 
-    {{!-- Flash Messages Partial --}}
+    <!-- Flash Messages -->
     {{> flashMessages }}
 
-    <form action="/auth/login" method="POST">
-      {{!-- Hidden role field --}}
-      <input type="hidden" name="role" value="Super Admin">
+    <!-- Login Form -->
+    <form action="/auth/login" method="POST" class="uk-form-stacked">
 
-      {{!-- Email or Phone --}}
-      <div class="mb-3">
-        <label for="identifier" class="form-label">Email or Phone</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-person"></i></span>
-          <input type="text" class="form-control" id="identifier" name="identifier" placeholder="Email or Phone" required>
+      <!-- Hidden role field -->
+      <input type="hidden" name="role" value="Super Admin" />
+
+      <!-- Email or Phone -->
+      <div class="uk-margin">
+        <label class="uk-form-label" for="identifier">Email or Phone</label>
+        <div class="uk-form-controls uk-inline uk-width-1-1">
+          <span class="uk-form-icon" uk-icon="icon: user"></span>
+          <input class="uk-input" type="text" id="identifier" name="identifier" placeholder="Email or Phone" required />
         </div>
       </div>
 
-      {{!-- Password --}}
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock"></i></span>
-          <input type="password" class="form-control" id="password" name="password" required>
-          <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-            <i class="bi bi-eye"></i>
-          </button>
+      <!-- Password -->
+      <div class="uk-margin">
+        <label class="uk-form-label" for="password">Password</label>
+        <div class="uk-form-controls uk-inline uk-width-1-1">
+          <span class="uk-form-icon" uk-icon="icon: lock"></span>
+          <input class="uk-input" type="password" id="password" name="password" required />
+          <a class="uk-form-icon uk-form-icon-flip" href="#" id="togglePassword" uk-icon="icon: eye"></a>
         </div>
       </div>
 
-      {{!-- Remember Me --}}
-      <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
-        <label class="form-check-label" for="rememberMe">
-          Remember Me
-        </label>
+      <!-- Remember Me -->
+      <div class="uk-margin uk-flex uk-flex-middle">
+        <label><input class="uk-checkbox" type="checkbox" name="rememberMe" /> Remember Me</label>
       </div>
 
-      {{!-- Submit Button --}}
-      <div class="d-grid">
-        <button type="submit" class="btn btn-primary">
-          <i class="bi bi-box-arrow-in-right me-1"></i> Login
+      <!-- Submit Button -->
+      <div class="uk-margin">
+        <button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+          <span uk-icon="sign-in"></span> Login
         </button>
       </div>
+
     </form>
 
-    <div class="mt-3 text-center">
-      <a href="/forgot-password" class="text-decoration-none">Forgot password?</a>
+    <!-- Forgot Password -->
+    <div class="uk-text-center uk-margin-top">
+      <a href="/forgot-password" class="uk-link-muted">Forgot password?</a>
     </div>
+
   </div>
 </div>
 
 {{#section "scripts"}}
 <script>
-  // Password toggle script
+  // Password toggle script (UIkit compatible)
   document.addEventListener('DOMContentLoaded', () => {
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
 
     if (togglePassword && passwordInput) {
-      togglePassword.addEventListener('click', function () {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        this.querySelector('i').classList.toggle('bi-eye');
-        this.querySelector('i').classList.toggle('bi-eye-slash');
+      togglePassword.addEventListener('click', function (e) {
+        e.preventDefault();
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        this.setAttribute('uk-icon', isPassword ? 'icon: eye-slash' : 'icon: eye');
       });
     }
   });
