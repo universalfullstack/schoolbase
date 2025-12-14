@@ -9,6 +9,7 @@ import { engine } from 'express-handlebars';
 import hbsHelpers from './helpers/hbsHelpers.js';
 import baseRoutes from './routes_base/index.js';
 import subdomainResolver from './middleware/subdomainResolver.js';
+import errorHandler from './middleware/errorHandler.js';
 import appSettings from './middleware/appSettings.js';
 import passport from 'passport';
 import configurePassport from './config/passport.js';
@@ -77,7 +78,7 @@ app.use((req, res, next) => {
   res.locals.currentPath = req.path;
   res.locals.year = new Date().getFullYear();
   res.locals.settings = req.appSettings || null;
-  console.log('Settings: ', res.locals.settings)
+  // console.log('Settings: ', res.locals.settings)
   next();
 });
 
@@ -107,6 +108,14 @@ app.use(
     subdomainResolver(req, res, next);
   })
 );
+
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).render("error", { message: "Page not found", error: {} });
+});
+
+// Error handler
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () =>

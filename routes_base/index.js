@@ -39,4 +39,14 @@ router.use('/auth', authRoutes);
 // Super Admin routes
 router.use('/super-admin', superAdminRoutes);
 
+/* SUPER ADMIN 404 — MUST BE LAST */
+router.use((req, res) => {
+  res.status(404).render('errors/404', {
+    layout: 'super-admin',
+    title: 'Super Admin Page Not Found',
+    message: 'This super admin page does not exist.',
+    backUrl: '/super-admin/dashboard'
+  });
+});
+
 export default router;

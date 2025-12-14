@@ -1,9 +1,7 @@
-
-$primary: navy;
-$secondary: orange;
-
-// Import Bootstrap SCSS
-@use "../../node_modules/bootstrap/scss/bootstrap.scss";
+@use "../../node_modules/bootstrap/scss/bootstrap" with (
+  $primary: #2563eb,   // Modern blue (trust + tech)
+  $secondary: #10b981 // Emerald (growth + success)
+);
 
 // Your custom styles below
 body {

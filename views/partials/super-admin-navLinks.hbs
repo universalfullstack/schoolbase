@@ -1,0 +1,102 @@
+<ul class="nav nav-pills flex-column mb-auto">
+  <li class="nav-item mb-1">
+    <a class="nav-link {{#ifActive '/super-admin/dashboard'}}active{{/ifActive}}" href="/super-admin/dashboard">
+      <i class="bi bi-speedometer2 me-2"></i>Dashboard
+    </a>
+  </li>
+
+  <!-- Schools -->
+  <li class="nav-item mb-1">
+    <a class="nav-link d-flex justify-content-between align-items-center
+      {{#ifActivePrefix currentPath '/super-admin/schools'}}{{else}}collapsed{{/ifActivePrefix}}"
+      data-bs-toggle="collapse"
+      href="#schoolsMenu"
+      aria-expanded="{{#ifActivePrefix currentPath '/super-admin/schools'}}true{{else}}false{{/ifActivePrefix}}">
+      <span><i class="bi bi-mortarboard me-2"></i>Schools</span>
+      <i class="bi bi-chevron-down small"></i>
+    </a>
+
+    <div class="collapse ps-3 {{#ifActivePrefix currentPath '/super-admin/schools'}}show{{/ifActivePrefix}}" id="schoolsMenu">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link {{#ifActive '/super-admin/schools'}}active{{/ifActive}}" href="/super-admin/schools">All Schools</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{#ifActive '/super-admin/schools/create/new'}}active{{/ifActive}}" href="/super-admin/schools/create/new">Create School</a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <!-- Students -->
+  <li class="nav-item mb-1">
+    <a class="nav-link d-flex justify-content-between align-items-center
+      {{#ifActivePrefix currentPath '/super-admin/students'}}{{else}}collapsed{{/ifActivePrefix}}"
+      data-bs-toggle="collapse"
+      href="#studentsMenu"
+      aria-expanded="{{#ifActivePrefix currentPath '/super-admin/students'}}true{{else}}false{{/ifActivePrefix}}">
+      <span><i class="bi bi-people me-2"></i>Students</span>
+      <i class="bi bi-chevron-down small"></i>
+    </a>
+
+    <div class="collapse ps-3 {{#ifActivePrefix currentPath '/super-admin/students'}}show{{/ifActivePrefix}}" id="studentsMenu">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link {{#ifActive '/super-admin/students'}}active{{/ifActive}}" href="/super-admin/students">All Students</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{#ifActive '/super-admin/enrollments'}}active{{/ifActive}}" href="/super-admin/enrollments">Enrollments</a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <!-- Staff -->
+  <li class="nav-item mb-1">
+    <a class="nav-link d-flex justify-content-between align-items-center
+      {{#ifActivePrefix currentPath '/super-admin/staff'}}{{else}}collapsed{{/ifActivePrefix}}"
+      data-bs-toggle="collapse"
+      href="#staffMenu"
+      aria-expanded="{{#ifActivePrefix currentPath '/super-admin/staff'}}true{{else}}false{{/ifActivePrefix}}">
+      <span><i class="bi bi-person-badge me-2"></i>Staff</span>
+      <i class="bi bi-chevron-down small"></i>
+    </a>
+
+    <div class="collapse ps-3 {{#ifActivePrefix currentPath '/super-admin/staff'}}show{{/ifActivePrefix}}" id="staffMenu">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link {{#ifActive '/super-admin/staff'}}active{{/ifActive}}" href="/super-admin/staff">All Staff</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{#ifActive '/super-admin/roles'}}active{{/ifActive}}" href="/super-admin/roles">Roles</a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="nav-item mb-1">
+    <a class="nav-link {{#ifActive '/super-admin/classes'}}active{{/ifActive}}" href="/super-admin/classes">
+      <i class="bi bi-journal-bookmark me-2"></i>Classes
+    </a>
+  </li>
+
+  <li class="nav-item mt-3">
+    <small class="text-muted px-2">Administration</small>
+  </li>
+
+  <li class="nav-item mb-1">
+    <a class="nav-link {{#ifActive '/super-admin/settings'}}active{{/ifActive}}" href="/super-admin/settings">
+      <i class="bi bi-gear me-2"></i>Settings
+    </a>
+  </li>
+  <li class="nav-item mb-1">
+    <a class="nav-link {{#ifActive '/super-admin/plans'}}active{{/ifActive}}" href="/super-admin/plans">
+      <i class="bi bi-layers me-2"></i>Plans
+    </a>
+  </li>
+  <li class="nav-item mb-1">
+    <a class="nav-link {{#ifActive '/super-admin/subscriptions'}}active{{/ifActive}}" href="/super-admin/subscriptions">
+      <i class="bi bi-card-checklist me-2"></i>Subscriptions
+    </a>
+  </li>
+</ul>

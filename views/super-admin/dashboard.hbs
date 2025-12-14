@@ -1,4 +1,5 @@
 <div class="container-fluid py-4">
+
   <!-- Greeting -->
   <div class="mb-4">
     <h1 class="h3">{{user.role}} Dashboard</h1>
@@ -16,7 +17,6 @@
     <div class="col-6 col-md-3">
       <div class="card text-white bg-primary shadow-sm p-3 h-100">
         <div class="d-flex align-items-center">
-          <i class="bi bi-building fs-2 me-3"></i>
           <div>
             <small>Schools</small>
             <h4>{{stats.totalSchools}}</h4>
@@ -29,7 +29,6 @@
     <div class="col-6 col-md-3">
       <div class="card text-white bg-warning shadow-sm p-3 h-100">
         <div class="d-flex align-items-center">
-          <i class="bi bi-person-badge fs-2 me-3"></i>
           <div>
             <small>School Admins</small>
             <h4>{{stats.totalSchoolAdmins}}</h4>
@@ -42,7 +41,6 @@
     <div class="col-6 col-md-3">
       <div class="card text-white bg-purple shadow-sm p-3 h-100">
         <div class="d-flex align-items-center">
-          <i class="bi bi-people-fill fs-2 me-3"></i>
           <div>
             <small>Staff</small>
             <h4>{{stats.totalStaff}}</h4>
@@ -55,7 +53,6 @@
     <div class="col-6 col-md-3">
       <div class="card text-white bg-info shadow-sm p-3 h-100">
         <div class="d-flex align-items-center">
-          <i class="bi bi-mortarboard fs-2 me-3"></i>
           <div>
             <small>Students</small>
             <h4>{{stats.totalStudents}}</h4>
@@ -63,15 +60,11 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Subscription & Revenue Stats -->
-  <div class="row g-3 mb-4">
     <!-- Active Subscriptions -->
     <div class="col-6 col-md-3">
       <div class="card text-white bg-success shadow-sm p-3 h-100">
         <div class="d-flex align-items-center">
-          <i class="bi bi-card-checklist fs-2 me-3"></i>
           <div>
             <small>Active Subscriptions</small>
             <h4>{{stats.totalSubscriptions}}</h4>
@@ -84,12 +77,28 @@
     <div class="col-6 col-md-3">
       <div class="card text-white bg-teal shadow-sm p-3 h-100">
         <div class="d-flex align-items-center">
-          <i class="bi bi-cash-stack fs-2 me-3"></i>
           <div>
             <small>Total Revenue</small>
             <h4>₦{{stats.totalRevenue}}</h4>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-lg-6">
+      <div class="card p-3 shadow-sm">
+        <h5>Subscription Trend (Last 6 Months)</h5>
+        <canvas id="subscriptionTrendChart"></canvas>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="card p-3 shadow-sm">
+        <h5>Subscriptions by Status</h5>
+        <canvas id="subscriptionStatusChart"></canvas>
       </div>
     </div>
   </div>
@@ -115,7 +124,17 @@
             <td>{{this.plan}}</td>
             <td>{{this.startDate}}</td>
             <td>{{this.endDate}}</td>
-            <td>{{this.status}}</td>
+            <td>
+              {{#if (eq this.status "active")}}
+                <span class="badge bg-success">Active</span>
+              {{else if (eq this.status "expired")}}
+                <span class="badge bg-danger">Expired</span>
+              {{else if (eq this.status "pending")}}
+                <span class="badge bg-warning text-dark">Pending</span>
+              {{else}}
+                <span class="badge bg-secondary">Cancelled</span>
+              {{/if}}
+            </td>
           </tr>
           {{else}}
           <tr><td colspan="5" class="text-muted">No subscriptions yet</td></tr>
@@ -134,7 +153,57 @@
 {{/section}}
 
 {{#section "scripts"}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  console.log("Dashboard loaded successfully");
+  // Parse JSON strings passed from controller
+  const trendLabels  = {{{trendLabels}}};
+  const trendData    = {{{trendData}}};
+  const statusLabels = {{{statusLabels}}};
+  const statusData   = {{{statusData}}};
+
+  // ----------------- Subscription Trend Chart -----------------
+  const ctxTrend = document.getElementById('subscriptionTrendChart').getContext('2d');
+  new Chart(ctxTrend, {
+    type: 'line',
+    data: {
+      labels: trendLabels,
+      datasets: [{
+        label: 'New Subscriptions',
+        data: trendData,
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // ----------------- Subscription Status Chart -----------------
+  const ctxStatus = document.getElementById('subscriptionStatusChart').getContext('2d');
+  new Chart(ctxStatus, {
+    type: 'doughnut',
+    data: {
+      labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
+      datasets: [{
+        data: statusData,
+        backgroundColor: [
+          '#198754', // active
+          '#dc3545', // expired
+          '#ffc107', // pending
+          '#6c757d', // cancelled
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } }
+    }
+  });
 </script>
 {{/section}}

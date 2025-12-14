@@ -4,6 +4,8 @@ import { renderSuperAdminDashboard } from '../controllers/super_admin/dashboardC
 import { renderSuperAdminProfile } from '../controllers/super_admin/profileController.js';
 import schoolRoutes from './school.js';
 import settingRoutes from './setting.js';
+import planRoutes from './plan.js';
+import subscriptionRoutes from './subscription.js';
 
 const router = express.Router();
 
@@ -23,5 +25,11 @@ router.use('/profile', renderSuperAdminProfile);
 
 // Settings routes
 router.use('/settings', settingRoutes);
+
+// Plans routes
+router.use('/plans', planRoutes);
+
+// Subscription routes
+router.use('/subscriptions', subscriptionRoutes);
 
 export default router;

@@ -1,16 +1,12 @@
 import dayjs from "dayjs";
-
-// User models
 import { Student, Staff, Guardian, SchoolAdmin } from "../../models/User.js";
-
-// Academic models
 import School from "../../models/School.js";
 import Subscription from "../../models/Subscription.js";
 
 export const renderSuperAdminDashboard = async (req, res) => {
   try {
     // -----------------------------
-    // Parallel fetch for essential stats
+    // Fetch basic stats in parallel
     // -----------------------------
     const [totalSchools, totalStudents, totalGuardians, totalStaff, totalSchoolAdmins, subscriptionsAgg, latestSubscriptionsRaw] =
       await Promise.all([
@@ -19,12 +15,9 @@ export const renderSuperAdminDashboard = async (req, res) => {
         Guardian.countDocuments(),
         Staff.countDocuments(),
         SchoolAdmin.countDocuments(),
-
         Subscription.aggregate([
-          { $match: { status: "active" } },
           { $group: { _id: null, totalRevenue: { $sum: "$amountPaid" }, totalActive: { $sum: 1 } } }
         ]),
-
         Subscription.find()
           .sort({ createdAt: -1 })
           .limit(6)
@@ -37,7 +30,7 @@ export const renderSuperAdminDashboard = async (req, res) => {
     const totalRevenue = subscriptionsAgg[0]?.totalRevenue || 0;
 
     // -----------------------------
-    // Format latest subscriptions
+    // Latest subscriptions formatting
     // -----------------------------
     const latestSubscriptions = latestSubscriptionsRaw.map(s => ({
       school: s.school?.name || "Unknown",
@@ -48,13 +41,49 @@ export const renderSuperAdminDashboard = async (req, res) => {
     }));
 
     // -----------------------------
-    // Render view
+    // Subscription trend: last 6 months
+    // -----------------------------
+    const sixMonthsAgo = dayjs().subtract(5, "month").startOf("month").toDate();
+
+    const trendAgg = await Subscription.aggregate([
+      { $match: { startDate: { $gte: sixMonthsAgo } } },
+      {
+        $group: {
+          _id: { month: { $dateToString: { format: "%Y-%m", date: "$startDate" } } },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { "_id.month": 1 } }
+    ]);
+
+    const trendLabelsArray = [];
+    const trendDataArray = [];
+    for (let i = 0; i < 6; i++) {
+      const m = dayjs().subtract(5 - i, "month").format("YYYY-MM");
+      trendLabelsArray.push(dayjs(m + "-01").format("MMM YYYY"));
+      const found = trendAgg.find(t => t._id.month === m);
+      trendDataArray.push(found ? found.count : 0);
+    }
+
+    // -----------------------------
+    // Subscriptions by status summary
+    // -----------------------------
+    const statusAgg = await Subscription.aggregate([
+      { $group: { _id: "$status", count: { $sum: 1 } } }
+    ]);
+
+    const statusLabelsArray = ["active", "expired", "pending", "cancelled"];
+    const statusDataArray = statusLabelsArray.map(label => {
+      const found = statusAgg.find(s => s._id === label);
+      return found ? found.count : 0;
+    });
+
+    // -----------------------------
+    // Render dashboard
     // -----------------------------
     res.render("super-admin/dashboard", {
       layout: "super-admin",
       title: "Dashboard",
-      now: new Date(),
-
       stats: {
         totalSchools,
         totalStaff,
@@ -63,8 +92,13 @@ export const renderSuperAdminDashboard = async (req, res) => {
         totalSubscriptions,
         totalRevenue,
       },
+      latestSubscriptions,
 
-      latestSubscriptions
+      // Pass JSON strings to template safely
+      trendLabels: JSON.stringify(trendLabelsArray),
+      trendData: JSON.stringify(trendDataArray),
+      statusLabels: JSON.stringify(statusLabelsArray),
+      statusData: JSON.stringify(statusDataArray),
     });
 
   } catch (err) {

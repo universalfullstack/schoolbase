@@ -21,7 +21,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development node --watch server.js",
     "start": "cross-env NODE_ENV=production node server.js",
-    "watch:css": "sass src/scss/style.scss public/css/style.css --style=compressed --watch",
+    "build:css": "sass src/scss/style.scss public/css/style.css --style=compressed",
     "seed:superadmin": "node ./seeders/seedSuperAdmin.js"
   },
   "dependencies": {

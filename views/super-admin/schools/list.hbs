@@ -1,0 +1,222 @@
+<div class="container-fluid py-5">
+
+  <!-- Header -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+    <h1 class="h3 mb-0">Schools</h1>
+
+    <a href="/super-admin/schools/create/new" class="btn btn-primary">
+      Create New School
+    </a>
+  </div>
+
+  {{> flashMessages}}
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-4" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        data-bs-toggle="tab"
+        data-bs-target="#activeTab"
+        type="button"
+        role="tab">
+        Active Schools
+        <span class="badge bg-success ms-1">{{activeSchools.length}}</span>
+      </button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        data-bs-toggle="tab"
+        data-bs-target="#inactiveTab"
+        type="button"
+        role="tab">
+        Inactive Schools
+        <span class="badge bg-secondary ms-1">{{inactiveSchools.length}}</span>
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+
+    <!-- ================= ACTIVE SCHOOLS ================= -->
+    <div class="tab-pane fade show active" id="activeTab" role="tabpanel">
+
+      {{#if activeSchools.length}}
+      <table id="activeTable" class="table table-striped table-bordered nowrap w-100 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Logo</th>
+            <th>School Name</th>
+            <th>Subdomain</th>
+            <th>Status</th>
+            <th style="width: 220px;">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each activeSchools}}
+          <tr>
+            <td>
+              <img
+                src="{{#if this.logo}}{{this.logo}}{{else}}/images/school-default.png{{/if}}"
+                alt="{{this.name}} logo"
+                class="rounded"
+                style="width:40px;height:40px;object-fit:cover;">
+            </td>
+
+            <td>{{this.name}}</td>
+            <td>{{this.subdomain}}</td>
+
+            <td>
+              {{#if (eq this.status "Active")}}
+                <span class="badge bg-success text-light">Active</span>
+              {{else}}
+                <span class="badge bg-danger text-light">{{this.status}}</span>
+              {{/if}}
+            </td>
+
+            <td class="d-flex gap-2">
+              <a
+                href="/super-admin/schools/edit/{{this._id}}"
+                class="btn btn-sm btn-outline-primary w-33">
+                Edit School
+              </a>
+
+              <form
+                action="/super-admin/schools/delete/{{this._id}}"
+                method="POST"
+                onsubmit="return confirm('Delete this school? This action cannot be undone.');"
+                class="w-33">
+                <button class="btn btn-sm btn-outline-danger w-100">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+        <div class="alert alert-info">
+          No active schools found.
+        </div>
+      {{/if}}
+
+    </div>
+
+    <!-- ================= INACTIVE SCHOOLS ================= -->
+    <div class="tab-pane fade" id="inactiveTab" role="tabpanel">
+
+      {{#if inactiveSchools.length}}
+      <table id="inactiveTable" class="table table-striped table-bordered nowrap w-100 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Logo</th>
+            <th>School Name</th>
+            <th>Subdomain</th>
+            <th>Status</th>
+            <th style="width: 220px;">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each inactiveSchools}}
+          <tr>
+            <td>
+              <img
+                src="{{this.logo}}"
+                alt="{{this.name}} logo"
+                class="rounded"
+                style="width:40px;height:40px;object-fit:cover;">
+            </td>
+
+            <td>{{this.name}}</td>
+            <td>{{this.subdomain}}</td>
+
+            <td>
+              {{#if (eq this.status "Active")}}
+                <span class="badge bg-success text-light">Active</span>
+              {{else}}
+                <span class="badge bg-danger text-light">{{this.status}}</span>
+              {{/if}}
+            </td>
+
+            <td class="d-flex gap-2">
+              <a
+                href="/super-admin/schools/edit/{{this._id}}"
+                class="btn btn-sm btn-outline-primary w-33">
+                Edit School
+              </a>
+
+              <form
+                action="/super-admin/schools/activate/{{this._id}}"
+                method="POST"
+                onsubmit="return confirm('Activate this school?');"
+                class="w-33">
+                <button class="btn btn-sm btn-outline-success w-100">
+                  Activate
+                </button>
+              </form>
+
+              <form
+                action="/super-admin/schools/delete/{{this._id}}"
+                method="POST"
+                onsubmit="return confirm('Delete this school? This action cannot be undone.');"
+                class="w-33">
+                <button class="btn btn-sm btn-outline-danger w-100">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+        <div class="alert alert-info">
+          No inactive schools found.
+        </div>
+      {{/if}}
+
+    </div>
+  </div>
+</div>
+
+{{#section "styles"}}
+<link
+  href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css"
+  rel="stylesheet">
+
+<link
+  href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css"
+  rel="stylesheet">
+{{/section}}
+
+{{#section "scripts"}}
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    const activeTable = $('#activeTable').DataTable({
+      responsive: true,
+      pageLength: 10
+    });
+
+    const inactiveTable = $('#inactiveTable').DataTable({
+      responsive: true,
+      pageLength: 10
+    });
+
+    // Fix DataTables width when switching tabs
+    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function () {
+      activeTable.columns.adjust().responsive.recalc();
+      inactiveTable.columns.adjust().responsive.recalc();
+    });
+  });
+</script>
+{{/section}}

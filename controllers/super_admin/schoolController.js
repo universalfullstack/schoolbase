@@ -11,11 +11,14 @@ import {
 export const listSchools = async (req, res) => {
   try {
     const schools = await School.find({ deletedAt: null }).lean();
+    const activeSchools = schools.filter(s => s.status === "Active");
+    const inactiveSchools = schools.filter(s => s.status !== "Active");
 
-    res.render("super-admin/school/list", {
+    res.render("super-admin/schools/list", {
       layout: "super-admin",
       title: "Schools",
-      schools
+      activeSchools,
+      inactiveSchools
     });
   } catch (err) {
     console.error(err);
@@ -34,7 +37,7 @@ export const viewSchool = async (req, res) => {
 
     if (!school) return res.status(404).send("School not found");
 
-    res.render("super-admin/school/view", {
+    res.render("super-admin/schools/view", {
       layout: "super-admin",
       title: school.name,
       school
@@ -49,7 +52,7 @@ export const viewSchool = async (req, res) => {
 // RENDER CREATE SCHOOL FORM
 // ============================
 export const renderCreateSchool = (req, res) => {
-  res.render("super-admin/school/create", {
+  res.render("super-admin/schools/create", {
     layout: "super-admin",
     title: "Create School",
     old: req.session.formData || {}
@@ -116,7 +119,7 @@ export const renderEditSchool = async (req, res) => {
     const school = await School.findById(req.params.id).lean();
     if (!school) return res.status(404).send("School not found");
 
-    res.render("super-admin/school/edit", {
+    res.render("super-admin/schools/edit", {
       layout: "super-admin",
       title: `Edit ${school.name}`,
       school,

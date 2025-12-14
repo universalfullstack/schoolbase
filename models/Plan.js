@@ -6,7 +6,8 @@ const PlanSchema = new mongoose.Schema(
     description: { type: String },
 
     // Pricing
-    price: { type: Number, required: true }, // in your preferred currency (e.g., USD)
+    price: { type: Number, required: true }, // in your preferred currency (e.g., NGN)
+    discount: { type: Number, default: 0 }, // No discount by default
     billingCycle: {
       type: String,
       enum: ["monthly", "yearly"],
@@ -18,7 +19,6 @@ const PlanSchema = new mongoose.Schema(
     maxStaff: { type: Number, default: 0 },
     maxClasses: { type: Number, default: 0 },
     maxSections: { type: Number, default: 0 },
-    maxStorageMB: { type: Number, default: 0 }, // storage limit in MB, 0 = unlimited
 
     // Additional features
     features: [{ type: String }], // e.g., ["Messaging", "Reports", "Custom Branding"]

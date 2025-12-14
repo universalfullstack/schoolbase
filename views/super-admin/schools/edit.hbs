@@ -12,20 +12,33 @@
 
           <div
             id="logoDropzone"
-            class="rounded border d-flex align-items-center justify-content-center mb-3"
-            style="height: 180px; cursor: pointer; overflow: hidden;"
+            class="rounded border d-flex align-items-center justify-content-center mb-3 position-relative"
+            style="height:180px; cursor:pointer; overflow:hidden;"
           >
             <img
               id="logoPreview"
-              src="{{school.logo}}"
+              src="{{#if school.logo}}{{school.logo}}{{else}}/images/school-default.png{{/if}}"
               class="img-fluid"
-              style="max-height: 100%; max-width: 100%; object-fit: contain;"
+              style="max-height:100%; max-width:100%; object-fit:contain;"
             >
+
+            <!-- Hover overlay -->
+            <div
+              class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-white"
+              style="background:rgba(0,0,0,0.55); opacity:0; transition:opacity .2s;"
+              id="logoOverlay"
+            >
+              <i class="bi bi-cloud-arrow-up fs-1 mb-2"></i>
+              <strong>Drop a new logo here</strong>
+              <small class="text-light">or click to browse</small>
+            </div>
           </div>
 
-          <input type="file" id="logoInput" name="logo" class="form-control d-none">
+          <input type="file" id="logoInput" name="logo" class="form-control d-none" accept="image/*">
 
-          <p class="small text-muted">Upload a new logo (optional)</p>
+          <p class="small text-muted mb-0">
+            Recommended: square image (PNG or JPG), max 2MB. Leave empty to keep current logo.
+          </p>
         </div>
       </div>
 
@@ -69,15 +82,9 @@
           </div>
 
           <div class="d-flex gap-2 mt-4">
-                <a href="/super-admin/schools" class="btn btn-secondary w-100">
-                    Back
-                </a>
-                <button type="submit" class="btn btn-primary w-100">
-                    Save Changes
-                </button>
-
-            </div>
-
+            <a href="/super-admin/schools" class="btn btn-secondary w-100">Back</a>
+            <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+          </div>
 
         </div>
       </div>
@@ -89,17 +96,34 @@
   const dz = document.getElementById("logoDropzone");
   const input = document.getElementById("logoInput");
   const preview = document.getElementById("logoPreview");
+  const overlay = document.getElementById("logoOverlay");
 
   dz.addEventListener("click", () => input.click());
+
+  dz.addEventListener("mouseenter", () => overlay.style.opacity = "1");
+  dz.addEventListener("mouseleave", () => overlay.style.opacity = "0");
+
   input.addEventListener("change", e => {
     const file = e.target.files[0];
     if (file) preview.src = URL.createObjectURL(file);
   });
-  dz.addEventListener("dragover", e => e.preventDefault());
+
+  dz.addEventListener("dragover", e => {
+    e.preventDefault();
+    overlay.style.opacity = "1";
+  });
+
+  dz.addEventListener("dragleave", () => {
+    overlay.style.opacity = "0";
+  });
+
   dz.addEventListener("drop", e => {
     e.preventDefault();
+    overlay.style.opacity = "0";
+
     const file = e.dataTransfer.files[0];
     if (!file) return;
+
     input.files = e.dataTransfer.files;
     preview.src = URL.createObjectURL(file);
   });
