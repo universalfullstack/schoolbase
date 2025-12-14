@@ -1,61 +1,62 @@
-<div class="uk-flex uk-flex-center uk-flex-middle uk-height-viewport">
-  <div class="uk-card uk-card-default uk-card-body uk-box-shadow-large" style="max-width: 400px; width: 100%;">
+<!-- ===================== login.hbs ===================== -->
+<div class="row valign-wrapper" style="min-height: 100vh;">
+  <div class="col s12 m8 l4 offset-m2 offset-l4">
 
-    <!-- Header -->
-    <div class="uk-text-center uk-margin-bottom">
-      <img src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}" 
-           alt="School Logo" 
-           class="uk-margin-small-bottom" 
-           style="max-height: 80px;" />
-      <h3 class="uk-margin-remove">Super Admin Login</h3>
-      <p class="uk-text-muted uk-margin-small-top">Enter your credentials to continue</p>
-    </div>
+    <div class="card z-depth-4">
+      <div class="card-content black-text">
 
-    <!-- Flash Messages -->
-    {{> flashMessages }}
-
-    <!-- Login Form -->
-    <form action="/auth/login" method="POST" class="uk-form-stacked">
-
-      <!-- Hidden role field -->
-      <input type="hidden" name="role" value="Super Admin" />
-
-      <!-- Email or Phone -->
-      <div class="uk-margin">
-        <label class="uk-form-label" for="identifier">Email or Phone</label>
-        <div class="uk-form-controls uk-inline uk-width-1-1">
-          <span class="uk-form-icon" uk-icon="icon: user"></span>
-          <input class="uk-input" type="text" id="identifier" name="identifier" placeholder="Email or Phone" required />
+        <!-- Header -->
+        <div class="center-align">
+          <img src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}" 
+               alt="School Logo" 
+               style="max-height:80px" />
+          <h5 class="margin-top">Super Admin Login</h5>
+          <p class="grey-text">Enter your credentials to continue</p>
         </div>
+
+        <!-- Flash Messages -->
+        {{> flashMessages }}
+
+        <!-- Login Form -->
+        <form action="/auth/login" method="POST">
+          <input type="hidden" name="role" value="Super Admin" />
+
+          <!-- Email or Phone -->
+          <div class="input-field">
+            <i class="material-icons prefix">person</i>
+            <input id="identifier" name="identifier" type="text" required />
+            <label for="identifier">Email or Phone</label>
+          </div>
+
+          <!-- Password -->
+          <div class="input-field">
+            <i class="material-icons prefix">lock</i>
+            <input id="password" name="password" type="password" required />
+            <label for="password">Password</label>
+            <i class="material-icons suffix" id="togglePassword" style="cursor:pointer">visibility</i>
+          </div>
+
+          <!-- Remember Me -->
+          <p>
+            <label>
+              <input type="checkbox" name="rememberMe" />
+              <span>Remember Me</span>
+            </label>
+          </p>
+
+          <!-- Submit -->
+          <div class="input-field">
+            <button type="submit" class="btn blue darken-2 waves-effect waves-light full-width">
+              <i class="material-icons left">login</i>Login
+            </button>
+          </div>
+        </form>
+
       </div>
 
-      <!-- Password -->
-      <div class="uk-margin">
-        <label class="uk-form-label" for="password">Password</label>
-        <div class="uk-form-controls uk-inline uk-width-1-1">
-          <span class="uk-form-icon" uk-icon="icon: lock"></span>
-          <input class="uk-input" type="password" id="password" name="password" required />
-          <a class="uk-form-icon uk-form-icon-flip" href="#" id="togglePassword" uk-icon="icon: eye"></a>
-        </div>
+      <div class="card-action center-align">
+        <a href="/forgot-password">Forgot password?</a>
       </div>
-
-      <!-- Remember Me -->
-      <div class="uk-margin uk-flex uk-flex-middle">
-        <label><input class="uk-checkbox" type="checkbox" name="rememberMe" /> Remember Me</label>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="uk-margin">
-        <button type="submit" class="uk-button uk-button-primary uk-width-1-1">
-          <span uk-icon="sign-in"></span> Login
-        </button>
-      </div>
-
-    </form>
-
-    <!-- Forgot Password -->
-    <div class="uk-text-center uk-margin-top">
-      <a href="/forgot-password" class="uk-link-muted">Forgot password?</a>
     </div>
 
   </div>
@@ -63,17 +64,15 @@
 
 {{#section "scripts"}}
 <script>
-  // Password toggle script (UIkit compatible)
-  document.addEventListener('DOMContentLoaded', () => {
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
 
-    if (togglePassword && passwordInput) {
-      togglePassword.addEventListener('click', function (e) {
-        e.preventDefault();
-        const isPassword = passwordInput.type === 'password';
-        passwordInput.type = isPassword ? 'text' : 'password';
-        this.setAttribute('uk-icon', isPassword ? 'icon: eye-slash' : 'icon: eye');
+    if (toggle && password) {
+      toggle.addEventListener('click', function () {
+        const isPassword = password.type === 'password';
+        password.type = isPassword ? 'text' : 'password';
+        this.textContent = isPassword ? 'visibility_off' : 'visibility';
       });
     }
   });
