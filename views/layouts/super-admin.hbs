@@ -46,6 +46,17 @@
       object-fit: cover;
     }
 
+    .collapsible-header {
+  font-weight: 500;
+}
+
+.collapsible-body a.active,
+a.active {
+  color: #1976d2;
+  font-weight: 600;
+  }
+    
+
     @media (max-width: 992px) {
       .layout {
         grid-template-columns: 1fr;
@@ -143,6 +154,9 @@
     M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {
       coverTrigger: false,
       constrainWidth: false
+    });
+    M.Collapsible.init(document.querySelectorAll('.collapsible'), {
+      accordion: false
     });
   });
 </script>
