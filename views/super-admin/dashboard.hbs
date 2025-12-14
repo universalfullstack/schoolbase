@@ -1,113 +1,107 @@
-<div class="container-fluid py-4">
+<div class="container">
 
   <!-- Greeting -->
-  <div class="mb-4">
-    <h1 class="h3">{{user.role}} Dashboard</h1>
+  <div class="section">
+    <h4>{{user.role}} Dashboard</h4>
+
     {{#unless user.emailVerified}}
-      <div class="alert alert-warning d-flex align-items-center" role="alert">
-        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-        <div>Email not verified</div>
+      <div class="card-panel yellow lighten-4 black-text">
+        <i class="material-icons left">warning</i>
+        Email not verified
       </div>
     {{/unless}}
   </div>
 
   <!-- Stat cards -->
-  <div class="row g-3 mb-4">
+  <div class="row">
+
     <!-- Schools -->
-    <div class="col-6 col-md-3">
-      <div class="card text-white bg-primary shadow-sm p-3 h-100">
-        <div class="d-flex align-items-center">
-          <div>
-            <small>Schools</small>
-            <h4>{{stats.totalSchools}}</h4>
-          </div>
+    <div class="col s12 m6 l3">
+      <div class="card blue darken-2 white-text">
+        <div class="card-content">
+          <span class="card-title">Schools</span>
+          <h5>{{stats.totalSchools}}</h5>
         </div>
       </div>
     </div>
 
     <!-- School Admins -->
-    <div class="col-6 col-md-3">
-      <div class="card text-white bg-warning shadow-sm p-3 h-100">
-        <div class="d-flex align-items-center">
-          <div>
-            <small>School Admins</small>
-            <h4>{{stats.totalSchoolAdmins}}</h4>
-          </div>
+    <div class="col s12 m6 l3">
+      <div class="card amber darken-2 white-text">
+        <div class="card-content">
+          <span class="card-title">School Admins</span>
+          <h5>{{stats.totalSchoolAdmins}}</h5>
         </div>
       </div>
     </div>
 
     <!-- Staff -->
-    <div class="col-6 col-md-3">
-      <div class="card text-white bg-purple shadow-sm p-3 h-100">
-        <div class="d-flex align-items-center">
-          <div>
-            <small>Staff</small>
-            <h4>{{stats.totalStaff}}</h4>
-          </div>
+    <div class="col s12 m6 l3">
+      <div class="card purple darken-1 white-text">
+        <div class="card-content">
+          <span class="card-title">Staff</span>
+          <h5>{{stats.totalStaff}}</h5>
         </div>
       </div>
     </div>
 
     <!-- Students -->
-    <div class="col-6 col-md-3">
-      <div class="card text-white bg-info shadow-sm p-3 h-100">
-        <div class="d-flex align-items-center">
-          <div>
-            <small>Students</small>
-            <h4>{{stats.totalStudents}}</h4>
-          </div>
+    <div class="col s12 m6 l3">
+      <div class="card teal lighten-1 white-text">
+        <div class="card-content">
+          <span class="card-title">Students</span>
+          <h5>{{stats.totalStudents}}</h5>
         </div>
       </div>
     </div>
 
     <!-- Active Subscriptions -->
-    <div class="col-6 col-md-3">
-      <div class="card text-white bg-success shadow-sm p-3 h-100">
-        <div class="d-flex align-items-center">
-          <div>
-            <small>Active Subscriptions</small>
-            <h4>{{stats.totalSubscriptions}}</h4>
-          </div>
+    <div class="col s12 m6 l3">
+      <div class="card green darken-2 white-text">
+        <div class="card-content">
+          <span class="card-title">Active Subscriptions</span>
+          <h5>{{stats.totalSubscriptions}}</h5>
         </div>
       </div>
     </div>
 
     <!-- Total Revenue -->
-    <div class="col-6 col-md-3">
-      <div class="card text-white bg-teal shadow-sm p-3 h-100">
-        <div class="d-flex align-items-center">
-          <div>
-            <small>Total Revenue</small>
-            <h4>₦{{stats.totalRevenue}}</h4>
-          </div>
+    <div class="col s12 m6 l3">
+      <div class="card teal darken-2 white-text">
+        <div class="card-content">
+          <span class="card-title">Total Revenue</span>
+          <h5>₦{{stats.totalRevenue}}</h5>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Charts -->
-  <div class="row g-3 mb-4">
-    <div class="col-12 col-lg-6">
-      <div class="card p-3 shadow-sm">
-        <h5>Subscription Trend (Last 6 Months)</h5>
-        <canvas id="subscriptionTrendChart"></canvas>
+  <div class="row">
+    <div class="col s12 m12 l6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Subscription Trend (Last 6 Months)</span>
+          <canvas id="subscriptionTrendChart"></canvas>
+        </div>
       </div>
     </div>
 
-    <div class="col-12 col-lg-6">
-      <div class="card p-3 shadow-sm">
-        <h5>Subscriptions by Status</h5>
-        <canvas id="subscriptionStatusChart"></canvas>
+    <div class="col s12 m12 l6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Subscriptions by Status</span>
+          <canvas id="subscriptionStatusChart"></canvas>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Latest subscriptions table -->
-  <div class="card shadow-sm p-3">
-    <h5 class="mb-3">Latest Subscriptions</h5>
-    <div class="table-responsive">
-      <table class="table table-sm table-hover">
+  <!-- Latest Subscriptions Table -->
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Latest Subscriptions</span>
+      <table class="highlight responsive-table">
         <thead>
           <tr>
             <th>School</th>
@@ -126,18 +120,18 @@
             <td>{{this.endDate}}</td>
             <td>
               {{#if (eq this.status "active")}}
-                <span class="badge bg-success">Active</span>
+                <span class="new badge green" data-badge-caption="">Active</span>
               {{else if (eq this.status "expired")}}
-                <span class="badge bg-danger">Expired</span>
+                <span class="new badge red" data-badge-caption="">Expired</span>
               {{else if (eq this.status "pending")}}
-                <span class="badge bg-warning text-dark">Pending</span>
+                <span class="new badge amber black-text" data-badge-caption="">Pending</span>
               {{else}}
-                <span class="badge bg-secondary">Cancelled</span>
+                <span class="new badge grey" data-badge-caption="">Cancelled</span>
               {{/if}}
             </td>
           </tr>
           {{else}}
-          <tr><td colspan="5" class="text-muted">No subscriptions yet</td></tr>
+          <tr><td colspan="5" class="grey-text">No subscriptions yet</td></tr>
           {{/each}}
         </tbody>
       </table>
@@ -147,23 +141,21 @@
 
 {{#section "styles"}}
 <style>
-  .bg-purple { background-color: #6f42c1 !important; }
-  .bg-teal { background-color: #20c997 !important; }
+  .purple { background-color: #6f42c1 !important; }
+  .teal { background-color: #20c997 !important; }
 </style>
 {{/section}}
 
 {{#section "scripts"}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Parse JSON strings passed from controller
   const trendLabels  = {{{trendLabels}}};
   const trendData    = {{{trendData}}};
   const statusLabels = {{{statusLabels}}};
   const statusData   = {{{statusData}}};
 
-  // ----------------- Subscription Trend Chart -----------------
-  const ctxTrend = document.getElementById('subscriptionTrendChart').getContext('2d');
-  new Chart(ctxTrend, {
+  // Subscription Trend Chart
+  new Chart(document.getElementById('subscriptionTrendChart').getContext('2d'), {
     type: 'line',
     data: {
       labels: trendLabels,
@@ -177,22 +169,24 @@
         tension: 0.4
       }]
     },
-    options: {
-      responsive: true,
-      plugins: { legend: { display: true } },
-      scales: { y: { beginAtZero: true } }
-    }
+    options: { responsive: true, plugins: { legend: { display: true } }, scales: { y: { beginAtZero: true } } }
   });
 
-  // ----------------- Subscription Status Chart -----------------
-  const ctxStatus = document.getElementById('subscriptionStatusChart').getContext('2d');
-  new Chart(ctxStatus, {
+  // Subscription Status Chart
+  new Chart(document.getElementById('subscriptionStatusChart').getContext('2d'), {
     type: 'doughnut',
     data: {
       labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
       datasets: [{
         data: statusData,
-        backgroundColor: [
+        backgroundColor: ['#198754','#dc3545','#ffc107','#6c757d']
+      }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+  });
+</script>
+{{/section}}
+  backgroundColor: [
           '#198754', // active
           '#dc3545', // expired
           '#ffc107', // pending
