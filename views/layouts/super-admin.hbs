@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>
-    {{title}} — 
+    {{title}} —
     {{#if settings.general.systemName}}
       {{settings.general.systemName}}
     {{else}}
@@ -15,8 +15,8 @@
 
   <!-- MUI CSS -->
   <link rel="stylesheet" href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/css/style.css">
 
   <style>
     body {
@@ -34,7 +34,7 @@
 
     /* Sidebar */
     .sidebar {
-      background: #fff;
+      background: #ffffff;
       border-right: 1px solid #e0e0e0;
       padding: 30px 20px;
       display: flex;
@@ -66,7 +66,6 @@
       color: #757575;
     }
 
-    /* Sidebar nav links */
     .sidebar .mui-list a {
       display: flex;
       align-items: center;
@@ -95,14 +94,12 @@
       margin-top: 20px;
     }
 
-    /* Main content */
     main.content {
       padding: 32px 40px;
       overflow-x: auto;
       width: 100%;
     }
 
-    /* Top Nav */
     header.mui-appbar {
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
@@ -111,7 +108,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
       height: 64px;
     }
 
@@ -127,6 +123,7 @@
       height: 42px;
       border-radius: 50%;
       object-fit: cover;
+      margin-right: 6px;
     }
 
     @media (max-width: 992px) {
@@ -149,12 +146,17 @@
 <header class="mui-appbar mui--z1">
   <div class="mui-container-fluid">
     <div class="top-nav">
-      <!-- Mobile menu button -->
-      <a href="#!" class="mui-btn mui-btn--flat mui--hide-lg" id="mobile-menu-btn">
-        <i class="material-icons">menu</i>
-      </a>
 
-      <!-- Brand logo -->
+      <!-- Mobile menu button -->
+      <button
+        type="button"
+        class="mui-btn mui-btn--flat mui--hidden-lg"
+        id="mobile-menu-btn"
+        aria-label="Open menu">
+        <i class="material-icons">menu</i>
+      </button>
+
+      <!-- Brand -->
       <a href="/" class="brand-logo">
         {{#if settings.general.systemName}}
           {{settings.general.systemName}}
@@ -165,18 +167,30 @@
 
       <!-- User dropdown -->
       <div class="mui-dropdown">
-        <a href="#!" class="mui-btn mui-btn--flat">
-          <img src="{{user.profileImage}}" class="user-img">
-          <span class="mui--hide-sm">{{user.firstName}} {{user.lastName}}</span>
+        <button
+          class="mui-btn mui-btn--flat"
+          data-mui-toggle="dropdown"
+          aria-haspopup="true">
+          <img
+            src="{{user.profileImage}}"
+            alt="User profile"
+            class="user-img">
+          <span class="mui--hidden-sm">
+            {{user.firstName}} {{user.lastName}}
+          </span>
           <i class="material-icons">arrow_drop_down</i>
-        </a>
+        </button>
+
         <ul class="mui-dropdown__menu">
           <li><a href="/super-admin/profile">Profile</a></li>
           <li><a href="/super-admin/settings">Settings</a></li>
           <li class="mui-divider"></li>
-          <li><a href="/logout" class="mui--text-danger">Logout</a></li>
+          <li>
+            <a href="/logout" class="mui--text-danger">Logout</a>
+          </li>
         </ul>
       </div>
+
     </div>
   </div>
 </header>
@@ -185,35 +199,46 @@
 <div class="layout">
 
   <!-- Sidebar -->
-  <aside class="sidebar mui--hide-sm">
-    <div class="user-info">
-      <img src="{{user.profileImage}}" alt="User Image">
-      <div>
-        <strong>{{user.firstName}} {{user.lastName}}</strong>
-        <small>{{user.role}}</small>
+  <aside class="sidebar mui--hidden-sm">
+    <div>
+      <div class="user-info">
+        <img src="{{user.profileImage}}" alt="User profile">
+        <div>
+          <strong>{{user.firstName}} {{user.lastName}}</strong>
+          <small>{{user.role}}</small>
+        </div>
       </div>
-    </div>
 
-    {{> super-admin-navLinks }}
+      {{> super-admin-navLinks }}
+    </div>
 
     <div class="footer">
       &copy; {{year}} {{school.name}}
     </div>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Main content -->
   <main class="content">
     {{{body}}}
   </main>
+
 </div>
 
 <!-- ================= MOBILE SIDEBAR ================= -->
-<div class="mui-drawer" id="mobile-sidebar">
+<div class="mui-drawer mui--no-user-select" id="mobile-sidebar">
   <div class="mui-drawer__header">
-    <img class="mui--circle" src="{{user.profileImage}}">
-    <div class="mui--text-title">{{user.firstName}} {{user.lastName}}</div>
-    <div class="mui--text-subhead">{{user.role}}</div>
+    <img
+      class="mui--circle"
+      src="{{user.profileImage}}"
+      alt="User profile">
+    <div class="mui--text-title">
+      {{user.firstName}} {{user.lastName}}
+    </div>
+    <div class="mui--text-subhead">
+      {{user.role}}
+    </div>
   </div>
+
   {{> super-admin-navLinks }}
 </div>
 
@@ -221,11 +246,13 @@
 <script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Mobile drawer toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const drawer = document.getElementById('mobile-sidebar');
-    if(mobileMenuBtn && drawer) {
-      mobileMenuBtn.addEventListener('click', () => drawer.classList.toggle('mui--open'));
+
+    if (mobileMenuBtn && drawer) {
+      mobileMenuBtn.addEventListener('click', function () {
+        drawer.classList.toggle('mui--is-open');
+      });
     }
   });
 </script>
