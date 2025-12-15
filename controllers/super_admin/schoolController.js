@@ -205,7 +205,7 @@ export const updateSchool = async (req, res) => {
 export const activateSchool = async (req, res) => {
   try {
     await School.findByIdAndUpdate(req.params.id, {
-      status: "Activate"
+      status: "Active"
     });
 
     req.flash("success", "School activated successfully");
