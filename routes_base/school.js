@@ -5,7 +5,7 @@ import {
   createSchool,
   renderEditSchool,
   updateSchool,
-  deleteSchool
+  deleteSchool,
   activateSchool,
   viewSchool
 } from "../controllers/super_admin/schoolController.js";
