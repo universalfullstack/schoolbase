@@ -99,14 +99,12 @@
 
 </div>
 
-<!-- Chart.js Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Ensure data is passed safely using JSON helper or triple braces
-  const trendLabels = {{{Json trendLabels}}};
-  const trendData = {{{Json trendData}}};
-  const statusLabels = {{{Json statusLabels}}};
-  const statusData = {{{Json statusData}}};
+  // Ensure data is passed safely using lowercase json helper
+  const trendLabels = {{{json trendLabels}}};
+  const trendData = {{{json trendData}}};
+  const statusLabels = {{{json statusLabels}}};
+  const statusData = {{{json statusData}}};
 
   // Subscription Trend Chart
   new Chart(document.getElementById('trendChart'), {
