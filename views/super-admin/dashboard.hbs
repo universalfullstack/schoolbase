@@ -1,4 +1,4 @@
-<div class="container">
+<div class="dashboard-page">
 
   <!-- Greeting -->
   <div class="section">
@@ -12,10 +12,9 @@
     {{/unless}}
   </div>
 
-  <!-- Stat cards -->
+  <!-- ================= STATS ================= -->
   <div class="row">
 
-    <!-- Schools -->
     <div class="col s12 m6 l3">
       <div class="card blue darken-2 white-text">
         <div class="card-content">
@@ -25,7 +24,6 @@
       </div>
     </div>
 
-    <!-- School Admins -->
     <div class="col s12 m6 l3">
       <div class="card amber darken-2 white-text">
         <div class="card-content">
@@ -35,7 +33,6 @@
       </div>
     </div>
 
-    <!-- Staff -->
     <div class="col s12 m6 l3">
       <div class="card purple darken-1 white-text">
         <div class="card-content">
@@ -45,7 +42,6 @@
       </div>
     </div>
 
-    <!-- Students -->
     <div class="col s12 m6 l3">
       <div class="card teal lighten-1 white-text">
         <div class="card-content">
@@ -55,7 +51,6 @@
       </div>
     </div>
 
-    <!-- Active Subscriptions -->
     <div class="col s12 m6 l3">
       <div class="card green darken-2 white-text">
         <div class="card-content">
@@ -65,7 +60,6 @@
       </div>
     </div>
 
-    <!-- Total Revenue -->
     <div class="col s12 m6 l3">
       <div class="card teal darken-2 white-text">
         <div class="card-content">
@@ -74,33 +68,41 @@
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- Charts -->
+  <!-- ================= CHARTS ================= -->
   <div class="row">
-    <div class="col s12 m12 l6">
+
+    <div class="col s12 l6">
       <div class="card">
         <div class="card-content">
           <span class="card-title">Subscription Trend (Last 6 Months)</span>
-          <canvas id="subscriptionTrendChart"></canvas>
+          <div class="chart-box">
+            <canvas id="subscriptionTrendChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col s12 m12 l6">
+    <div class="col s12 l6">
       <div class="card">
         <div class="card-content">
           <span class="card-title">Subscriptions by Status</span>
-          <canvas id="subscriptionStatusChart"></canvas>
+          <div class="chart-box">
+            <canvas id="subscriptionStatusChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- Latest Subscriptions Table -->
+  <!-- ================= LATEST SUBSCRIPTIONS ================= -->
   <div class="card">
     <div class="card-content">
       <span class="card-title">Latest Subscriptions</span>
+
       <table class="highlight responsive-table">
         <thead>
           <tr>
@@ -111,6 +113,7 @@
             <th>Status</th>
           </tr>
         </thead>
+
         <tbody>
           {{#each latestSubscriptions}}
           <tr>
@@ -131,20 +134,35 @@
             </td>
           </tr>
           {{else}}
-          <tr><td colspan="5" class="grey-text">No subscriptions yet</td></tr>
+          <tr>
+            <td colspan="5" class="center grey-text">No subscriptions yet</td>
+          </tr>
           {{/each}}
         </tbody>
       </table>
     </div>
   </div>
+
 </div>
 
+<!-- ================= PAGE STYLES ================= -->
 {{#section "styles"}}
 <style>
-  .purple { background-color: #6f42c1 !important; }
-  .teal { background-color: #20c997 !important; }
+  .chart-box {
+    position: relative;
+    height: 300px;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
 </style>
 {{/section}}
+
+<!-- ================= PAGE SCRIPTS ================= -->
+{{#section "scripts"}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -154,49 +172,49 @@ document.addEventListener('DOMContentLoaded', function () {
   const statusLabels = {{{statusLabels}}};
   const statusData   = {{{statusData}}};
 
-  // Line chart
-  new Chart(
-    document.getElementById('subscriptionTrendChart'),
-    {
-      type: 'line',
-      data: {
-        labels: trendLabels,
-        datasets: [{
-          label: 'New Subscriptions',
-          data: trendData,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 2,
-          fill: true,
-          tension: 0.4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: { y: { beginAtZero: true } }
+  // Line Chart
+  new Chart(document.getElementById('subscriptionTrendChart'), {
+    type: 'line',
+    data: {
+      labels: trendLabels,
+      datasets: [{
+        label: 'New Subscriptions',
+        data: trendData,
+        backgroundColor: 'rgba(33, 150, 243, 0.2)',
+        borderColor: '#2196f3',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true }
       }
     }
-  );
+  });
 
-  // Doughnut chart
-  new Chart(
-    document.getElementById('subscriptionStatusChart'),
-    {
-      type: 'doughnut',
-      data: {
-        labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
-        datasets: [{
-          data: statusData,
-          backgroundColor: ['#198754', '#dc3545', '#ffc107', '#6c757d']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'bottom' } }
+  // Doughnut Chart
+  new Chart(document.getElementById('subscriptionStatusChart'), {
+    type: 'doughnut',
+    data: {
+      labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
+      datasets: [{
+        data: statusData,
+        backgroundColor: ['#2e7d32', '#c62828', '#f9a825', '#757575']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' }
       }
     }
-  );
+  });
 
 });
 </script>
+{{/section}}
