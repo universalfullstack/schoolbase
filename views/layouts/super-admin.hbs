@@ -67,17 +67,24 @@
       color: #757575;
     }
 
+    /* Materialize nav link styling for sidebar */
+    .sidebar .sidenav a,
     .sidebar a {
-      display: block;
+      display: flex;
+      align-items: center;
       padding: 10px 12px;
       margin-bottom: 5px;
       border-radius: 6px;
       color: #424242;
-      transition: all 0.2s ease-in-out;
-      text-decoration: none;
     }
 
-    .sidebar a:hover,
+    .sidebar .sidenav a i,
+    .sidebar a i {
+      margin-right: 12px;
+      font-size: 1.1rem;
+    }
+
+    .sidebar .sidenav a.active,
     .sidebar a.active {
       background-color: #e3f2fd;
       color: #1976d2;
@@ -94,6 +101,7 @@
     /* Main content */
     .content {
       padding: 32px 40px;
+      overflow-x: auto;
     }
 
     /* Top Nav */
@@ -106,6 +114,7 @@
       font-size: 1.5rem;
     }
 
+    /* User dropdown */
     .user-img {
       width: 42px;
       height: 42px;
@@ -125,7 +134,6 @@
       font-weight: 600;
     }
 
-    /* Mobile responsiveness */
     @media (max-width: 992px) {
       .layout {
         grid-template-columns: 1fr;
@@ -159,7 +167,7 @@
     <!-- User Dropdown -->
     <ul class="right">
       <li>
-        <a class="dropdown-trigger black-text" href="#!" data-target="user-dropdown">
+        <a class="dropdown-trigger black-text waves-effect waves-light" href="#!" data-target="user-dropdown">
           <img src="{{user.profileImage}}" class="user-img valign-wrapper">
           <span class="hide-on-small-only" style="margin-left:8px;">
             {{user.firstName}} {{user.lastName}}
@@ -174,10 +182,10 @@
 
 <!-- User Dropdown -->
 <ul id="user-dropdown" class="dropdown-content">
-  <li><a href="/super-admin/profile">Profile</a></li>
-  <li><a href="/super-admin/settings">Settings</a></li>
+  <li><a class="waves-effect" href="/super-admin/profile">Profile</a></li>
+  <li><a class="waves-effect" href="/super-admin/settings">Settings</a></li>
   <li class="divider"></li>
-  <li><a href="/logout" class="red-text">Logout</a></li>
+  <li><a class="waves-effect red-text" href="/logout">Logout</a></li>
 </ul>
 
 <!-- ================= DESKTOP LAYOUT ================= -->
