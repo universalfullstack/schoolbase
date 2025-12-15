@@ -106,3 +106,4 @@ export const renderSuperAdminDashboard = async (req, res) => {
     res.status(500).render("error", { message: "Could not load dashboard." });
   }
 };
+ 
