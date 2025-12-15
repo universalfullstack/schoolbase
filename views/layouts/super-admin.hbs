@@ -17,20 +17,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Custom Styles -->
   <link href="/css/style.css" rel="stylesheet">
 
   <style>
     body {
       background: #f5f6f8;
       font-family: "Roboto", sans-serif;
+      margin: 0;
     }
 
     .layout {
       display: grid;
       grid-template-columns: 280px 1fr;
       min-height: 100vh;
-      overflow-x: hidden;
+      width: 100%;
     }
 
     /* Sidebar */
@@ -67,7 +67,7 @@
       color: #757575;
     }
 
-    /* Materialize nav link styling for sidebar */
+    /* Sidebar nav links */
     .sidebar .sidenav a,
     .sidebar a {
       display: flex;
@@ -99,14 +99,16 @@
     }
 
     /* Main content */
-    .content {
+    main.content {
       padding: 32px 40px;
       overflow-x: auto;
+      width: 100%;
     }
 
     /* Top Nav */
     nav {
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      width: 100%;
     }
 
     .nav-wrapper .brand-logo {
@@ -114,7 +116,6 @@
       font-size: 1.5rem;
     }
 
-    /* User dropdown */
     .user-img {
       width: 42px;
       height: 42px;
@@ -139,20 +140,18 @@
         grid-template-columns: 1fr;
       }
 
-      .content {
+      main.content {
         padding: 24px;
       }
     }
   </style>
-
-  {{{_sections.styles}}}
 </head>
 
 <body>
 
 <!-- ================= TOP NAV ================= -->
 <nav class="white z-depth-1">
-  <div class="nav-wrapper container-fluid">
+  <div class="nav-wrapper">
 
     <!-- Mobile Menu -->
     <a href="#" data-target="mobile-sidebar" class="sidenav-trigger show-on-large">
@@ -241,7 +240,5 @@
     });
   });
 </script>
-
-{{{_sections.scripts}}}
 </body>
 </html>
