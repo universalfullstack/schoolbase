@@ -1,4 +1,3 @@
-Ensure that the following marking is compatible with MUI CSS latest version:
 <!doctype html>
 <html lang="en">
 <head>
@@ -151,7 +150,7 @@ Ensure that the following marking is compatible with MUI CSS latest version:
   <div class="mui-container-fluid">
     <div class="top-nav">
       <!-- Mobile menu button -->
-      <a href="#" class="mui-btn mui-btn--flat mui--hide-lg" id="mobile-menu-btn">
+      <a href="#!" class="mui-btn mui-btn--flat mui--hide-lg" id="mobile-menu-btn">
         <i class="material-icons">menu</i>
       </a>
 
@@ -167,16 +166,16 @@ Ensure that the following marking is compatible with MUI CSS latest version:
       <!-- User dropdown -->
       <div class="mui-dropdown">
         <a href="#!" class="mui-btn mui-btn--flat">
-          <img src="{{user.profileImage}}" class="user-img valign-wrapper">
+          <img src="{{user.profileImage}}" class="user-img">
           <span class="mui--hide-sm">{{user.firstName}} {{user.lastName}}</span>
           <i class="material-icons">arrow_drop_down</i>
         </a>
-        <div class="mui-dropdown__menu">
-          <a href="/super-admin/profile">Profile</a>
-          <a href="/super-admin/settings">Settings</a>
-          <hr>
-          <a href="/logout" class="mui--text-danger">Logout</a>
-        </div>
+        <ul class="mui-dropdown__menu">
+          <li><a href="/super-admin/profile">Profile</a></li>
+          <li><a href="/super-admin/settings">Settings</a></li>
+          <li class="mui-divider"></li>
+          <li><a href="/logout" class="mui--text-danger">Logout</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -212,8 +211,8 @@ Ensure that the following marking is compatible with MUI CSS latest version:
 <div class="mui-drawer" id="mobile-sidebar">
   <div class="mui-drawer__header">
     <img class="mui--circle" src="{{user.profileImage}}">
-    <span class="mui--text-title">{{user.firstName}} {{user.lastName}}</span>
-    <span class="mui--text-subhead">{{user.role}}</span>
+    <div class="mui--text-title">{{user.firstName}} {{user.lastName}}</div>
+    <div class="mui--text-subhead">{{user.role}}</div>
   </div>
   {{> super-admin-navLinks }}
 </div>
@@ -222,13 +221,11 @@ Ensure that the following marking is compatible with MUI CSS latest version:
 <script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Drawer toggle for mobile
-    var mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    var drawer = document.getElementById('mobile-sidebar');
+    // Mobile drawer toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const drawer = document.getElementById('mobile-sidebar');
     if(mobileMenuBtn && drawer) {
-      mobileMenuBtn.addEventListener('click', function() {
-        drawer.classList.toggle('mui--open');
-      });
+      mobileMenuBtn.addEventListener('click', () => drawer.classList.toggle('mui--open'));
     }
   });
 </script>
