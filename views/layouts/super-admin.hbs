@@ -1,3 +1,16 @@
+Absolutely! I’ve updated your markup to fix the issues I mentioned:
+
+Properly wrapped your JS inside <script> tags.
+
+Handled potential undefined settings.general.systemName.
+
+Removed duplicate comments.
+
+Replaced the <table> in the top nav with Flexbox for cleaner, modern layout.
+
+
+Here’s the full updated code:
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,11 +27,8 @@
   </title>
 
   <!-- MUI CSS -->
-    <!-- MUI CSS -->
   <link rel="stylesheet" href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css" />
-
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
   <link href="/css/style.css" rel="stylesheet">
 
   <style>
@@ -110,10 +120,19 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 64px;
+    }
+
     .brand-logo {
       font-weight: 500;
       font-size: 1.5rem;
-      margin-left: 10px;
+      text-decoration: none;
+      color: inherit;
     }
 
     .user-img {
@@ -142,35 +161,36 @@
 <!-- ================= TOP NAV ================= -->
 <header class="mui-appbar mui--z1">
   <div class="mui-container-fluid">
-    <table style="width:100%">
-      <tr>
-        <td>
-          <a href="#" class="mui-btn mui-btn--flat mui--hide-lg" id="mobile-menu-btn">
-            <i class="material-icons">menu</i>
-          </a>
-        </td>
-        <td class="mui--text-title">
-          <a href="/" class="brand-logo">
-            {{settings.general.systemName}}
-          </a>
-        </td>
-        <td class="mui--text-right">
-          <div class="mui-dropdown">
-            <a href="#!" class="mui-btn mui-btn--flat">
-              <img src="{{user.profileImage}}" class="user-img valign-wrapper">
-              <span class="mui--hide-sm">{{user.firstName}} {{user.lastName}}</span>
-              <i class="material-icons">arrow_drop_down</i>
-            </a>
-            <div class="mui-dropdown__menu">
-              <a href="/super-admin/profile">Profile</a>
-              <a href="/super-admin/settings">Settings</a>
-              <hr>
-              <a href="/logout" class="mui--text-danger">Logout</a>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <div class="top-nav">
+      <!-- Mobile menu button -->
+      <a href="#" class="mui-btn mui-btn--flat mui--hide-lg" id="mobile-menu-btn">
+        <i class="material-icons">menu</i>
+      </a>
+
+      <!-- Brand logo -->
+      <a href="/" class="brand-logo">
+        {{#if settings.general.systemName}}
+          {{settings.general.systemName}}
+        {{else}}
+          My School System
+        {{/if}}
+      </a>
+
+      <!-- User dropdown -->
+      <div class="mui-dropdown">
+        <a href="#!" class="mui-btn mui-btn--flat">
+          <img src="{{user.profileImage}}" class="user-img valign-wrapper">
+          <span class="mui--hide-sm">{{user.firstName}} {{user.lastName}}</span>
+          <i class="material-icons">arrow_drop_down</i>
+        </a>
+        <div class="mui-dropdown__menu">
+          <a href="/super-admin/profile">Profile</a>
+          <a href="/super-admin/settings">Settings</a>
+          <hr>
+          <a href="/logout" class="mui--text-danger">Logout</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -211,8 +231,8 @@
 </div>
 
 <!-- ================= SCRIPTS ================= -->
-  <!-- MUI JS -->
-  <script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js">
+<script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+<script>
   document.addEventListener('DOMContentLoaded', function () {
     // Drawer toggle for mobile
     var mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -228,3 +248,28 @@
 {{{_sections.scripts}}}
 </body>
 </html>
+
+
+---
+
+✅ What’s fixed/updated:
+
+1. Inline JS is now inside a proper <script> block.
+
+
+2. Conditional fallback for settings.general.systemName in the top nav.
+
+
+3. Removed duplicate comments.
+
+
+4. Top nav layout uses Flexbox instead of a <table>.
+
+
+
+
+---
+
+If you want, I can also enhance the mobile drawer so it slides over the content smoothly instead of just toggling open/closed. This gives a nicer UX.
+
+Do you want me to do that?
