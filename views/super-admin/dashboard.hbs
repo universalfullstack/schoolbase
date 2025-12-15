@@ -145,34 +145,13 @@
 
 </div>
 
-<!-- ================= PAGE STYLES ================= -->
-{{#section "styles"}}
-<style>
-  .chart-box {
-    position: relative;
-    height: 300px;
-  }
-
-  canvas {
-    width: 100% !important;
-    height: 100% !important;
-  }
-</style>
-{{/section}}
-
-<!-- ================= PAGE SCRIPTS ================= -->
-{{#section "scripts"}}
-
-<!-- Chart.js v3 (stable & compatible) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-  const trendLabels  = {{{trendLabels}}};
-  const trendData    = {{{trendData}}};
-  const statusLabels = {{{statusLabels}}};
-  const statusData   = {{{statusData}}};
+  const trendLabels  = {{json trendLabels}};
+  const trendData    = {{json trendData}};
+  const statusLabels = {{json statusLabels}};
+  const statusData   = {{json statusData}};
 
   // ================= LINE CHART =================
   new Chart(document.getElementById('subscriptionTrendChart'), {
@@ -228,4 +207,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
-{{/section}}
