@@ -5,7 +5,8 @@ import {
   createSchool,
   renderEditSchool,
   updateSchool,
-  deleteSchool,
+  deleteSchool
+  activateSchool,
   viewSchool
 } from "../controllers/super_admin/schoolController.js";
 
@@ -27,6 +28,9 @@ router.post("/create/new", uploadSingle('logo'), createSchool);
 // Edit school
 router.get("/edit/:id", renderEditSchool);
 router.post("/edit/:id", uploadSingle("logo"), updateSchool);
+
+// Activate school
+router.post("/activate/:id", activateSchool);
 
 // Soft delete school
 router.post("/delete/:id", deleteSchool);
