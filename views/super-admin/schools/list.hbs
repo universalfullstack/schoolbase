@@ -28,9 +28,10 @@
     </div>
   </div>
 
+  <!-- ================= ACTIVE SCHOOLS ================= -->
   <div id="activeTab" class="col s12">
     {{#if activeSchools.length}}
-    <table id="activeTable" class="striped responsive-table">
+    <table id="activeTable" class="highlight responsive-table">
       <thead>
         <tr>
           <th>Logo</th>
@@ -44,8 +45,8 @@
         {{#each activeSchools}}
         <tr>
           <td>
-            <img src="{{#if this.logo}}{{this.logo}}{{else}}/images/school-default.png{{/if}}"
-                 alt="{{this.name}} logo"
+            <img src="{{#if this.logo}}{{this.logo}}{{else}}/images/school-default.png{{/if}}" 
+                 alt="{{this.name}} logo" 
                  style="width:40px;height:40px;object-fit:cover;">
           </td>
           <td>{{this.name}}</td>
@@ -72,9 +73,10 @@
     {{/if}}
   </div>
 
+  <!-- ================= INACTIVE SCHOOLS ================= -->
   <div id="inactiveTab" class="col s12">
     {{#if inactiveSchools.length}}
-    <table id="inactiveTable" class="striped responsive-table">
+    <table id="inactiveTable" class="highlight responsive-table">
       <thead>
         <tr>
           <th>Logo</th>
@@ -88,8 +90,8 @@
         {{#each inactiveSchools}}
         <tr>
           <td>
-            <img src="{{#if this.logo}}{{this.logo}}{{else}}/images/school-default.png{{/if}}"
-                 alt="{{this.name}} logo"
+            <img src="{{#if this.logo}}{{this.logo}}{{else}}/images/school-default.png{{/if}}" 
+                 alt="{{this.name}} logo" 
                  style="width:40px;height:40px;object-fit:cover;">
           </td>
           <td>{{this.name}}</td>
@@ -121,11 +123,47 @@
 
 </div>
 
+{{#section "styles"}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+<style>
+  table.dataTable thead th, table.dataTable tbody td {
+    padding: 8px 12px;
+  }
+  table.dataTable tbody td img {
+    border-radius: 4px;
+  }
+</style>
+{{/section}}
+
 {{#section "scripts"}}
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Materialize tabs
     const elems = document.querySelectorAll('.tabs');
     M.Tabs.init(elems, {});
+
+    // Initialize DataTables
+    const activeTable = $('#activeTable').DataTable({
+      responsive: true,
+      pageLength: 10
+    });
+    const inactiveTable = $('#inactiveTable').DataTable({
+      responsive: true,
+      pageLength: 10
+    });
+
+    // Fix column widths when switching tabs
+    const tabs = document.querySelectorAll('.tabs a');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        activeTable.columns.adjust().responsive.recalc();
+        inactiveTable.columns.adjust().responsive.recalc();
+      });
+    });
   });
 </script>
 {{/section}}
