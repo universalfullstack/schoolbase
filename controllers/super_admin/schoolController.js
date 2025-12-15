@@ -200,6 +200,24 @@ export const updateSchool = async (req, res) => {
 };
 
 // ============================
+// ACTIVATE SCHOOL
+// ============================
+export const activateSchool = async (req, res) => {
+  try {
+    await School.findByIdAndUpdate(req.params.id, {
+      status: "Activate"
+    });
+
+    req.flash("success", "School activated successfully");
+    res.redirect("/super-admin/schools");
+  } catch (err) {
+    console.error(err);
+    req.flash("error", "Failed to activate school");
+    res.redirect("/super-admin/schools");
+  }
+};
+
+// ============================
 // SOFT DELETE SCHOOL
 // ============================
 export const deleteSchool = async (req, res) => {
