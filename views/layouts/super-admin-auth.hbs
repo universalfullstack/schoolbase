@@ -1,4 +1,4 @@
-<!-- ===================== auth.layout.hbs ===================== -->
+<!-- ===================== auth.layout.hbs (MUI CSS) ===================== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,25 +7,49 @@
 
   <title>{{title}}</title>
 
-  <!-- Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- MUI CSS (Material UI for vanilla HTML) -->
+  <link
+    href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+
+  <!-- Google Material Icons -->
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="/css/style.css" />
 
   {{{_sections.styles}}}
 </head>
-<body class="blue darken-2 white-text">
 
-  <main class="valign-wrapper" style="min-height: 100vh;">
-    <div class="container">
-      {{{body}}}
+<body class="mui--bg-primary mui--text-white">
+
+  <main
+    class="mui-container-fluid mui--valign-middle"
+    style="min-height:100vh;"
+  >
+    <div class="mui-container">
+      <div class="mui-row">
+        <div class="mui-col-md-6 mui-col-md-offset-3 mui-col-sm-8 mui-col-sm-offset-2">
+
+          <!-- Auth Card Wrapper -->
+          <div class="mui-panel mui--z4 mui--bg-white mui--text-dark">
+            {{{body}}}
+          </div>
+
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- MUI JS (optional, lightweight) -->
+  <script
+    src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js">
+  </script>
 
   {{{_sections.scripts}}}
 </body>
