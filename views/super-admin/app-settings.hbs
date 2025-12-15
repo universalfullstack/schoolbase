@@ -1,230 +1,170 @@
-<div class="container-fluid py-4">
+<div class="container">
 
-  <h1 class="h4 mb-4">
-    <i class="bi bi-gear-fill me-2"></i>App Settings
-  </h1>
+  <h4 class="mb-4">
+    <i class="material-icons left">settings</i>App Settings
+  </h4>
 
   {{> flashMessages }}
 
   <form method="POST" enctype="multipart/form-data">
 
     <!-- Tabs -->
-    <ul class="nav nav-tabs mb-4" role="tablist">
-      <li class="nav-item">
-        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#general" type="button">
-          <i class="bi bi-info-circle me-1"></i>General
-        </button>
-      </li>
-
-      <li class="nav-item">
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#branding" type="button">
-          <i class="bi bi-palette me-1"></i>Branding
-        </button>
-      </li>
-
-      <li class="nav-item">
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#messaging" type="button">
-          <i class="bi bi-envelope me-1"></i>Messaging
-        </button>
-      </li>
-    </ul>
-
-    <div class="tab-content">
-
-      <!-- ================= GENERAL ================= -->
-      <div class="tab-pane fade show active" id="general">
-        <div class="card mb-4">
-          <div class="card-body">
-            <h6 class="text-muted mb-3">System Information</h6>
-
-            <div class="mb-3">
-              <label class="form-label">System Name</label>
-              <input type="text" class="form-control" name="systemName"
-                     value="{{settings.general.systemName}}">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Abbreviation</label>
-              <input type="text" class="form-control" name="abbreviation"
-                     value="{{settings.general.abbreviation}}">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Description</label>
-              <textarea class="form-control" rows="3"
-                        name="description">{{settings.general.description}}</textarea>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Currency</label>
-                <input type="text" class="form-control" name="currency"
-                       value="{{settings.general.currency}}">
-              </div>
-
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Timezone</label>
-                <input type="text" class="form-control" name="timezone"
-                       value="{{settings.general.timezone}}">
-              </div>
-            </div>
-
-            <hr>
-
-            <h6 class="text-muted mb-3">Contact Information</h6>
-
-            <div class="mb-3">
-              <label class="form-label">Support Email</label>
-              <input type="email" class="form-control" name="contactEmail"
-                     value="{{settings.contact.email}}">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Support Phone</label>
-              <input type="text" class="form-control" name="contactPhone"
-                     value="{{settings.contact.phone}}">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Office Address</label>
-              <textarea class="form-control" rows="2"
-                        name="contactAddress">{{settings.contact.address}}</textarea>
-            </div>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col s12">
+        <ul id="settings-tabs" class="tabs">
+          <li class="tab col s4">
+            <a class="active" href="#general"><i class="material-icons left">info</i>General</a>
+          </li>
+          <li class="tab col s4">
+            <a href="#branding"><i class="material-icons left">palette</i>Branding</a>
+          </li>
+          <li class="tab col s4">
+            <a href="#messaging"><i class="material-icons left">email</i>Messaging</a>
+          </li>
+        </ul>
       </div>
-
-      <!-- ================= BRANDING ================= -->
-      <div class="tab-pane fade" id="branding">
-        <div class="card mb-4">
-          <div class="card-body">
-
-            <h6 class="text-muted mb-3">Identity & Appearance</h6>
-
-            <div class="row g-4">
-
-              <!-- Logo -->
-              <div class="col-md-6">
-                <label class="form-label">Logo</label>
-                <div 
-                  id="logoDropzone" 
-                  class="image-dropzone border rounded position-relative mb-2"
-                  style="width:150px; height:150px; cursor:pointer; overflow:hidden; display:flex; align-items:center; justify-content:center;"
-                >
-                  <img 
-                    id="logoPreview" 
-                    src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{/if}}" 
-                    style="width:100%; height:100%; object-fit:cover;"
-                  >
-                  <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-25" style="opacity:0; transition:opacity 0.2s;">
-                    <i class="bi bi-camera fs-1 text-white"></i>
-                  </div>
-                </div>
-                <input type="file" id="logoInput" name="logo" class="form-control d-none" accept=".png,.jpg,.jpeg">
-                <p class="text-muted small">Recommended: square PNG or JPG, max 150x150px</p>
-              </div>
-
-              <!-- Favicon -->
-              <div class="col-md-6">
-                <label class="form-label">Favicon</label>
-                <div 
-                  id="faviconDropzone" 
-                  class="image-dropzone border rounded position-relative mb-2"
-                  style="width:80px; height:80px; cursor:pointer; overflow:hidden; display:flex; align-items:center; justify-content:center;"
-                >
-                  <img 
-                    id="faviconPreview" 
-                    src="{{#if settings.branding.favicon}}{{settings.branding.favicon}}{{/if}}" 
-                    style="width:100%; height:100%; object-fit:cover;"
-                  >
-                  <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-25" style="opacity:0; transition:opacity 0.2s;">
-                    <i class="bi bi-camera fs-1 text-white"></i>
-                  </div>
-                </div>
-                <input type="file" id="faviconInput" name="favicon" class="form-control d-none" accept=".png,.jpg,.jpeg">
-                <p class="text-muted small">Recommended: square PNG or JPG, max 80x80px</p>
-              </div>
-
-            </div>
-
-            <hr>
-
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Primary Color</label>
-                <input type="color" class="form-control form-control-color"
-                       name="primaryColor"
-                       value="{{settings.branding.primaryColor}}">
-              </div>
-
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Secondary Color</label>
-                <input type="color" class="form-control form-control-color"
-                       name="secondaryColor"
-                       value="{{settings.branding.secondaryColor}}">
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= MESSAGING ================= -->
-      <div class="tab-pane fade" id="messaging">
-        <div class="card mb-4">
-          <div class="card-body">
-
-            <h6 class="text-muted mb-3">Welcome Message</h6>
-            <div class="mb-3">
-              <label class="form-label">Subject</label>
-              <input type="text" class="form-control"
-                     name="welcomeSubject"
-                     value="{{settings.messaging.general.welcome.subject}}">
-            </div>
-            <div class="mb-4">
-              <label class="form-label">Message Body</label>
-              <textarea class="form-control" rows="4"
-                        name="welcomeBody">{{settings.messaging.general.welcome.body}}</textarea>
-            </div>
-
-            <hr>
-
-            <h6 class="text-muted mb-3">Account Activation</h6>
-            <div class="mb-3">
-              <label class="form-label">Subject</label>
-              <input type="text" class="form-control"
-                     name="activationSubject"
-                     value="{{settings.messaging.account.activation.subject}}">
-            </div>
-            <div class="mb-4">
-              <label class="form-label">Message Body</label>
-              <textarea class="form-control" rows="4"
-                        name="activationBody">{{settings.messaging.account.activation.body}}</textarea>
-            </div>
-
-            <hr>
-
-            <h6 class="text-muted mb-3">Subscription Expiry Warning</h6>
-            <div class="mb-3">
-              <label class="form-label">Subject</label>
-              <input type="text" class="form-control"
-                     name="subscriptionExpirySubject"
-                     value="{{settings.messaging.subscription.expiryWarning.subject}}">
-            </div>
-            <div class="mb-4">
-              <label class="form-label">Message Body</label>
-              <textarea class="form-control" rows="4"
-                        name="subscriptionExpiryBody">{{settings.messaging.subscription.expiryWarning.body}}</textarea>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <button type="submit" class="btn btn-primary">
-      <i class="bi bi-save me-1"></i>Save Settings
+    <div id="general" class="col s12">
+      <div class="card">
+        <div class="card-content">
+
+          <span class="card-title grey-text text-darken-1">System Information</span>
+
+          <div class="input-field">
+            <input id="systemName" type="text" name="systemName" value="{{settings.general.systemName}}">
+            <label for="systemName" class="active">System Name</label>
+          </div>
+
+          <div class="input-field">
+            <input id="abbreviation" type="text" name="abbreviation" value="{{settings.general.abbreviation}}">
+            <label for="abbreviation" class="active">Abbreviation</label>
+          </div>
+
+          <div class="input-field">
+            <textarea id="description" class="materialize-textarea" name="description">{{settings.general.description}}</textarea>
+            <label for="description" class="active">Description</label>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="currency" type="text" name="currency" value="{{settings.general.currency}}">
+              <label for="currency" class="active">Currency</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="timezone" type="text" name="timezone" value="{{settings.general.timezone}}">
+              <label for="timezone" class="active">Timezone</label>
+            </div>
+          </div>
+
+          <span class="card-title grey-text text-darken-1 mt-3">Contact Information</span>
+
+          <div class="input-field">
+            <input id="contactEmail" type="email" name="contactEmail" value="{{settings.contact.email}}">
+            <label for="contactEmail" class="active">Support Email</label>
+          </div>
+
+          <div class="input-field">
+            <input id="contactPhone" type="text" name="contactPhone" value="{{settings.contact.phone}}">
+            <label for="contactPhone" class="active">Support Phone</label>
+          </div>
+
+          <div class="input-field">
+            <textarea id="contactAddress" class="materialize-textarea" name="contactAddress">{{settings.contact.address}}</textarea>
+            <label for="contactAddress" class="active">Office Address</label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="branding" class="col s12">
+      <div class="card">
+        <div class="card-content">
+
+          <span class="card-title grey-text text-darken-1">Identity & Appearance</span>
+
+          <div class="row">
+            <div class="col s6 center-align">
+              <label>Logo</label>
+              <div id="logoDropzone" class="z-depth-1 grey lighten-4" style="width:150px;height:150px; margin:auto; position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <img id="logoPreview" src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{/if}}" style="width:100%;height:100%;object-fit:cover;">
+                <div class="overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.25);opacity:0;transition:0.2s;">
+                  <i class="material-icons white-text large">photo_camera</i>
+                </div>
+              </div>
+              <input type="file" id="logoInput" name="logo" class="d-none" accept=".png,.jpg,.jpeg">
+              <span class="grey-text text-darken-1">Recommended: 150x150px, PNG or JPG</span>
+            </div>
+
+            <div class="col s6 center-align">
+              <label>Favicon</label>
+              <div id="faviconDropzone" class="z-depth-1 grey lighten-4" style="width:80px;height:80px;margin:auto;position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <img id="faviconPreview" src="{{#if settings.branding.favicon}}{{settings.branding.favicon}}{{/if}}" style="width:100%;height:100%;object-fit:cover;">
+                <div class="overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.25);opacity:0;transition:0.2s;">
+                  <i class="material-icons white-text large">photo_camera</i>
+                </div>
+              </div>
+              <input type="file" id="faviconInput" name="favicon" class="d-none" accept=".png,.jpg,.jpeg">
+              <span class="grey-text text-darken-1">Recommended: 80x80px, PNG or JPG</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="color" id="primaryColor" name="primaryColor" value="{{settings.branding.primaryColor}}">
+              <label for="primaryColor" class="active">Primary Color</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="color" id="secondaryColor" name="secondaryColor" value="{{settings.branding.secondaryColor}}">
+              <label for="secondaryColor" class="active">Secondary Color</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="messaging" class="col s12">
+      <div class="card">
+        <div class="card-content">
+
+          <span class="card-title grey-text text-darken-1">Welcome Message</span>
+          <div class="input-field">
+            <input type="text" name="welcomeSubject" value="{{settings.messaging.general.welcome.subject}}">
+            <label class="active">Subject</label>
+          </div>
+          <div class="input-field">
+            <textarea class="materialize-textarea" name="welcomeBody">{{settings.messaging.general.welcome.body}}</textarea>
+            <label class="active">Message Body</label>
+          </div>
+
+          <span class="card-title grey-text text-darken-1 mt-3">Account Activation</span>
+          <div class="input-field">
+            <input type="text" name="activationSubject" value="{{settings.messaging.account.activation.subject}}">
+            <label class="active">Subject</label>
+          </div>
+          <div class="input-field">
+            <textarea class="materialize-textarea" name="activationBody">{{settings.messaging.account.activation.body}}</textarea>
+            <label class="active">Message Body</label>
+          </div>
+
+          <span class="card-title grey-text text-darken-1 mt-3">Subscription Expiry Warning</span>
+          <div class="input-field">
+            <input type="text" name="subscriptionExpirySubject" value="{{settings.messaging.subscription.expiryWarning.subject}}">
+            <label class="active">Subject</label>
+          </div>
+          <div class="input-field">
+            <textarea class="materialize-textarea" name="subscriptionExpiryBody">{{settings.messaging.subscription.expiryWarning.body}}</textarea>
+            <label class="active">Message Body</label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn blue waves-effect waves-light">
+      <i class="material-icons left">save</i>Save Settings
     </button>
 
   </form>
@@ -232,6 +172,11 @@
 
 {{#section "scripts"}}
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize Materialize Tabs
+  var tabs = document.querySelectorAll('.tabs');
+  M.Tabs.init(tabs);
+
   function setupImageDropzone(dropzoneId, inputId, previewId) {
     const dropzone = document.getElementById(dropzoneId);
     const input = document.getElementById(inputId);
@@ -242,25 +187,18 @@
     dropzone.addEventListener('mouseenter', () => overlay.style.opacity = 1);
     dropzone.addEventListener('mouseleave', () => overlay.style.opacity = 0);
 
-    input.addEventListener('change', (e) => {
+    input.addEventListener('change', e => {
       const file = e.target.files[0];
-      if(file) {
-        if(!file.type.startsWith('image/')) return;
+      if(file && file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onload = e => preview.src = e.target.result;
         reader.readAsDataURL(file);
       }
     });
 
-    dropzone.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      overlay.style.opacity = 1;
-    });
-    dropzone.addEventListener('dragleave', (e) => {
-      e.preventDefault();
-      overlay.style.opacity = 0;
-    });
-    dropzone.addEventListener('drop', (e) => {
+    dropzone.addEventListener('dragover', e => { e.preventDefault(); overlay.style.opacity = 1; });
+    dropzone.addEventListener('dragleave', e => { e.preventDefault(); overlay.style.opacity = 0; });
+    dropzone.addEventListener('drop', e => {
       e.preventDefault();
       overlay.style.opacity = 0;
       const file = e.dataTransfer.files[0];
@@ -273,9 +211,8 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    setupImageDropzone('logoDropzone', 'logoInput', 'logoPreview');
-    setupImageDropzone('faviconDropzone', 'faviconInput', 'faviconPreview');
-  });
+  setupImageDropzone('logoDropzone', 'logoInput', 'logoPreview');
+  setupImageDropzone('faviconDropzone', 'faviconInput', 'faviconPreview');
+});
 </script>
 {{/section}}
