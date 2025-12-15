@@ -11,32 +11,29 @@
     <!-- Tabs -->
     <div class="row">
       <div class="col s12">
-        <ul class="tabs z-depth-1">
-          <li class="tab col s4">
-            <a class="active" href="#general">General</a>
-          </li>
-          <li class="tab col s4">
-            <a href="#branding">Branding</a>
-          </li>
-          <li class="tab col s4">
-            <a href="#messaging">Messaging</a>
-          </li>
+        <ul class="tabs tabs-fixed-width" style="overflow-x:auto;">
+          <li class="tab"><a class="active" href="#general">General</a></li>
+          <li class="tab"><a href="#branding">Branding</a></li>
+          <li class="tab"><a href="#messaging">Messaging</a></li>
         </ul>
       </div>
     </div>
 
     <!-- ================= GENERAL ================= -->
     <div id="general" class="col s12 mt-4">
-      <ul class="collapsible">
+      <ul class="collapsible popout">
         <li class="active">
-          <div class="collapsible-header"><i class="material-icons">info</i>System Info</div>
+          <div class="collapsible-header">
+            <i class="material-icons">info</i>System Info
+            <i class="material-icons right">expand_more</i>
+          </div>
           <div class="collapsible-body">
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input id="systemName" type="text" name="systemName" value="{{settings.general.systemName}}">
                 <label for="systemName" class="active">System Name</label>
               </div>
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input id="abbreviation" type="text" name="abbreviation" value="{{settings.general.abbreviation}}">
                 <label for="abbreviation" class="active">Abbreviation</label>
               </div>
@@ -48,11 +45,11 @@
             </div>
 
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input type="text" id="currency" name="currency" value="{{settings.general.currency}}">
                 <label for="currency" class="active">Currency</label>
               </div>
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input type="text" id="timezone" name="timezone" value="{{settings.general.timezone}}">
                 <label for="timezone" class="active">Timezone</label>
               </div>
@@ -61,7 +58,10 @@
         </li>
 
         <li>
-          <div class="collapsible-header"><i class="material-icons">contact_mail</i>Contact Info</div>
+          <div class="collapsible-header">
+            <i class="material-icons">contact_mail</i>Contact Info
+            <i class="material-icons right">expand_more</i>
+          </div>
           <div class="collapsible-body">
             <div class="input-field">
               <input id="contactEmail" type="email" name="contactEmail" value="{{settings.contact.email}}">
@@ -82,14 +82,18 @@
 
     <!-- ================= BRANDING ================= -->
     <div id="branding" class="col s12 mt-4">
-      <ul class="collapsible">
+      <ul class="collapsible popout">
         <li class="active">
-          <div class="collapsible-header"><i class="material-icons">palette</i>Branding</div>
+          <div class="collapsible-header">
+            <i class="material-icons">palette</i>Branding
+            <i class="material-icons right">expand_more</i>
+          </div>
           <div class="collapsible-body">
             <div class="row">
-              <div class="col s6 center-align">
+              <!-- Logo -->
+              <div class="col s12 m6 mb-3 center-align">
                 <label>Logo</label>
-                <div id="logoDropzone" class="z-depth-1 grey lighten-4 mb-2" style="width:150px;height:150px; margin:auto; position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <div id="logoDropzone" class="z-depth-1 grey lighten-4 mb-2" style="width:150px;height:150px;margin:auto; position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer;">
                   <img id="logoPreview" src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{/if}}" style="width:100%;height:100%;object-fit:cover;">
                   <div class="overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.25);opacity:0;transition:0.2s;">
                     <i class="material-icons white-text large">photo_camera</i>
@@ -99,7 +103,8 @@
                 <span class="grey-text text-darken-1 small">Recommended: 150x150px</span>
               </div>
 
-              <div class="col s6 center-align">
+              <!-- Favicon -->
+              <div class="col s12 m6 mb-3 center-align">
                 <label>Favicon</label>
                 <div id="faviconDropzone" class="z-depth-1 grey lighten-4 mb-2" style="width:80px;height:80px;margin:auto;position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer;">
                   <img id="faviconPreview" src="{{#if settings.branding.favicon}}{{settings.branding.favicon}}{{/if}}" style="width:100%;height:100%;object-fit:cover;">
@@ -113,11 +118,11 @@
             </div>
 
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input type="color" id="primaryColor" name="primaryColor" value="{{settings.branding.primaryColor}}">
                 <label for="primaryColor" class="active">Primary Color</label>
               </div>
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input type="color" id="secondaryColor" name="secondaryColor" value="{{settings.branding.secondaryColor}}">
                 <label for="secondaryColor" class="active">Secondary Color</label>
               </div>
@@ -129,9 +134,12 @@
 
     <!-- ================= MESSAGING ================= -->
     <div id="messaging" class="col s12 mt-4">
-      <ul class="collapsible">
+      <ul class="collapsible popout">
         <li class="active">
-          <div class="collapsible-header"><i class="material-icons">email</i>Messaging</div>
+          <div class="collapsible-header">
+            <i class="material-icons">email</i>Messaging
+            <i class="material-icons right">expand_more</i>
+          </div>
           <div class="collapsible-body">
             <div class="input-field">
               <input type="text" name="welcomeSubject" value="{{settings.messaging.general.welcome.subject}}">
@@ -175,13 +183,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize Materialize Tabs
-  var tabs = document.querySelectorAll('.tabs');
-  M.Tabs.init(tabs);
-
-  // Initialize Collapsibles
-  var collapsibles = document.querySelectorAll('.collapsible');
-  M.Collapsible.init(collapsibles);
+  M.Tabs.init(document.querySelectorAll('.tabs'));
+  M.Collapsible.init(document.querySelectorAll('.collapsible'));
 
   function setupImageDropzone(dropzoneId, inputId, previewId) {
     const dropzone = document.getElementById(dropzoneId);
