@@ -144,9 +144,16 @@
     const elems = document.querySelectorAll('.tabs');
     M.Tabs.init(elems, {});
 
-    // Initialize DataTables (non-responsive)
-    $('#activeTable').DataTable({ pageLength: 10 });
-    $('#inactiveTable').DataTable({ pageLength: 10 });
+    // Initialize DataTables with horizontal scroll
+    $('#activeTable').DataTable({
+      pageLength: 10,
+      scrollX: true
+    });
+
+    $('#inactiveTable').DataTable({
+      pageLength: 10,
+      scrollX: true
+    });
 
     // Adjust columns when switching tabs
     const tabs = document.querySelectorAll('.tabs a');
