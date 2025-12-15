@@ -1,30 +1,32 @@
+<!-- ================= Sidebar Navigation ================= -->
 <ul class="collapsible expandable">
 
   <!-- Dashboard -->
   <li class="{{#ifActive '/super-admin/dashboard'}}active{{/ifActive}}">
-    <div class="collapsible-header">
+    <div class="collapsible-header waves-effect">
       <i class="material-icons">speed</i>
-      <a href="/super-admin/dashboard">Dashboard</a>
+      <a href="/super-admin/dashboard" class="black-text">Dashboard</a>
     </div>
   </li>
 
   <!-- Schools -->
   <li class="{{#ifActivePrefix currentPath '/super-admin/schools'}}active{{/ifActivePrefix}}">
-    <div class="collapsible-header">
+    <div class="collapsible-header waves-effect">
       <i class="material-icons">school</i>
       Schools
+      <i class="material-icons right">expand_more</i>
     </div>
     <div class="collapsible-body">
       <ul>
         <li>
           <a href="/super-admin/schools"
-             class="{{#ifActive '/super-admin/schools'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/schools'}}active{{/ifActive}}">
             All Schools
           </a>
         </li>
         <li>
           <a href="/super-admin/schools/create/new"
-             class="{{#ifActive '/super-admin/schools/create/new'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/schools/create/new'}}active{{/ifActive}}">
             Create School
           </a>
         </li>
@@ -34,21 +36,22 @@
 
   <!-- Students -->
   <li class="{{#ifActivePrefix currentPath '/super-admin/students'}}active{{/ifActivePrefix}}">
-    <div class="collapsible-header">
+    <div class="collapsible-header waves-effect">
       <i class="material-icons">groups</i>
       Students
+      <i class="material-icons right">expand_more</i>
     </div>
     <div class="collapsible-body">
       <ul>
         <li>
           <a href="/super-admin/students"
-             class="{{#ifActive '/super-admin/students'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/students'}}active{{/ifActive}}">
             All Students
           </a>
         </li>
         <li>
           <a href="/super-admin/enrollments"
-             class="{{#ifActive '/super-admin/enrollments'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/enrollments'}}active{{/ifActive}}">
             Enrollments
           </a>
         </li>
@@ -58,21 +61,22 @@
 
   <!-- Staff -->
   <li class="{{#ifActivePrefix currentPath '/super-admin/staff'}}active{{/ifActivePrefix}}">
-    <div class="collapsible-header">
+    <div class="collapsible-header waves-effect">
       <i class="material-icons">badge</i>
       Staff
+      <i class="material-icons right">expand_more</i>
     </div>
     <div class="collapsible-body">
       <ul>
         <li>
           <a href="/super-admin/staff"
-             class="{{#ifActive '/super-admin/staff'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/staff'}}active{{/ifActive}}">
             All Staff
           </a>
         </li>
         <li>
           <a href="/super-admin/roles"
-             class="{{#ifActive '/super-admin/roles'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/roles'}}active{{/ifActive}}">
             Roles
           </a>
         </li>
@@ -82,12 +86,11 @@
 
   <!-- Classes -->
   <li class="{{#ifActive '/super-admin/classes'}}active{{/ifActive}}">
-    <div class="collapsible-header">
+    <div class="collapsible-header waves-effect">
       <i class="material-icons">menu_book</i>
-      <a href="/super-admin/classes">Classes</a>
+      <a href="/super-admin/classes" class="black-text">Classes</a>
     </div>
   </li>
-
 </ul>
 
 <!-- Section Label -->
@@ -98,7 +101,7 @@
 <ul>
   <li>
     <a href="/super-admin/settings"
-       class="{{#ifActive '/super-admin/settings'}}active{{/ifActive}}">
+       class="waves-effect {{#ifActive '/super-admin/settings'}}active{{/ifActive}}">
       <i class="material-icons">settings</i>
       Settings
     </a>
@@ -106,7 +109,7 @@
 
   <li>
     <a href="/super-admin/plans"
-       class="{{#ifActive '/super-admin/plans'}}active{{/ifActive}}">
+       class="waves-effect {{#ifActive '/super-admin/plans'}}active{{/ifActive}}">
       <i class="material-icons">layers</i>
       Plans
     </a>
@@ -114,7 +117,7 @@
 
   <li>
     <a href="/super-admin/subscriptions"
-       class="{{#ifActive '/super-admin/subscriptions'}}active{{/ifActive}}">
+       class="waves-effect {{#ifActive '/super-admin/subscriptions'}}active{{/ifActive}}">
       <i class="material-icons">assignment_turned_in</i>
       Subscriptions
     </a>
