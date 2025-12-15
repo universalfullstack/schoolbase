@@ -1,161 +1,183 @@
-<div class="dashboard-page">
+<div class="container">
 
   <!-- Greeting -->
   <div class="section">
-    <h4>Super Admin Dashboard</h4>
+    <h4>{{user.role}} Dashboard</h4>
+
+    {{#unless user.emailVerified}}
+      <div class="card-panel yellow lighten-4 black-text">
+        <i class="material-icons left">warning</i>
+        Email not verified
+      </div>
+    {{/unless}}
   </div>
 
-  <!-- Stats Cards -->
+  <!-- Stat cards -->
   <div class="row">
+
+    <!-- Schools -->
     <div class="col s12 m6 l3">
-      <div class="card">
+      <div class="card blue darken-2 white-text">
         <div class="card-content">
           <span class="card-title">Schools</span>
           <h5>{{stats.totalSchools}}</h5>
         </div>
       </div>
     </div>
+
+    <!-- School Admins -->
     <div class="col s12 m6 l3">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">Students</span>
-          <h5>{{stats.totalStudents}}</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m6 l3">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">Staff</span>
-          <h5>{{stats.totalStaff}}</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m6 l3">
-      <div class="card">
+      <div class="card amber darken-2 white-text">
         <div class="card-content">
           <span class="card-title">School Admins</span>
           <h5>{{stats.totalSchoolAdmins}}</h5>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Charts -->
-  <div class="row">
-    <!-- Subscription Trend Chart -->
-    <div class="col s12 m6">
-      <div class="card">
+    <!-- Staff -->
+    <div class="col s12 m6 l3">
+      <div class="card purple darken-1 white-text">
         <div class="card-content">
-          <span class="card-title">Subscriptions Trend (Last 6 Months)</span>
-          <canvas id="trendChart"></canvas>
+          <span class="card-title">Staff</span>
+          <h5>{{stats.totalStaff}}</h5>
         </div>
       </div>
     </div>
 
-    <!-- Subscription Status Chart -->
-    <div class="col s12 m6">
+    <!-- Students -->
+    <div class="col s12 m6 l3">
+      <div class="card teal lighten-1 white-text">
+        <div class="card-content">
+          <span class="card-title">Students</span>
+          <h5>{{stats.totalStudents}}</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Subscriptions -->
+    <div class="col s12 m6 l3">
+      <div class="card green darken-2 white-text">
+        <div class="card-content">
+          <span class="card-title">Active Subscriptions</span>
+          <h5>{{stats.totalSubscriptions}}</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Revenue -->
+    <div class="col s12 m6 l3">
+      <div class="card teal darken-2 white-text">
+        <div class="card-content">
+          <span class="card-title">Total Revenue</span>
+          <h5>₦{{stats.totalRevenue}}</h5>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Charts -->
+  <div class="row">
+    <div class="col s12 m12 l6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Subscription Trend (Last 6 Months)</span>
+          <canvas id="subscriptionTrendChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m12 l6">
       <div class="card">
         <div class="card-content">
           <span class="card-title">Subscriptions by Status</span>
-          <canvas id="statusChart"></canvas>
+          <canvas id="subscriptionStatusChart"></canvas>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Latest Subscriptions Table -->
-  <div class="row">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">Latest Subscriptions</span>
-          <table class="striped">
-            <thead>
-              <tr>
-                <th>School</th>
-                <th>Plan</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each latestSubscriptions}}
-                <tr>
-                  <td>{{school}}</td>
-                  <td>{{plan}}</td>
-                  <td>{{startDate}}</td>
-                  <td>{{endDate}}</td>
-                  <td>{{status}}</td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
-        </div>
-      </div>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Latest Subscriptions</span>
+      <table class="highlight responsive-table">
+        <thead>
+          <tr>
+            <th>School</th>
+            <th>Plan</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each latestSubscriptions}}
+          <tr>
+            <td>{{this.school}}</td>
+            <td>{{this.plan}}</td>
+            <td>{{this.startDate}}</td>
+            <td>{{this.endDate}}</td>
+            <td>
+              {{#if (eq this.status "active")}}
+                <span class="new badge green" data-badge-caption="">Active</span>
+              {{else if (eq this.status "expired")}}
+                <span class="new badge red" data-badge-caption="">Expired</span>
+              {{else if (eq this.status "pending")}}
+                <span class="new badge amber black-text" data-badge-caption="">Pending</span>
+              {{else}}
+                <span class="new badge grey" data-badge-caption="">Cancelled</span>
+              {{/if}}
+            </td>
+          </tr>
+          {{else}}
+          <tr><td colspan="5" class="grey-text">No subscriptions yet</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
     </div>
   </div>
 
 </div>
 
+{{#section "scripts"}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Ensure data is passed safely using lowercase json helper
-  const trendLabels = {{{json trendLabels}}};
-  const trendData = {{{json trendData}}};
-  const statusLabels = {{{json statusLabels}}};
-  const statusData = {{{json statusData}}};
+  const trendLabels  = {{{trendLabels}}};
+  const trendData    = {{{trendData}}};
+  const statusLabels = {{{statusLabels}}};
+  const statusData   = {{{statusData}}};
 
   // Subscription Trend Chart
-  new Chart(document.getElementById('trendChart'), {
+  new Chart(document.getElementById('subscriptionTrendChart').getContext('2d'), {
     type: 'line',
     data: {
       labels: trendLabels,
       datasets: [{
-        label: 'Subscriptions',
+        label: 'New Subscriptions',
         data: trendData,
-        borderColor: 'rgba(63,81,181,1)',
-        backgroundColor: 'rgba(63,81,181,0.2)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 2,
         fill: true,
-        tension: 0.3
+        tension: 0.4
       }]
     },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: true },
-        tooltip: { enabled: true }
-      },
-      scales: {
-        y: { beginAtZero: true }
-      }
-    }
+    options: { responsive: true, plugins: { legend: { display: true } }, scales: { y: { beginAtZero: true } } }
   });
 
   // Subscription Status Chart
-  new Chart(document.getElementById('statusChart'), {
+  new Chart(document.getElementById('subscriptionStatusChart').getContext('2d'), {
     type: 'doughnut',
     data: {
-      labels: statusLabels,
+      labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
       datasets: [{
-        label: 'Subscriptions',
         data: statusData,
-        backgroundColor: [
-          'rgba(76,175,80,0.7)', // active - green
-          'rgba(244,67,54,0.7)', // expired - red
-          'rgba(255,193,7,0.7)', // pending - yellow
-          'rgba(158,158,158,0.7)' // cancelled - gray
-        ],
-        borderColor: 'rgba(255,255,255,0.8)',
-        borderWidth: 1
+        backgroundColor: ['#198754','#dc3545','#ffc107','#6c757d']
       }]
     },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'bottom' },
-        tooltip: { enabled: true }
-      }
-    }
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
   });
 </script>
+{{/section}}
