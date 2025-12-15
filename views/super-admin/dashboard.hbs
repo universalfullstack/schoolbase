@@ -146,43 +146,57 @@
 </style>
 {{/section}}
 
-{{#section "scripts"}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+
   const trendLabels  = {{{trendLabels}}};
   const trendData    = {{{trendData}}};
   const statusLabels = {{{statusLabels}}};
   const statusData   = {{{statusData}}};
 
-  // Subscription Trend Chart
-  new Chart(document.getElementById('subscriptionTrendChart').getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: trendLabels,
-      datasets: [{
-        label: 'New Subscriptions',
-        data: trendData,
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 2,
-        fill: true,
-        tension: 0.4
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { display: true } }, scales: { y: { beginAtZero: true } } }
-  });
+  // Line chart
+  new Chart(
+    document.getElementById('subscriptionTrendChart'),
+    {
+      type: 'line',
+      data: {
+        labels: trendLabels,
+        datasets: [{
+          label: 'New Subscriptions',
+          data: trendData,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true } }
+      }
+    }
+  );
 
-  // Subscription Status Chart
-  new Chart(document.getElementById('subscriptionStatusChart').getContext('2d'), {
-    type: 'doughnut',
-    data: {
-      labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
-      datasets: [{
-        data: statusData,
-        backgroundColor: ['#198754','#dc3545','#ffc107','#6c757d']
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
-  });
+  // Doughnut chart
+  new Chart(
+    document.getElementById('subscriptionStatusChart'),
+    {
+      type: 'doughnut',
+      data: {
+        labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
+        datasets: [{
+          data: statusData,
+          backgroundColor: ['#198754', '#dc3545', '#ffc107', '#6c757d']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    }
+  );
+
+});
 </script>
-{{/section}}
