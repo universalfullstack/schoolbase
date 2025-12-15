@@ -1,29 +1,37 @@
 <!-- ===================== MUI Sidebar Menu ===================== -->
-<ul class="mui-list--unstyled">
+<ul class="mui-list mui-list--unstyled">
 
   <!-- Dashboard -->
   <li class="{{#ifActive '/super-admin/dashboard'}}mui--bg-light-blue-50{{/ifActive}}">
     <a href="/super-admin/dashboard" class="mui-btn mui-btn--flat mui-btn--primary">
-      <i class="material-icons" style="vertical-align:middle;">speed</i>
-      <span style="margin-left:8px;">Dashboard</span>
+      <i class="material-icons">speed</i>
+      <span class="mui--margin-left-1">Dashboard</span>
     </a>
   </li>
 
   <!-- Schools -->
   <li class="{{#ifActivePrefix currentPath '/super-admin/schools'}}mui--bg-light-blue-50{{/ifActivePrefix}}">
-    <button class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle" data-target="schools-submenu">
+    <button
+      type="button"
+      class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle"
+      data-target="schools-submenu">
       <i class="material-icons">school</i>
-      <span style="margin-left:8px;">Schools</span>
-      <i class="material-icons" style="float:right;">expand_more</i>
+      <span class="mui--margin-left-1">Schools</span>
+      <i class="material-icons mui--pull-right">expand_more</i>
     </button>
-    <ul class="mui-collapse" id="schools-submenu">
+
+    <ul class="mui-list mui-list--unstyled mui-collapse" id="schools-submenu">
       <li>
-        <a href="/super-admin/schools" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/schools'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/schools"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/schools'}}mui--bg-light-blue-100{{/ifActive}}">
           All Schools
         </a>
       </li>
       <li>
-        <a href="/super-admin/schools/create/new" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/schools/create/new'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/schools/create/new"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/schools/create/new'}}mui--bg-light-blue-100{{/ifActive}}">
           Create School
         </a>
       </li>
@@ -32,19 +40,27 @@
 
   <!-- Sessions -->
   <li class="{{#ifActivePrefix currentPath '/super-admin/sessions'}}mui--bg-light-blue-50{{/ifActivePrefix}}">
-    <button class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle" data-target="sessions-submenu">
+    <button
+      type="button"
+      class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle"
+      data-target="sessions-submenu">
       <i class="material-icons">event_note</i>
-      <span style="margin-left:8px;">Sessions</span>
-      <i class="material-icons" style="float:right;">expand_more</i>
+      <span class="mui--margin-left-1">Sessions</span>
+      <i class="material-icons mui--pull-right">expand_more</i>
     </button>
-    <ul class="mui-collapse" id="sessions-submenu">
+
+    <ul class="mui-list mui-list--unstyled mui-collapse" id="sessions-submenu">
       <li>
-        <a href="/super-admin/sessions" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/sessions'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/sessions"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/sessions'}}mui--bg-light-blue-100{{/ifActive}}">
           All Sessions
         </a>
       </li>
       <li>
-        <a href="/super-admin/sessions/create" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/sessions/create'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/sessions/create"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/sessions/create'}}mui--bg-light-blue-100{{/ifActive}}">
           Create Session
         </a>
       </li>
@@ -53,19 +69,27 @@
 
   <!-- Subjects -->
   <li class="{{#ifActivePrefix currentPath '/super-admin/subjects'}}mui--bg-light-blue-50{{/ifActivePrefix}}">
-    <button class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle" data-target="subjects-submenu">
+    <button
+      type="button"
+      class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle"
+      data-target="subjects-submenu">
       <i class="material-icons">menu_book</i>
-      <span style="margin-left:8px;">Subjects</span>
-      <i class="material-icons" style="float:right;">expand_more</i>
+      <span class="mui--margin-left-1">Subjects</span>
+      <i class="material-icons mui--pull-right">expand_more</i>
     </button>
-    <ul class="mui-collapse" id="subjects-submenu">
+
+    <ul class="mui-list mui-list--unstyled mui-collapse" id="subjects-submenu">
       <li>
-        <a href="/super-admin/subjects" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/subjects'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/subjects"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/subjects'}}mui--bg-light-blue-100{{/ifActive}}">
           All Subjects
         </a>
       </li>
       <li>
-        <a href="/super-admin/subjects/create" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/subjects/create'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/subjects/create"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/subjects/create'}}mui--bg-light-blue-100{{/ifActive}}">
           Create Subject
         </a>
       </li>
@@ -74,19 +98,27 @@
 
   <!-- Classes -->
   <li class="{{#ifActivePrefix currentPath '/super-admin/classes'}}mui--bg-light-blue-50{{/ifActivePrefix}}">
-    <button class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle" data-target="classes-submenu">
+    <button
+      type="button"
+      class="mui-btn mui-btn--flat mui-btn--primary mui-collapse-toggle"
+      data-target="classes-submenu">
       <i class="material-icons">class</i>
-      <span style="margin-left:8px;">Classes</span>
-      <i class="material-icons" style="float:right;">expand_more</i>
+      <span class="mui--margin-left-1">Classes</span>
+      <i class="material-icons mui--pull-right">expand_more</i>
     </button>
-    <ul class="mui-collapse" id="classes-submenu">
+
+    <ul class="mui-list mui-list--unstyled mui-collapse" id="classes-submenu">
       <li>
-        <a href="/super-admin/classes" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/classes'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/classes"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/classes'}}mui--bg-light-blue-100{{/ifActive}}">
           All Classes
         </a>
       </li>
       <li>
-        <a href="/super-admin/classes/create" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/classes/create'}}mui--bg-light-blue-100{{/ifActive}}">
+        <a
+          href="/super-admin/classes/create"
+          class="mui-btn mui-btn--flat {{#ifActive '/super-admin/classes/create'}}mui--bg-light-blue-100{{/ifActive}}">
           Create Class
         </a>
       </li>
@@ -95,48 +127,55 @@
 
 </ul>
 
-<!-- Administration Section -->
-<div class="mui--text-dark-secondary" style="margin: 20px 0 10px;">
+<!-- ===================== Administration ===================== -->
+<div class="mui--text-dark-secondary mui--margin-top-2 mui--margin-bottom-1">
   <small>Administration</small>
 </div>
 
-<ul class="mui-list--unstyled">
+<ul class="mui-list mui-list--unstyled">
   <li>
-    <a href="/super-admin/settings" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/settings'}}mui--bg-light-blue-50{{/ifActive}}">
+    <a
+      href="/super-admin/settings"
+      class="mui-btn mui-btn--flat {{#ifActive '/super-admin/settings'}}mui--bg-light-blue-50{{/ifActive}}">
       <i class="material-icons">settings</i>
-      <span style="margin-left:8px;">Settings</span>
+      <span class="mui--margin-left-1">Settings</span>
     </a>
   </li>
+
   <li>
-    <a href="/super-admin/plans" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/plans'}}mui--bg-light-blue-50{{/ifActive}}">
+    <a
+      href="/super-admin/plans"
+      class="mui-btn mui-btn--flat {{#ifActive '/super-admin/plans'}}mui--bg-light-blue-50{{/ifActive}}">
       <i class="material-icons">layers</i>
-      <span style="margin-left:8px;">Plans</span>
+      <span class="mui--margin-left-1">Plans</span>
     </a>
   </li>
+
   <li>
-    <a href="/super-admin/subscriptions" class="mui-btn mui-btn--flat {{#ifActive '/super-admin/subscriptions'}}mui--bg-light-blue-50{{/ifActive}}">
+    <a
+      href="/super-admin/subscriptions"
+      class="mui-btn mui-btn--flat {{#ifActive '/super-admin/subscriptions'}}mui--bg-light-blue-50{{/ifActive}}">
       <i class="material-icons">assignment_turned_in</i>
-      <span style="margin-left:8px;">Subscriptions</span>
+      <span class="mui--margin-left-1">Subscriptions</span>
     </a>
   </li>
+
   <li>
     <a href="/logout" class="mui-btn mui-btn--flat mui--text-danger">
       <i class="material-icons">logout</i>
-      <span style="margin-left:8px;">Logout</span>
+      <span class="mui--margin-left-1">Logout</span>
     </a>
   </li>
 </ul>
 
-<!-- ================= Scripts for Collapsible Submenus ================= -->
+<!-- ===================== Collapsible Logic ===================== -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var toggles = document.querySelectorAll('.mui-collapse-toggle');
-    toggles.forEach(function(toggle){
-      toggle.addEventListener('click', function(){
-        var targetId = toggle.getAttribute('data-target');
-        var submenu = document.getElementById(targetId);
-        if(submenu){
-          submenu.classList.toggle('mui--open');
+    document.querySelectorAll('.mui-collapse-toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        var target = document.getElementById(toggle.dataset.target);
+        if (target) {
+          target.classList.toggle('mui--is-open');
         }
       });
     });
