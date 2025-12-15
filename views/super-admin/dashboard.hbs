@@ -143,10 +143,10 @@
 
 
 
+{{#section "scripts"}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 
 <script>
-alert('ok')
 
   const trendLabels  = {{{trendLabels}}};
   const trendData    = {{{trendData}}};
@@ -184,4 +184,5 @@ alert('ok')
     options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
   });
 </script>
+{{/section}}
 
