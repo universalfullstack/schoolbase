@@ -162,7 +162,9 @@
 
 <!-- ================= PAGE SCRIPTS ================= -->
 {{#section "scripts"}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Chart.js v3 (stable & compatible) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -172,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const statusLabels = {{{statusLabels}}};
   const statusData   = {{{statusData}}};
 
-  // Line Chart
+  // ================= LINE CHART =================
   new Chart(document.getElementById('subscriptionTrendChart'), {
     type: 'line',
     data: {
@@ -191,26 +193,35 @@ document.addEventListener('DOMContentLoaded', function () {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        y: { beginAtZero: true }
+        y: {
+          beginAtZero: true
+        }
       }
     }
   });
 
-  // Doughnut Chart
+  // ================= DOUGHNUT CHART =================
   new Chart(document.getElementById('subscriptionStatusChart'), {
     type: 'doughnut',
     data: {
       labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
       datasets: [{
         data: statusData,
-        backgroundColor: ['#2e7d32', '#c62828', '#f9a825', '#757575']
-
+        backgroundColor: [
+          '#2e7d32',
+          '#c62828',
+          '#f9a825',
+          '#757575'
+        ]
+      }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { position: 'bottom' }
+        legend: {
+          position: 'bottom'
+        }
       }
     }
   });
