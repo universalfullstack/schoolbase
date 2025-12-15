@@ -4,7 +4,7 @@
   <li class="{{#ifActive '/super-admin/dashboard'}}active{{/ifActive}}">
     <div class="collapsible-header waves-effect">
       <i class="material-icons">speed</i>
-      <a href="/super-admin/dashboard" class="black-text">Dashboard</a>
+      <a href="/super-admin/dashboard" class="black-text" style="text-decoration: none;">Dashboard</a>
     </div>
   </li>
 
@@ -19,13 +19,13 @@
       <ul>
         <li>
           <a href="/super-admin/schools"
-             class="waves-effect {{#ifActive '/super-admin/schools'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/schools'}}active{{/ifActive}}" style="text-decoration: none;">
             All Schools
           </a>
         </li>
         <li>
           <a href="/super-admin/schools/create/new"
-             class="waves-effect {{#ifActive '/super-admin/schools/create/new'}}active{{/ifActive}}">
+             class="waves-effect {{#ifActive '/super-admin/schools/create/new'}}active{{/ifActive}}" style="text-decoration: none;">
             Create School
           </a>
         </li>
@@ -33,50 +33,50 @@
     </div>
   </li>
 
-  <!-- Students -->
-  <li class="{{#ifActivePrefix currentPath '/super-admin/students'}}active{{/ifActivePrefix}}">
+  <!-- Sessions -->
+  <li class="{{#ifActivePrefix currentPath '/super-admin/sessions'}}active{{/ifActivePrefix}}">
     <div class="collapsible-header waves-effect">
-      <i class="material-icons">groups</i>
-      Students
+      <i class="material-icons">event_note</i>
+      Sessions
       <i class="material-icons right">expand_more</i>
     </div>
     <div class="collapsible-body">
       <ul>
         <li>
-          <a href="/super-admin/students"
-             class="waves-effect {{#ifActive '/super-admin/students'}}active{{/ifActive}}">
-            All Students
+          <a href="/super-admin/sessions"
+             class="waves-effect {{#ifActive '/super-admin/sessions'}}active{{/ifActive}}" style="text-decoration: none;">
+            All Sessions
           </a>
         </li>
         <li>
-          <a href="/super-admin/enrollments"
-             class="waves-effect {{#ifActive '/super-admin/enrollments'}}active{{/ifActive}}">
-            Enrollments
+          <a href="/super-admin/sessions/create"
+             class="waves-effect {{#ifActive '/super-admin/sessions/create'}}active{{/ifActive}}" style="text-decoration: none;">
+            Create Session
           </a>
         </li>
       </ul>
     </div>
   </li>
 
-  <!-- Staff -->
-  <li class="{{#ifActivePrefix currentPath '/super-admin/staff'}}active{{/ifActivePrefix}}">
+  <!-- Subjects -->
+  <li class="{{#ifActivePrefix currentPath '/super-admin/subjects'}}active{{/ifActivePrefix}}">
     <div class="collapsible-header waves-effect">
-      <i class="material-icons">badge</i>
-      Staff
+      <i class="material-icons">menu_book</i>
+      Subjects
       <i class="material-icons right">expand_more</i>
     </div>
     <div class="collapsible-body">
       <ul>
         <li>
-          <a href="/super-admin/staff"
-             class="waves-effect {{#ifActive '/super-admin/staff'}}active{{/ifActive}}">
-            All Staff
+          <a href="/super-admin/subjects"
+             class="waves-effect {{#ifActive '/super-admin/subjects'}}active{{/ifActive}}" style="text-decoration: none;">
+            All Subjects
           </a>
         </li>
         <li>
-          <a href="/super-admin/roles"
-             class="waves-effect {{#ifActive '/super-admin/roles'}}active{{/ifActive}}">
-            Roles
+          <a href="/super-admin/subjects/create"
+             class="waves-effect {{#ifActive '/super-admin/subjects/create'}}active{{/ifActive}}" style="text-decoration: none;">
+            Create Subject
           </a>
         </li>
       </ul>
@@ -84,12 +84,30 @@
   </li>
 
   <!-- Classes -->
-  <li class="{{#ifActive '/super-admin/classes'}}active{{/ifActive}}">
+  <li class="{{#ifActivePrefix currentPath '/super-admin/classes'}}active{{/ifActivePrefix}}">
     <div class="collapsible-header waves-effect">
-      <i class="material-icons">menu_book</i>
-      <a href="/super-admin/classes" class="black-text">Classes</a>
+      <i class="material-icons">class</i>
+      Classes
+      <i class="material-icons right">expand_more</i>
+    </div>
+    <div class="collapsible-body">
+      <ul>
+        <li>
+          <a href="/super-admin/classes"
+             class="waves-effect {{#ifActive '/super-admin/classes'}}active{{/ifActive}}" style="text-decoration: none;">
+            All Classes
+          </a>
+        </li>
+        <li>
+          <a href="/super-admin/classes/create"
+             class="waves-effect {{#ifActive '/super-admin/classes/create'}}active{{/ifActive}}" style="text-decoration: none;">
+            Create Class
+          </a>
+        </li>
+      </ul>
     </div>
   </li>
+
 </ul>
 
 <!-- Administration Section -->
@@ -100,7 +118,7 @@
 <ul>
   <li>
     <a href="/super-admin/settings"
-       class="waves-effect {{#ifActive '/super-admin/settings'}}active{{/ifActive}}">
+       class="waves-effect {{#ifActive '/super-admin/settings'}}active{{/ifActive}}" style="text-decoration: none;">
       <i class="material-icons">settings</i>
       Settings
     </a>
@@ -108,7 +126,7 @@
 
   <li>
     <a href="/super-admin/plans"
-       class="waves-effect {{#ifActive '/super-admin/plans'}}active{{/ifActive}}">
+       class="waves-effect {{#ifActive '/super-admin/plans'}}active{{/ifActive}}" style="text-decoration: none;">
       <i class="material-icons">layers</i>
       Plans
     </a>
@@ -116,9 +134,16 @@
 
   <li>
     <a href="/super-admin/subscriptions"
-       class="waves-effect {{#ifActive '/super-admin/subscriptions'}}active{{/ifActive}}">
+       class="waves-effect {{#ifActive '/super-admin/subscriptions'}}active{{/ifActive}}" style="text-decoration: none;">
       <i class="material-icons">assignment_turned_in</i>
       Subscriptions
+    </a>
+  </li>
+
+  <li>
+    <a href="/logout" class="waves-effect red-text" style="text-decoration: none;">
+      <i class="material-icons">logout</i>
+      Logout
     </a>
   </li>
 </ul>
