@@ -8,23 +8,36 @@ export const renderSuperAdminDashboard = async (req, res) => {
     // -----------------------------
     // Fetch basic stats in parallel
     // -----------------------------
-    const [totalSchools, totalStudents, totalGuardians, totalStaff, totalSchoolAdmins, subscriptionsAgg, latestSubscriptionsRaw] =
-      await Promise.all([
-        School.countDocuments(),
-        Student.countDocuments(),
-        Guardian.countDocuments(),
-        Staff.countDocuments(),
-        SchoolAdmin.countDocuments(),
-        Subscription.aggregate([
-          { $group: { _id: null, totalRevenue: { $sum: "$amountPaid" }, totalActive: { $sum: 1 } } }
-        ]),
-        Subscription.find()
-          .sort({ createdAt: -1 })
-          .limit(6)
-          .populate("school", "name")
-          .populate("plan", "name")
-          .lean()
-      ]);
+    const [
+      totalSchools,
+      totalStudents,
+      totalGuardians,
+      totalStaff,
+      totalSchoolAdmins,
+      subscriptionsAgg,
+      latestSubscriptionsRaw
+    ] = await Promise.all([
+      School.countDocuments(),
+      Student.countDocuments(),
+      Guardian.countDocuments(),
+      Staff.countDocuments(),
+      SchoolAdmin.countDocuments(),
+      Subscription.aggregate([
+        { 
+          $group: { 
+            _id: null, 
+            totalRevenue: { $sum: "$amountPaid" }, 
+            totalActive: { $sum: 1 } 
+          } 
+        }
+      ]),
+      Subscription.find()
+        .sort({ createdAt: -1 })
+        .limit(6)
+        .populate("school", "name")
+        .populate("plan", "name")
+        .lean()
+    ]);
 
     const totalSubscriptions = subscriptionsAgg[0]?.totalActive || 0;
     const totalRevenue = subscriptionsAgg[0]?.totalRevenue || 0;
@@ -94,11 +107,11 @@ export const renderSuperAdminDashboard = async (req, res) => {
       },
       latestSubscriptions,
 
-      // Pass JSON strings to template safely
-      trendLabels: trendLabelsArray,
-      trendData: trendDataArray,
-      statusLabels: statusLabelsArray,
-      statusData: statusDataArray,
+      // Pass JSON strings for Chart.js
+      trendLabels: JSON.stringify(trendLabelsArray),
+      trendData: JSON.stringify(trendDataArray),
+      statusLabels: JSON.stringify(statusLabelsArray),
+      statusData: JSON.stringify(statusDataArray),
     });
 
   } catch (err) {
@@ -106,4 +119,3 @@ export const renderSuperAdminDashboard = async (req, res) => {
     res.status(500).render("error", { message: "Could not load dashboard." });
   }
 };
- 
