@@ -1,106 +1,166 @@
-<div class="container-fluid py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-6">
-      <div class="card shadow-sm p-4">
+<div class="container section">
 
-        <h1 class="h3 mb-4 text-center">Edit Plan: {{plan.name}}</h1>
+  <div class="row">
+    <div class="col s12 m10 l6 offset-m1 offset-l3">
+      <div class="card">
 
-        {{> flashMessages}}
+        <div class="card-content">
+          <span class="card-title center-align">
+            Edit Plan: {{plan.name}}
+          </span>
 
-        <form action="/super-admin/plans/edit/{{plan._id}}" method="POST">
+          {{> flashMessages}}
 
-          <!-- Plan Name -->
-          <div class="mb-3">
-            <label class="form-label">Plan Name</label>
-            <input type="text" name="name" class="form-control" 
-                   value="{{#if old.name}}{{old.name}}{{else}}{{plan.name}}{{/if}}" required>
-            <small class="text-muted">Unique name for this plan (e.g., Basic, Pro, Enterprise).</small>
+          <form action="/super-admin/plans/edit/{{plan._id}}" method="POST">
+
+            <!-- Plan Name -->
+            <div class="input-field">
+              <input id="name" type="text" name="name" required
+                value="{{#if old.name}}{{old.name}}{{else}}{{plan.name}}{{/if}}">
+              <label for="name" class="active">Plan Name</label>
+              <span class="helper-text">
+                Unique name for this plan (e.g., Basic, Pro, Enterprise).
+              </span>
+            </div>
+
+            <!-- Description -->
+            <div class="input-field">
+              <textarea id="description" name="description"
+                class="materialize-textarea">{{#if old.description}}{{old.description}}{{else}}{{plan.description}}{{/if}}</textarea>
+              <label for="description" class="active">Description</label>
+              <span class="helper-text">
+                Brief summary of the plan’s purpose or benefits.
+              </span>
+            </div>
+
+            <!-- Price -->
+            <div class="input-field">
+              <input id="price" type="number" name="price" required
+                value="{{#if old.price}}{{old.price}}{{else}}{{plan.price}}{{/if}}">
+              <label for="price" class="active">Price</label>
+              <span class="helper-text">
+                Cost of the plan in your currency (e.g., NGN).
+              </span>
+            </div>
+
+            <!-- Discount -->
+            <div class="input-field">
+              <input id="discount" type="number" name="discount"
+                value="{{#if old.discount}}{{old.discount}}{{else}}{{plan.discount}}{{/if}}">
+              <label for="discount" class="active">Discount</label>
+              <span class="helper-text">
+                Optional discount amount (0 if none).
+              </span>
+            </div>
+
+            <!-- Billing Cycle -->
+            <div class="input-field">
+              <select name="billingCycle">
+                <option value="monthly"
+                  {{#if old.billingCycle}}
+                    {{#ifCond old.billingCycle "monthly"}}selected{{/ifCond}}
+                  {{else}}
+                    {{#ifCond plan.billingCycle "monthly"}}selected{{/ifCond}}
+                  {{/if}}>
+                  Monthly
+                </option>
+                <option value="yearly"
+                  {{#if old.billingCycle}}
+                    {{#ifCond old.billingCycle "yearly"}}selected{{/ifCond}}
+                  {{else}}
+                    {{#ifCond plan.billingCycle "yearly"}}selected{{/ifCond}}
+                  {{/if}}>
+                  Yearly
+                </option>
+              </select>
+              <label>Billing Cycle</label>
+              <span class="helper-text">
+                How often users are billed for this plan.
+              </span>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Resource Limits -->
+            <h6 class="grey-text text-darken-1">Resource Limits</h6>
+
+            <div class="input-field">
+              <input type="number" name="maxStudents"
+                value="{{#if old.maxStudents}}{{old.maxStudents}}{{else}}{{plan.maxStudents}}{{/if}}">
+              <label class="active">Max Students</label>
+              <span class="helper-text">0 = unlimited</span>
+            </div>
+
+            <div class="input-field">
+              <input type="number" name="maxStaff"
+                value="{{#if old.maxStaff}}{{old.maxStaff}}{{else}}{{plan.maxStaff}}{{/if}}">
+              <label class="active">Max Staff</label>
+              <span class="helper-text">0 = unlimited</span>
+            </div>
+
+            <div class="input-field">
+              <input type="number" name="maxClasses"
+                value="{{#if old.maxClasses}}{{old.maxClasses}}{{else}}{{plan.maxClasses}}{{/if}}">
+              <label class="active">Max Classes</label>
+              <span class="helper-text">0 = unlimited</span>
+            </div>
+
+            <div class="input-field">
+              <input type="number" name="maxSections"
+                value="{{#if old.maxSections}}{{old.maxSections}}{{else}}{{plan.maxSections}}{{/if}}">
+              <label class="active">Max Sections</label>
+              <span class="helper-text">0 = unlimited</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Features -->
+            <div class="input-field">
+              <textarea name="features" class="materialize-textarea">
+{{#if old.features}}{{old.features}}{{else}}{{#if plan.features}}{{plan.features}}{{else}}Messaging
+Reports{{/if}}{{/if}}
+              </textarea>
+              <label class="active">Features (one per line)</label>
+              <span class="helper-text">
+                Separate features with commas or line breaks.
+              </span>
+            </div>
+
+            <!-- Active -->
+            <p>
+              <label>
+                <input type="checkbox" name="isActive"
+                  {{#if old.isActive}}checked{{else}}{{#if plan.isActive}}checked{{/if}}{{/if}}>
+                <span>Active</span>
+              </label>
+            </p>
+
+          </form>
+        </div>
+
+        <!-- Actions -->
+        <div class="card-action">
+          <div class="row">
+            <div class="col s6">
+              <a href="/super-admin/plans"
+                 class="btn-flat waves-effect">
+                Back
+              </a>
+            </div>
+            <div class="col s6 right-align">
+              <button type="submit"
+                      formmethod="POST"
+                      formaction="/super-admin/plans/edit/{{plan._id}}"
+                      class="btn blue waves-effect waves-light">
+                <i class="material-icons left">save</i>
+                Save Changes
+              </button>
+            </div>
           </div>
+        </div>
 
-          <!-- Description -->
-          <div class="mb-3">
-            <label class="form-label">Description</label>
-            <textarea name="description" class="form-control" rows="3">{{#if old.description}}{{old.description}}{{else}}{{plan.description}}{{/if}}</textarea>
-            <small class="text-muted">Brief summary of the plan’s purpose or benefits.</small>
-          </div>
-
-          <!-- Price -->
-          <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input type="number" name="price" class="form-control" 
-                   value="{{#if old.price}}{{old.price}}{{else}}{{plan.price}}{{/if}}" required>
-            <small class="text-muted">The cost of the plan in your currency (e.g., NGN).</small>
-          </div>
-
-          <!-- Discount -->
-          <div class="mb-3">
-            <label class="form-label">Discount</label>
-            <input type="number" name="discount" class="form-control" 
-                   value="{{#if old.discount}}{{old.discount}}{{else}}{{plan.discount}}{{/if}}">
-            <small class="text-muted">Optional discount amount (0 if none).</small>
-          </div>
-
-          <!-- Billing Cycle -->
-          <div class="mb-3">
-            <label class="form-label">Billing Cycle</label>
-            <select name="billingCycle" class="form-select">
-              <option value="monthly" {{#if old.billingCycle}}{{#ifCond old.billingCycle "monthly"}}selected{{/ifCond}}{{else}}{{#ifCond plan.billingCycle "monthly"}}selected{{/ifCond}}{{/if}}>Monthly</option>
-              <option value="yearly" {{#if old.billingCycle}}{{#ifCond old.billingCycle "yearly"}}selected{{/ifCond}}{{else}}{{#ifCond plan.billingCycle "yearly"}}selected{{/ifCond}}{{/if}}>Yearly</option>
-            </select>
-            <small class="text-muted">How often users are billed for this plan.</small>
-          </div>
-
-          <!-- Resource Limits -->
-          <div class="mb-3">
-            <label class="form-label">Max Students</label>
-            <input type="number" name="maxStudents" class="form-control" 
-                   value="{{#if old.maxStudents}}{{old.maxStudents}}{{else}}{{plan.maxStudents}}{{/if}}">
-            <small class="text-muted">Maximum number of students (0 = unlimited).</small>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Max Staff</label>
-            <input type="number" name="maxStaff" class="form-control" 
-                   value="{{#if old.maxStaff}}{{old.maxStaff}}{{else}}{{plan.maxStaff}}{{/if}}">
-            <small class="text-muted">Maximum number of staff (0 = unlimited).</small>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Max Classes</label>
-            <input type="number" name="maxClasses" class="form-control" 
-                   value="{{#if old.maxClasses}}{{old.maxClasses}}{{else}}{{plan.maxClasses}}{{/if}}">
-            <small class="text-muted">Maximum number of classes (0 = unlimited).</small>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Max Sections</label>
-            <input type="number" name="maxSections" class="form-control" 
-                   value="{{#if old.maxSections}}{{old.maxSections}}{{else}}{{plan.maxSections}}{{/if}}">
-            <small class="text-muted">Maximum number of sections per class (0 = unlimited).</small>
-          </div>
-
-          <!-- Features -->
-          <div class="mb-3">
-            <label class="form-label">Features (one per line)</label>
-            <textarea name="features" class="form-control" rows="3">{{#if old.features}}{{old.features}}{{else}}{{#if plan.features}}{{plan.features}}{{else}}Messaging, Reports{{/if}}{{/if}}</textarea>
-            <small class="text-muted">List the features included in this plan, separated by commas or one per line.</small>
-          </div>
-
-          <!-- Active -->
-          <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" id="isActive" name="isActive" 
-                   {{#if old.isActive}}checked{{else}}{{#if plan.isActive}}checked{{/if}}{{/if}}>
-            <label class="form-check-label" for="isActive">Active</label>
-          </div>
-
-          <!-- Buttons: side-by-side, full width -->
-          <div class="d-flex gap-2 mt-4">
-            <a href="/super-admin/plans" class="btn btn-secondary w-50">Back</a>
-            <button type="submit" class="btn btn-primary w-50">Save Changes</button>
-          </div>
-
-        </form>
       </div>
     </div>
   </div>
+
 </div>
