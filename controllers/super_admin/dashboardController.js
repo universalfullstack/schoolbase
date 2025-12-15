@@ -95,10 +95,10 @@ export const renderSuperAdminDashboard = async (req, res) => {
       latestSubscriptions,
 
       // Pass JSON strings to template safely
-      trendLabels: JSON.stringify(trendLabelsArray),
-      trendData: JSON.stringify(trendDataArray),
-      statusLabels: JSON.stringify(statusLabelsArray),
-      statusData: JSON.stringify(statusDataArray),
+      trendLabels: trendLabelsArray,
+      trendData: trendDataArray,
+      statusLabels: statusLabelsArray,
+      statusData: statusDataArray,
     });
 
   } catch (err) {
