@@ -13,12 +13,10 @@
     {{/if}} Super Admin
   </title>
 
-  <!-- Materialize CSS (community version) -->
-<link
-  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@materializecss/materialize@2.2.2/dist/css/materialize.min.css" />
-
+  <!-- MUI CSS -->
+  <link href="https://cdn.muicss.com/mui-0.12.1/css/mui.min.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  
   <link href="/css/style.css" rel="stylesheet">
 
   <style>
@@ -70,24 +68,22 @@
     }
 
     /* Sidebar nav links */
-    .sidebar .sidenav a,
-    .sidebar a {
+    .sidebar .mui-list a {
       display: flex;
       align-items: center;
       padding: 10px 12px;
       margin-bottom: 5px;
       border-radius: 6px;
       color: #424242;
+      text-decoration: none;
     }
 
-    .sidebar .sidenav a i,
-    .sidebar a i {
+    .sidebar .mui-list a i {
       margin-right: 12px;
       font-size: 1.1rem;
     }
 
-    .sidebar .sidenav a.active,
-    .sidebar a.active {
+    .sidebar .mui-list a.active {
       background-color: #e3f2fd;
       color: #1976d2;
       font-weight: 600;
@@ -108,14 +104,14 @@
     }
 
     /* Top Nav */
-    nav {
+    header.mui-appbar {
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      width: 100%;
     }
 
-    .nav-wrapper .brand-logo {
+    .brand-logo {
       font-weight: 500;
       font-size: 1.5rem;
+      margin-left: 10px;
     }
 
     .user-img {
@@ -123,18 +119,6 @@
       height: 42px;
       border-radius: 50%;
       object-fit: cover;
-    }
-
-    /* Collapsible improvements */
-    .collapsible-header {
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-
-    .collapsible-body a.active,
-    a.active {
-      color: #1976d2;
-      font-weight: 600;
     }
 
     @media (max-width: 992px) {
@@ -148,55 +132,51 @@
     }
   </style>
 
-<!-- Page-specific styles -->
-{{{_sections.styles}}}
+  {{{_sections.styles}}}
 </head>
 
 <body>
 
 <!-- ================= TOP NAV ================= -->
-<nav class="white z-depth-1">
-  <div class="nav-wrapper">
-
-    <!-- Mobile Menu -->
-    <a href="#" data-target="mobile-sidebar" class="sidenav-trigger show-on-large">
-      <i class="material-icons blue-text">menu</i>
-    </a>
-
-    <!-- Brand -->
-    <a href="/" class="brand-logo black-text" style="margin-left: 10px">
-      {{settings.general.systemName}}
-    </a>
-
-    <!-- User Dropdown -->
-    <ul class="right">
-      <li>
-        <a class="dropdown-trigger black-text waves-effect waves-light" href="#!" data-target="user-dropdown">
-          <img src="{{user.profileImage}}" class="user-img valign-wrapper">
-          <span class="hide-on-small-only" style="margin-left:8px;">
-            {{user.firstName}} {{user.lastName}}
-          </span>
-          <i class="material-icons right">arrow_drop_down</i>
-        </a>
-      </li>
-    </ul>
-
+<header class="mui-appbar mui--z1">
+  <div class="mui-container-fluid">
+    <table style="width:100%">
+      <tr>
+        <td>
+          <a href="#" class="mui-btn mui-btn--flat mui--hide-lg" id="mobile-menu-btn">
+            <i class="material-icons">menu</i>
+          </a>
+        </td>
+        <td class="mui--text-title">
+          <a href="/" class="brand-logo">
+            {{settings.general.systemName}}
+          </a>
+        </td>
+        <td class="mui--text-right">
+          <div class="mui-dropdown">
+            <a href="#!" class="mui-btn mui-btn--flat">
+              <img src="{{user.profileImage}}" class="user-img valign-wrapper">
+              <span class="mui--hide-sm">{{user.firstName}} {{user.lastName}}</span>
+              <i class="material-icons">arrow_drop_down</i>
+            </a>
+            <div class="mui-dropdown__menu">
+              <a href="/super-admin/profile">Profile</a>
+              <a href="/super-admin/settings">Settings</a>
+              <hr>
+              <a href="/logout" class="mui--text-danger">Logout</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
-</nav>
-
-<!-- User Dropdown -->
-<ul id="user-dropdown" class="dropdown-content">
-  <li><a class="waves-effect" href="/super-admin/profile">Profile</a></li>
-  <li><a class="waves-effect" href="/super-admin/settings">Settings</a></li>
-  <li class="divider"></li>
-  <li><a class="waves-effect red-text" href="/logout">Logout</a></li>
-</ul>
+</header>
 
 <!-- ================= DESKTOP LAYOUT ================= -->
 <div class="layout">
 
   <!-- Sidebar -->
-  <aside class="sidebar hide-on-med-and-down">
+  <aside class="sidebar mui--hide-sm">
     <div class="user-info">
       <img src="{{user.profileImage}}" alt="User Image">
       <div>
@@ -219,36 +199,30 @@
 </div>
 
 <!-- ================= MOBILE SIDEBAR ================= -->
-<ul class="sidenav" id="mobile-sidebar">
-  <li class="user-view">
-    <div class="background blue darken-2"></div>
-    <img class="circle" src="{{user.profileImage}}">
-    <span class="white-text name">{{user.firstName}} {{user.lastName}}</span>
-    <span class="white-text email">{{user.role}}</span>
-  </li>
-
+<div class="mui-drawer" id="mobile-sidebar">
+  <div class="mui-drawer__header">
+    <img class="mui--circle" src="{{user.profileImage}}">
+    <span class="mui--text-title">{{user.firstName}} {{user.lastName}}</span>
+    <span class="mui--text-subhead">{{user.role}}</span>
+  </div>
   {{> super-admin-navLinks }}
-</ul>
+</div>
 
 <!-- ================= SCRIPTS ================= -->
-<!-- Materialize JS (community version) -->
-<script
-  src="https://cdn.jsdelivr.net/npm/@materializecss/materialize@2.2.2/dist/js/materialize.min.js"></script>
-
+<script src="https://cdn.muicss.com/mui-0.12.1/js/mui.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    M.Sidenav.init(document.querySelectorAll('.sidenav'));
-    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {
-      coverTrigger: false,
-      constrainWidth: false
-    });
-    M.Collapsible.init(document.querySelectorAll('.collapsible'), {
-      accordion: false
-    });
+    // Drawer toggle for mobile
+    var mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    var drawer = document.getElementById('mobile-sidebar');
+    if(mobileMenuBtn && drawer) {
+      mobileMenuBtn.addEventListener('click', function() {
+        drawer.classList.toggle('mui--open');
+      });
+    }
   });
 </script>
 
-<!-- Page-specific scripts -->
 {{{_sections.scripts}}}
 </body>
 </html>
