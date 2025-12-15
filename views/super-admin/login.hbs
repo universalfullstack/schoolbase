@@ -1,64 +1,88 @@
-<!-- ===================== login.hbs ===================== -->
-<div class="row valign-wrapper" style="min-height: 100vh;">
-  <div class="col s12 m8 l4 offset-m2 offset-l4">
+<!-- ===================== login.hbs (MUI CSS) ===================== -->
 
-    <div class="card z-depth-4">
-      <div class="card-content black-text">
+<div class="mui-container-fluid mui--valign-middle" style="min-height:100vh;">
+  <div class="mui-container">
+    <div class="mui-row">
+      <div class="mui-col-md-4 mui-col-md-offset-4 mui-col-sm-8 mui-col-sm-offset-2">
 
-        <!-- Header -->
-        <div class="center-align">
-          <img src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}" 
-               alt="School Logo" 
-               style="max-height:80px" />
-          <h5 class="margin-top">Super Admin Login</h5>
-          <p class="grey-text">Enter your credentials to continue</p>
-        </div>
+        <!-- Card -->
+        <div class="mui-panel mui--z4">
 
-        <!-- Flash Messages -->
-        {{> flashMessages }}
+          <!-- Header -->
+          <div class="mui--text-center">
+            <img
+              src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}"
+              alt="School Logo"
+              style="max-height:80px; margin-bottom:10px;"
+            />
 
-        <!-- Login Form -->
-        <form action="/auth/login" method="POST">
-          <input type="hidden" name="role" value="Super Admin" />
-
-          <!-- Email or Phone -->
-          <div class="input-field">
-            <i class="material-icons prefix">person</i>
-            <input id="identifier" name="identifier" type="text" required />
-            <label for="identifier">Email or Phone</label>
+            <h4 class="mui--text-dark-secondary">Super Admin Login</h4>
+            <p class="mui--text-caption">Enter your credentials to continue</p>
           </div>
 
-          <!-- Password -->
-          <div class="input-field">
-            <i class="material-icons prefix">lock</i>
-            <input id="password" name="password" type="password" required />
-            <label for="password">Password</label>
-            <i class="material-icons suffix" id="togglePassword" style="cursor:pointer">visibility</i>
-          </div>
+          <!-- Flash Messages -->
+          {{> flashMessages }}
 
-          <!-- Remember Me -->
-          <p>
-            <label>
-              <input type="checkbox" name="rememberMe" />
-              <span>Remember Me</span>
-            </label>
-          </p>
+          <!-- Login Form -->
+          <form action="/auth/login" method="POST">
+            <input type="hidden" name="role" value="Super Admin" />
 
-          <!-- Submit -->
-          <div class="input-field">
-            <button type="submit" class="btn blue darken-2 waves-effect waves-light full-width">
-              <i class="material-icons left">login</i>Login
+            <!-- Email / Phone -->
+            <div class="mui-textfield mui-textfield--floating-label">
+              <input type="text" name="identifier" required />
+              <label>Email or Phone</label>
+            </div>
+
+            <!-- Password -->
+            <div class="mui-textfield mui-textfield--floating-label" style="position:relative;">
+              <input type="password" name="password" id="password" required />
+              <label>Password</label>
+
+              <!-- Toggle Icon -->
+              <span
+                id="togglePassword"
+                class="material-icons"
+                style="
+                  position:absolute;
+                  right:0;
+                  top:18px;
+                  cursor:pointer;
+                  color:#757575;
+                "
+              >
+                visibility
+              </span>
+            </div>
+
+            <!-- Remember Me -->
+            <div class="mui-checkbox">
+              <label>
+                <input type="checkbox" name="rememberMe" />
+                Remember Me
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              class="mui-btn mui-btn--raised mui-btn--primary mui--full-width"
+              style="margin-top:20px;"
+            >
+              <span class="material-icons" style="vertical-align:middle; margin-right:6px;">
+                login
+              </span>
+              Login
             </button>
+          </form>
+
+          <!-- Footer -->
+          <div class="mui--text-center" style="margin-top:16px;">
+            <a href="/forgot-password">Forgot password?</a>
           </div>
-        </form>
 
-      </div>
-
-      <div class="card-action center-align">
-        <a href="/forgot-password">Forgot password?</a>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
 
