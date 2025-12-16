@@ -1,262 +1,44 @@
-<!doctype html>
+<!-- ===================== auth.layout.hbs ===================== -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>
-    {{title}} —
-    {{#if settings.general.systemName}}
-      {{settings.general.systemName}}
-    {{else}}
-      My School System
-    {{/if}} Super Admin
-  </title>
+  <title>{{title}}</title>
 
-  <!-- MUI CSS -->
-  <link rel="stylesheet" href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/css/style.css">
+  <!-- Bootstrap CSS (Latest) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
 
-  <style>
-    body {
-      background: #f5f6f8;
-      font-family: "Roboto", sans-serif;
-      margin: 0;
-    }
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
 
-    .layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      min-height: 100vh;
-      width: 100%;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      background: #ffffff;
-      border-right: 1px solid #e0e0e0;
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .sidebar .user-info {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    .sidebar .user-info img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 12px;
-    }
-
-    .sidebar .user-info strong {
-      font-size: 1rem;
-      display: block;
-    }
-
-    .sidebar .user-info small {
-      font-size: 0.85rem;
-      color: #757575;
-    }
-
-    .sidebar .mui-list a {
-      display: flex;
-      align-items: center;
-      padding: 10px 12px;
-      margin-bottom: 5px;
-      border-radius: 6px;
-      color: #424242;
-      text-decoration: none;
-    }
-
-    .sidebar .mui-list a i {
-      margin-right: 12px;
-      font-size: 1.1rem;
-    }
-
-    .sidebar .mui-list a.active {
-      background-color: #e3f2fd;
-      color: #1976d2;
-      font-weight: 600;
-    }
-
-    .sidebar .footer {
-      font-size: 0.8rem;
-      color: #9e9e9e;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    main.content {
-      padding: 32px 40px;
-      overflow-x: auto;
-      width: 100%;
-    }
-
-    header.mui-appbar {
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .top-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-
-    .brand-logo {
-      font-weight: 500;
-      font-size: 1.5rem;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .user-img {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 6px;
-    }
-
-    @media (max-width: 992px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      main.content {
-        padding: 24px;
-      }
-    }
-  </style>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/css/style.css" />
 
   {{{_sections.styles}}}
 </head>
 
-<body>
+<body class="bg-light">
 
-<!-- ================= TOP NAV ================= -->
-<header class="mui-appbar mui--z1">
-  <div class="mui-container-fluid">
-    <div class="top-nav">
+  <!-- Auth Content -->
+  {{{body}}}
 
-      <!-- Mobile menu button -->
-      <button
-        type="button"
-        class="mui-btn mui-btn--flat mui--hidden-lg"
-        id="mobile-menu-btn"
-        aria-label="Open menu">
-        <i class="material-icons">menu</i>
-      </button>
+  <!-- Bootstrap JS Bundle -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
 
-      <!-- Brand -->
-      <a href="/" class="brand-logo">
-        {{#if settings.general.systemName}}
-          {{settings.general.systemName}}
-        {{else}}
-          My School System
-        {{/if}}
-      </a>
-
-      <!-- User dropdown -->
-      <div class="mui-dropdown">
-        <button
-          class="mui-btn mui-btn--flat"
-          data-mui-toggle="dropdown"
-          aria-haspopup="true">
-          <img
-            src="{{user.profileImage}}"
-            alt="User profile"
-            class="user-img">
-          <span class="mui--hidden-sm">
-            {{user.firstName}} {{user.lastName}}
-          </span>
-          <i class="material-icons">arrow_drop_down</i>
-        </button>
-
-        <ul class="mui-dropdown__menu">
-          <li><a href="/super-admin/profile">Profile</a></li>
-          <li><a href="/super-admin/settings">Settings</a></li>
-          <li class="mui-divider"></li>
-          <li>
-            <a href="/logout" class="mui--text-danger">Logout</a>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</header>
-
-<!-- ================= DESKTOP LAYOUT ================= -->
-<div class="layout">
-
-  <!-- Sidebar -->
-  <aside class="sidebar mui--hidden-sm">
-    <div>
-      <div class="user-info">
-        <img src="{{user.profileImage}}" alt="User profile">
-        <div>
-          <strong>{{user.firstName}} {{user.lastName}}</strong>
-          <small>{{user.role}}</small>
-        </div>
-      </div>
-
-      {{> super-admin-navLinks }}
-    </div>
-
-    <div class="footer">
-      &copy; {{year}} {{school.name}}
-    </div>
-  </aside>
-
-  <!-- Main content -->
-  <main class="content">
-    {{{body}}}
-  </main>
-
-</div>
-
-<!-- ================= MOBILE SIDEBAR ================= -->
-<div class="mui-drawer mui--no-user-select" id="mobile-sidebar">
-  <div class="mui-drawer__header">
-    <img
-      class="mui--circle"
-      src="{{user.profileImage}}"
-      alt="User profile">
-    <div class="mui--text-title">
-      {{user.firstName}} {{user.lastName}}
-    </div>
-    <div class="mui--text-subhead">
-      {{user.role}}
-    </div>
-  </div>
-
-  {{> super-admin-navLinks }}
-</div>
-
-<!-- ================= SCRIPTS ================= -->
-<script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const drawer = document.getElementById('mobile-sidebar');
-
-    if (mobileMenuBtn && drawer) {
-      mobileMenuBtn.addEventListener('click', function () {
-        drawer.classList.toggle('mui--is-open');
-      });
-    }
-  });
-</script>
-
-{{{_sections.scripts}}}
+  {{{_sections.scripts}}}
 </body>
 </html>
