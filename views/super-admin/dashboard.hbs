@@ -1,206 +1,161 @@
-<div class="mui-container">
+<div class="container-fluid">
 
   <!-- ================= Greeting ================= -->
-  <h1 class="mui--text-display1 mui--margin-bottom-3">
-    {{user.role}} Dashboard
-  </h1>
+  <div class="mb-4">
+    <h1 class="display-6 fw-semibold">
+      {{user.role}} Dashboard
+    </h1>
+  </div>
 
   {{#unless user.emailVerified}}
-    <div class="mui-panel mui--bg-yellow-100 mui--text-dark-black mui--margin-bottom-3">
-      <i class="material-icons mui--align-middle mui--margin-right-1">warning</i>
+    <div class="alert alert-warning d-flex align-items-center mb-4">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
       Email not verified
     </div>
   {{/unless}}
 
   <!-- ================= Stats ================= -->
-  <div class="mui-row mui--margin-bottom-3">
+  <div class="row g-3 mb-4">
 
     <!-- Schools -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
-      <div class="mui-panel mui--bg-blue-700 mui--text-white">
-        <div class="mui--text-title">Schools</div>
-        <div class="mui--text-headline">{{stats.totalSchools}}</div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card text-bg-primary h-100">
+        <div class="card-body">
+          <div class="small">Schools</div>
+          <div class="fs-3 fw-bold">{{stats.totalSchools}}</div>
+        </div>
       </div>
     </div>
 
     <!-- School Admins -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
-      <div class="mui-panel mui--bg-amber-700 mui--text-white">
-        <div class="mui--text-title">School Admins</div>
-        <div class="mui--text-headline">{{stats.totalSchoolAdmins}}</div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card text-bg-warning h-100">
+        <div class="card-body">
+          <div class="small">School Admins</div>
+          <div class="fs-3 fw-bold">{{stats.totalSchoolAdmins}}</div>
+        </div>
       </div>
     </div>
 
     <!-- Staff -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
-      <div class="mui-panel mui--bg-purple-700 mui--text-white">
-        <div class="mui--text-title">Staff</div>
-        <div class="mui--text-headline">{{stats.totalStaff}}</div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card text-bg-secondary h-100">
+        <div class="card-body">
+          <div class="small">Staff</div>
+          <div class="fs-3 fw-bold">{{stats.totalStaff}}</div>
+        </div>
       </div>
     </div>
 
     <!-- Students -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
-      <div class="mui-panel mui--bg-teal-400 mui--text-white">
-        <div class="mui--text-title">Students</div>
-        <div class="mui--text-headline">{{stats.totalStudents}}</div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card text-bg-info h-100">
+        <div class="card-body">
+          <div class="small">Students</div>
+          <div class="fs-3 fw-bold">{{stats.totalStudents}}</div>
+        </div>
       </div>
     </div>
 
     <!-- Active Subscriptions -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
-      <div class="mui-panel mui--bg-green-700 mui--text-white">
-        <div class="mui--text-title">Active Subscriptions</div>
-        <div class="mui--text-headline">{{stats.totalSubscriptions}}</div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card text-bg-success h-100">
+        <div class="card-body">
+          <div class="small">Active Subscriptions</div>
+          <div class="fs-3 fw-bold">{{stats.totalSubscriptions}}</div>
+        </div>
       </div>
     </div>
 
     <!-- Total Revenue -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
-      <div class="mui-panel mui--bg-teal-700 mui--text-white">
-        <div class="mui--text-title">Total Revenue</div>
-        <div class="mui--text-headline">₦{{stats.totalRevenue}}</div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card text-bg-dark h-100">
+        <div class="card-body">
+          <div class="small">Total Revenue</div>
+          <div class="fs-3 fw-bold">₦{{stats.totalRevenue}}</div>
+        </div>
       </div>
     </div>
 
   </div>
 
   <!-- ================= Charts ================= -->
-  <div class="mui-row mui--margin-bottom-3">
+  <div class="row g-3 mb-4">
 
-    <div class="mui-col-xs-12 mui-col-lg-6 mui--margin-bottom-2">
-      <div class="mui-panel">
-        <div class="mui--text-title mui--margin-bottom-1">
-          Subscription Trend (Last 6 Months)
+    <div class="col-12 col-lg-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="card-title mb-3">
+            Subscription Trend (Last 6 Months)
+          </h6>
+          <canvas id="subscriptionTrendChart"></canvas>
         </div>
-        <canvas id="subscriptionTrendChart"></canvas>
       </div>
     </div>
 
-    <div class="mui-col-xs-12 mui-col-lg-6 mui--margin-bottom-2">
-      <div class="mui-panel">
-        <div class="mui--text-title mui--margin-bottom-1">
-          Subscriptions by Status
+    <div class="col-12 col-lg-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="card-title mb-3">
+            Subscriptions by Status
+          </h6>
+          <canvas id="subscriptionStatusChart"></canvas>
         </div>
-        <canvas id="subscriptionStatusChart"></canvas>
       </div>
     </div>
 
   </div>
 
   <!-- ================= Latest Subscriptions ================= -->
-  <div class="mui-panel">
-    <div class="mui--text-title mui--margin-bottom-2">
-      Latest Subscriptions
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title mb-3">
+        Latest Subscriptions
+      </h6>
+
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>School</th>
+              <th>Plan</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each latestSubscriptions}}
+              <tr>
+                <td>{{this.school}}</td>
+                <td>{{this.plan}}</td>
+                <td>{{this.startDate}}</td>
+                <td>{{this.endDate}}</td>
+                <td>
+                  {{#if (eq this.status "active")}}
+                    <span class="badge bg-success">Active</span>
+                  {{else if (eq this.status "expired")}}
+                    <span class="badge bg-danger">Expired</span>
+                  {{else if (eq this.status "pending")}}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                  {{else}}
+                    <span class="badge bg-secondary">Cancelled</span>
+                  {{/if}}
+                </td>
+              </tr>
+            {{else}}
+              <tr>
+                <td colspan="5" class="text-center text-muted">
+                  No subscriptions yet
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
     </div>
-
-    <table class="mui-table mui-table--bordered mui-table--responsive">
-      <thead>
-        <tr>
-          <th>School</th>
-          <th>Plan</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {{#each latestSubscriptions}}
-          <tr>
-            <td>{{this.school}}</td>
-            <td>{{this.plan}}</td>
-            <td>{{this.startDate}}</td>
-            <td>{{this.endDate}}</td>
-            <td>
-              {{#if (eq this.status "active")}}
-                <span class="mui--bg-green-600 mui--text-white mui--padding-xs mui--rounded">
-                  Active
-                </span>
-              {{else if (eq this.status "expired")}}
-                <span class="mui--bg-red-600 mui--text-white mui--padding-xs mui--rounded">
-                  Expired
-                </span>
-              {{else if (eq this.status "pending")}}
-                <span class="mui--bg-amber-600 mui--text-black mui--padding-xs mui--rounded">
-                  Pending
-                </span>
-              {{else}}
-                <span class="mui--bg-grey-500 mui--text-white mui--padding-xs mui--rounded">
-                  Cancelled
-                </span>
-              {{/if}}
-            </td>
-          </tr>
-        {{else}}
-          <tr>
-            <td colspan="5" class="mui--text-center mui--text-dark-secondary">
-              No subscriptions yet
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
   </div>
 
 </div>
-
-{{#section "scripts"}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
-<script>
-  const trendLabels  = {{{trendLabels}}};
-  const trendData    = {{{trendData}}};
-  const statusLabels = {{{statusLabels}}};
-  const statusData   = {{{statusData}}};
-
-  new Chart(
-    document.getElementById('subscriptionTrendChart'),
-    {
-      type: 'line',
-      data: {
-        labels: trendLabels,
-        datasets: [{
-          label: 'New Subscriptions',
-          data: trendData,
-          backgroundColor: 'rgba(25, 135, 84, 0.2)',
-          borderColor: '#198754',
-          borderWidth: 2,
-          tension: 0.4,
-          fill: true
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
-    }
-  );
-
-  new Chart(
-    document.getElementById('subscriptionStatusChart'),
-    {
-      type: 'doughnut',
-      data: {
-        labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
-        datasets: [{
-          data: statusData,
-          backgroundColor: [
-            '#198754',
-            '#dc3545',
-            '#ffc107',
-            '#6c757d'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'bottom' }
-        }
-      }
-    }
-  );
-</script>
-{{/section}}
