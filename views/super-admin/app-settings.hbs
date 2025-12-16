@@ -11,45 +11,49 @@
   <form method="POST" enctype="multipart/form-data">
 
     <!-- ================= TABS ================= -->
-   <ul class="nav nav-tabs mb-3" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button
-      type="button"
-      class="nav-link active"
-      data-bs-toggle="tab"
-      data-bs-target="#general"
-      role="tab">
-      General
-    </button>
-  </li>
+    <ul
+      class="nav nav-tabs flex-nowrap overflow-auto mb-3"
+      role="tablist"
+      style="white-space: nowrap;"
+    >
+      <li class="nav-item" role="presentation">
+        <button
+          type="button"
+          class="nav-link active"
+          data-bs-toggle="tab"
+          data-bs-target="#general"
+          role="tab">
+          General
+        </button>
+      </li>
 
-  <li class="nav-item" role="presentation">
-    <button
-      type="button"
-      class="nav-link"
-      data-bs-toggle="tab"
-      data-bs-target="#branding"
-      role="tab">
-      Branding
-    </button>
-  </li>
+      <li class="nav-item" role="presentation">
+        <button
+          type="button"
+          class="nav-link"
+          data-bs-toggle="tab"
+          data-bs-target="#branding"
+          role="tab">
+          Branding
+        </button>
+      </li>
 
-  <li class="nav-item" role="presentation">
-    <button
-      type="button"
-      class="nav-link"
-      data-bs-toggle="tab"
-      data-bs-target="#messaging"
-      role="tab">
-      Messaging
-    </button>
-  </li>
-</ul>
+      <li class="nav-item" role="presentation">
+        <button
+          type="button"
+          class="nav-link"
+          data-bs-toggle="tab"
+          data-bs-target="#messaging"
+          role="tab">
+          Messaging
+        </button>
+      </li>
+    </ul>
 
     <div class="tab-content">
 
       <!-- ================= GENERAL ================= -->
-      <div class="tab-pane fade show active" id="general">
+      <div class="tab-pane fade show active" id="general" role="tabpanel">
 
         <!-- System Info -->
         <div class="card shadow-sm mb-4">
@@ -61,34 +65,48 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">System Name</label>
-                <input type="text" name="systemName" class="form-control"
-                       value="{{settings.general.systemName}}">
+                <input
+                  type="text"
+                  name="systemName"
+                  class="form-control"
+                  value="{{settings.general.systemName}}">
               </div>
 
               <div class="col-md-6">
                 <label class="form-label">Abbreviation</label>
-                <input type="text" name="abbreviation" class="form-control"
-                       value="{{settings.general.abbreviation}}">
+                <input
+                  type="text"
+                  name="abbreviation"
+                  class="form-control"
+                  value="{{settings.general.abbreviation}}">
               </div>
             </div>
 
             <div class="mt-3">
               <label class="form-label">Description</label>
-              <textarea name="description" class="form-control" rows="3">
-{{settings.general.description}}</textarea>
+              <textarea
+                name="description"
+                class="form-control"
+                rows="3">{{settings.general.description}}</textarea>
             </div>
 
             <div class="row g-3 mt-2">
               <div class="col-md-6">
                 <label class="form-label">Currency</label>
-                <input type="text" name="currency" class="form-control"
-                       value="{{settings.general.currency}}">
+                <input
+                  type="text"
+                  name="currency"
+                  class="form-control"
+                  value="{{settings.general.currency}}">
               </div>
 
               <div class="col-md-6">
                 <label class="form-label">Timezone</label>
-                <input type="text" name="timezone" class="form-control"
-                       value="{{settings.general.timezone}}">
+                <input
+                  type="text"
+                  name="timezone"
+                  class="form-control"
+                  value="{{settings.general.timezone}}">
               </div>
             </div>
           </div>
@@ -103,27 +121,35 @@
 
             <div class="mb-3">
               <label class="form-label">Support Email</label>
-              <input type="email" name="contactEmail" class="form-control"
-                     value="{{settings.contact.email}}">
+              <input
+                type="email"
+                name="contactEmail"
+                class="form-control"
+                value="{{settings.contact.email}}">
             </div>
 
             <div class="mb-3">
               <label class="form-label">Support Phone</label>
-              <input type="text" name="contactPhone" class="form-control"
-                     value="{{settings.contact.phone}}">
+              <input
+                type="text"
+                name="contactPhone"
+                class="form-control"
+                value="{{settings.contact.phone}}">
             </div>
 
             <div>
               <label class="form-label">Office Address</label>
-              <textarea name="contactAddress" class="form-control" rows="2">
-{{settings.contact.address}}</textarea>
+              <textarea
+                name="contactAddress"
+                class="form-control"
+                rows="2">{{settings.contact.address}}</textarea>
             </div>
           </div>
         </div>
       </div>
 
       <!-- ================= BRANDING ================= -->
-      <div class="tab-pane fade" id="branding">
+      <div class="tab-pane fade" id="branding" role="tabpanel">
 
         <div class="card shadow-sm">
           <div class="card-body">
@@ -136,30 +162,48 @@
               <!-- Logo -->
               <div class="col-md-6">
                 <label class="form-label d-block">Logo</label>
-                <div class="image-dropzone mx-auto" id="logoDropzone" style="width:150px;height:150px;">
-                  <img id="logoPreview"
-                       src="{{settings.branding.logo}}"
-                       class="img-fluid">
+                <div
+                  class="image-dropzone mx-auto"
+                  id="logoDropzone"
+                  style="width:150px;height:150px;">
+                  <img
+                    id="logoPreview"
+                    src="{{settings.branding.logo}}"
+                    alt="Logo">
                   <div class="overlay">
                     <i class="bi bi-camera fs-3"></i>
                   </div>
                 </div>
-                <input type="file" id="logoInput" name="logo" class="d-none" accept="image/*">
+                <input
+                  type="file"
+                  id="logoInput"
+                  name="logo"
+                  class="d-none"
+                  accept="image/*">
                 <small class="text-muted">150×150px recommended</small>
               </div>
 
               <!-- Favicon -->
               <div class="col-md-6">
                 <label class="form-label d-block">Favicon</label>
-                <div class="image-dropzone mx-auto" id="faviconDropzone" style="width:80px;height:80px;">
-                  <img id="faviconPreview"
-                       src="{{settings.branding.favicon}}"
-                       class="img-fluid">
+                <div
+                  class="image-dropzone mx-auto"
+                  id="faviconDropzone"
+                  style="width:80px;height:80px;">
+                  <img
+                    id="faviconPreview"
+                    src="{{settings.branding.favicon}}"
+                    alt="Favicon">
                   <div class="overlay">
                     <i class="bi bi-camera fs-4"></i>
                   </div>
                 </div>
-                <input type="file" id="faviconInput" name="favicon" class="d-none" accept="image/*">
+                <input
+                  type="file"
+                  id="faviconInput"
+                  name="favicon"
+                  class="d-none"
+                  accept="image/*">
                 <small class="text-muted">80×80px recommended</small>
               </div>
             </div>
@@ -167,13 +211,20 @@
             <div class="row g-3 mt-3">
               <div class="col-md-6">
                 <label class="form-label">Primary Color</label>
-                <input type="color" name="primaryColor" class="form-control form-control-color"
-                       value="{{settings.branding.primaryColor}}">
+                <input
+                  type="color"
+                  name="primaryColor"
+                  class="form-control form-control-color"
+                  value="{{settings.branding.primaryColor}}">
               </div>
+
               <div class="col-md-6">
                 <label class="form-label">Secondary Color</label>
-                <input type="color" name="secondaryColor" class="form-control form-control-color"
-                       value="{{settings.branding.secondaryColor}}">
+                <input
+                  type="color"
+                  name="secondaryColor"
+                  class="form-control form-control-color"
+                  value="{{settings.branding.secondaryColor}}">
               </div>
             </div>
           </div>
@@ -181,7 +232,7 @@
       </div>
 
       <!-- ================= MESSAGING ================= -->
-      <div class="tab-pane fade" id="messaging">
+      <div class="tab-pane fade" id="messaging" role="tabpanel">
 
         <div class="card shadow-sm">
           <div class="card-body">
@@ -191,38 +242,53 @@
 
             <div class="mb-3">
               <label class="form-label">Welcome Subject</label>
-              <input type="text" name="welcomeSubject" class="form-control"
-                     value="{{settings.messaging.general.welcome.subject}}">
+              <input
+                type="text"
+                name="welcomeSubject"
+                class="form-control"
+                value="{{settings.messaging.general.welcome.subject}}">
             </div>
 
             <div class="mb-3">
               <label class="form-label">Welcome Body</label>
-              <textarea name="welcomeBody" class="form-control" rows="3">
-{{settings.messaging.general.welcome.body}}</textarea>
+              <textarea
+                name="welcomeBody"
+                class="form-control"
+                rows="3">{{settings.messaging.general.welcome.body}}</textarea>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Activation Subject</label>
-              <input type="text" name="activationSubject" class="form-control"
-                     value="{{settings.messaging.account.activation.subject}}">
+              <input
+                type="text"
+                name="activationSubject"
+                class="form-control"
+                value="{{settings.messaging.account.activation.subject}}">
             </div>
 
             <div class="mb-3">
               <label class="form-label">Activation Body</label>
-              <textarea name="activationBody" class="form-control" rows="3">
-{{settings.messaging.account.activation.body}}</textarea>
+              <textarea
+                name="activationBody"
+                class="form-control"
+                rows="3">{{settings.messaging.account.activation.body}}</textarea>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Expiry Warning Subject</label>
-              <input type="text" name="subscriptionExpirySubject" class="form-control"
-                     value="{{settings.messaging.subscription.expiryWarning.subject}}">
+              <input
+                type="text"
+                name="subscriptionExpirySubject"
+                class="form-control"
+                value="{{settings.messaging.subscription.expiryWarning.subject}}">
             </div>
 
             <div>
               <label class="form-label">Expiry Warning Body</label>
-              <textarea name="subscriptionExpiryBody" class="form-control" rows="3">
-{{settings.messaging.subscription.expiryWarning.body}}</textarea>
+              <textarea
+                name="subscriptionExpiryBody"
+                class="form-control"
+                rows="3">{{settings.messaging.subscription.expiryWarning.body}}</textarea>
             </div>
           </div>
         </div>
@@ -230,7 +296,7 @@
 
     </div>
 
-    <!-- Save -->
+    <!-- Save Button -->
     <div class="mt-4">
       <button type="submit" class="btn btn-primary">
         <i class="bi bi-save me-1"></i> Save Settings
