@@ -84,13 +84,47 @@
 {{/section}}
 
 {{#section "scripts"}}
-<!-- Flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-  flatpickr("#endDate", {
-    dateFormat: "Y-m-d",
-    minDate: "today",
-    allowInput: true
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const planSelect = document.getElementById('plan');
+    const endDateInput = document.getElementById('endDate');
+
+    // Initialize flatpickr
+    const fp = flatpickr(endDateInput, {
+      dateFormat: 'Y-m-d',
+      minDate: 'today',
+      allowInput: true
+    });
+
+    // Helper to add months or years
+    function calculateEndDate(cycle) {
+      const start = new Date();
+      const end = new Date(start);
+
+      if (cycle === 'monthly') {
+        end.setMonth(end.getMonth() + 1);
+      }
+
+      if (cycle === 'yearly') {
+        end.setFullYear(end.getFullYear() + 1);
+      }
+
+      return end;
+    }
+
+    // When plan changes → auto set end date
+    planSelect.addEventListener('change', function () {
+      const selectedOption = this.options[this.selectedIndex];
+      const billingCycle = selectedOption.dataset.cycle;
+
+      if (!billingCycle) return;
+
+      const endDate = calculateEndDate(billingCycle);
+      fp.setDate(endDate, true);
+    });
+
   });
 </script>
 {{/section}}
