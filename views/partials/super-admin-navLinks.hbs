@@ -7,7 +7,7 @@
       href="/super-admin/dashboard"
       class="btn w-100 text-start d-flex align-items-center
       {{#ifActive '/super-admin/dashboard'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <span class="material-icons me-2">speed</span>
+      <i class="bi bi-speedometer2 me-2"></i>
       Dashboard
     </a>
   </li>
@@ -19,9 +19,9 @@
       data-bs-toggle="collapse"
       data-bs-target="#schools-submenu"
       aria-expanded="{{#ifActivePrefix currentPath '/super-admin/schools'}}true{{else}}false{{/ifActivePrefix}}">
-      <span class="material-icons me-2">school</span>
+      <i class="bi bi-mortarboard me-2"></i>
       <span class="flex-grow-1">Schools</span>
-      <span class="material-icons">expand_more</span>
+      <i class="bi bi-chevron-down"></i>
     </button>
 
     <div
@@ -54,9 +54,9 @@
       class="btn w-100 text-start d-flex align-items-center"
       data-bs-toggle="collapse"
       data-bs-target="#sessions-submenu">
-      <span class="material-icons me-2">event_note</span>
+      <i class="bi bi-calendar-event me-2"></i>
       <span class="flex-grow-1">Sessions</span>
-      <span class="material-icons">expand_more</span>
+      <i class="bi bi-chevron-down"></i>
     </button>
 
     <div
@@ -89,9 +89,9 @@
       class="btn w-100 text-start d-flex align-items-center"
       data-bs-toggle="collapse"
       data-bs-target="#subjects-submenu">
-      <span class="material-icons me-2">menu_book</span>
+      <i class="bi bi-book me-2"></i>
       <span class="flex-grow-1">Subjects</span>
-      <span class="material-icons">expand_more</span>
+      <i class="bi bi-chevron-down"></i>
     </button>
 
     <div
@@ -124,9 +124,9 @@
       class="btn w-100 text-start d-flex align-items-center"
       data-bs-toggle="collapse"
       data-bs-target="#classes-submenu">
-      <span class="material-icons me-2">class</span>
+      <i class="bi bi-collection me-2"></i>
       <span class="flex-grow-1">Classes</span>
-      <span class="material-icons">expand_more</span>
+      <i class="bi bi-chevron-down"></i>
     </button>
 
     <div
@@ -167,7 +167,7 @@
       href="/super-admin/settings"
       class="btn w-100 text-start d-flex align-items-center
       {{#ifActive '/super-admin/settings'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <span class="material-icons me-2">settings</span>
+      <i class="bi bi-gear me-2"></i>
       Settings
     </a>
   </li>
@@ -177,7 +177,7 @@
       href="/super-admin/plans"
       class="btn w-100 text-start d-flex align-items-center
       {{#ifActive '/super-admin/plans'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <span class="material-icons me-2">layers</span>
+      <i class="bi bi-layers me-2"></i>
       Plans
     </a>
   </li>
@@ -187,14 +187,14 @@
       href="/super-admin/subscriptions"
       class="btn w-100 text-start d-flex align-items-center
       {{#ifActive '/super-admin/subscriptions'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <span class="material-icons me-2">assignment_turned_in</span>
+      <i class="bi bi-check2-square me-2"></i>
       Subscriptions
     </a>
   </li>
 
   <li class="mb-1">
     <a href="/logout" class="btn w-100 text-start d-flex align-items-center text-danger">
-      <span class="material-icons me-2">logout</span>
+      <i class="bi bi-box-arrow-right me-2"></i>
       Logout
     </a>
   </li>
