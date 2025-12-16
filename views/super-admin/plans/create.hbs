@@ -125,8 +125,12 @@ Reports{{/if}}</textarea>
 
 </div>
 
+{{#section "styles"}}
 <!-- Optional Flatpickr Date Picker (for future use) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{{/section}}
+
+{{#section "scripts"}}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -135,3 +139,4 @@ Reports{{/if}}</textarea>
     });
   });
 </script>
+{{/section}}
