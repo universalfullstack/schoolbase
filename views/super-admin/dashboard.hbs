@@ -1,63 +1,63 @@
 <div class="mui-container">
 
-  <!-- Greeting -->
-  <div class="mui--text-display1" style="margin-bottom: 24px;">
+  <!-- ================= Greeting ================= -->
+  <h1 class="mui--text-display1 mui--margin-bottom-3">
     {{user.role}} Dashboard
-  </div>
+  </h1>
 
   {{#unless user.emailVerified}}
-    <div class="mui-panel mui--bg-yellow-100 mui--text-dark-black" style="padding:12px; margin-bottom:24px;">
-      <i class="material-icons" style="vertical-align:middle; margin-right:8px;">warning</i>
+    <div class="mui-panel mui--bg-yellow-100 mui--text-dark-black mui--margin-bottom-3">
+      <i class="material-icons mui--align-middle mui--margin-right-1">warning</i>
       Email not verified
     </div>
   {{/unless}}
 
-  <!-- Stat cards -->
-  <div class="mui-row" style="margin-bottom:24px;">
+  <!-- ================= Stats ================= -->
+  <div class="mui-row mui--margin-bottom-3">
 
     <!-- Schools -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3" style="margin-bottom:16px;">
-      <div class="mui-panel mui--bg-blue-700 mui--text-white" style="padding:16px;">
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
+      <div class="mui-panel mui--bg-blue-700 mui--text-white">
         <div class="mui--text-title">Schools</div>
         <div class="mui--text-headline">{{stats.totalSchools}}</div>
       </div>
     </div>
 
     <!-- School Admins -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3" style="margin-bottom:16px;">
-      <div class="mui-panel mui--bg-amber-700 mui--text-white" style="padding:16px;">
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
+      <div class="mui-panel mui--bg-amber-700 mui--text-white">
         <div class="mui--text-title">School Admins</div>
         <div class="mui--text-headline">{{stats.totalSchoolAdmins}}</div>
       </div>
     </div>
 
     <!-- Staff -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3" style="margin-bottom:16px;">
-      <div class="mui-panel mui--bg-purple-700 mui--text-white" style="padding:16px;">
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
+      <div class="mui-panel mui--bg-purple-700 mui--text-white">
         <div class="mui--text-title">Staff</div>
         <div class="mui--text-headline">{{stats.totalStaff}}</div>
       </div>
     </div>
 
     <!-- Students -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3" style="margin-bottom:16px;">
-      <div class="mui-panel mui--bg-teal-400 mui--text-white" style="padding:16px;">
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
+      <div class="mui-panel mui--bg-teal-400 mui--text-white">
         <div class="mui--text-title">Students</div>
         <div class="mui--text-headline">{{stats.totalStudents}}</div>
       </div>
     </div>
 
     <!-- Active Subscriptions -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3" style="margin-bottom:16px;">
-      <div class="mui-panel mui--bg-green-700 mui--text-white" style="padding:16px;">
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
+      <div class="mui-panel mui--bg-green-700 mui--text-white">
         <div class="mui--text-title">Active Subscriptions</div>
         <div class="mui--text-headline">{{stats.totalSubscriptions}}</div>
       </div>
     </div>
 
     <!-- Total Revenue -->
-    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3" style="margin-bottom:16px;">
-      <div class="mui-panel mui--bg-teal-700 mui--text-white" style="padding:16px;">
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3 mui--margin-bottom-2">
+      <div class="mui-panel mui--bg-teal-700 mui--text-white">
         <div class="mui--text-title">Total Revenue</div>
         <div class="mui--text-headline">₦{{stats.totalRevenue}}</div>
       </div>
@@ -65,26 +65,35 @@
 
   </div>
 
-  <!-- Charts -->
-  <div class="mui-row" style="margin-bottom:24px;">
-    <div class="mui-col-xs-12 mui-col-md-12 mui-col-lg-6" style="margin-bottom:16px;">
-      <div class="mui-panel" style="padding:16px;">
-        <div class="mui--text-title">Subscription Trend (Last 6 Months)</div>
+  <!-- ================= Charts ================= -->
+  <div class="mui-row mui--margin-bottom-3">
+
+    <div class="mui-col-xs-12 mui-col-lg-6 mui--margin-bottom-2">
+      <div class="mui-panel">
+        <div class="mui--text-title mui--margin-bottom-1">
+          Subscription Trend (Last 6 Months)
+        </div>
         <canvas id="subscriptionTrendChart"></canvas>
       </div>
     </div>
 
-    <div class="mui-col-xs-12 mui-col-md-12 mui-col-lg-6" style="margin-bottom:16px;">
-      <div class="mui-panel" style="padding:16px;">
-        <div class="mui--text-title">Subscriptions by Status</div>
+    <div class="mui-col-xs-12 mui-col-lg-6 mui--margin-bottom-2">
+      <div class="mui-panel">
+        <div class="mui--text-title mui--margin-bottom-1">
+          Subscriptions by Status
+        </div>
         <canvas id="subscriptionStatusChart"></canvas>
       </div>
     </div>
+
   </div>
 
-  <!-- Latest Subscriptions Table -->
-  <div class="mui-panel" style="padding:16px;">
-    <div class="mui--text-title" style="margin-bottom:16px;">Latest Subscriptions</div>
+  <!-- ================= Latest Subscriptions ================= -->
+  <div class="mui-panel">
+    <div class="mui--text-title mui--margin-bottom-2">
+      Latest Subscriptions
+    </div>
+
     <table class="mui-table mui-table--bordered mui-table--responsive">
       <thead>
         <tr>
@@ -95,29 +104,40 @@
           <th>Status</th>
         </tr>
       </thead>
+
       <tbody>
         {{#each latestSubscriptions}}
-        <tr>
-          <td>{{this.school}}</td>
-          <td>{{this.plan}}</td>
-          <td>{{this.startDate}}</td>
-          <td>{{this.endDate}}</td>
-          <td>
-            {{#if (eq this.status "active")}}
-              <span class="mui--bg-green-600 mui--text-white" style="padding:2px 8px; border-radius:4px;">Active</span>
-            {{else if (eq this.status "expired")}}
-              <span class="mui--bg-red-600 mui--text-white" style="padding:2px 8px; border-radius:4px;">Expired</span>
-            {{else if (eq this.status "pending")}}
-              <span class="mui--bg-amber-600 mui--text-black" style="padding:2px 8px; border-radius:4px;">Pending</span>
-            {{else}}
-              <span class="mui--bg-grey-500 mui--text-white" style="padding:2px 8px; border-radius:4px;">Cancelled</span>
-            {{/if}}
-          </td>
-        </tr>
+          <tr>
+            <td>{{this.school}}</td>
+            <td>{{this.plan}}</td>
+            <td>{{this.startDate}}</td>
+            <td>{{this.endDate}}</td>
+            <td>
+              {{#if (eq this.status "active")}}
+                <span class="mui--bg-green-600 mui--text-white mui--padding-xs mui--rounded">
+                  Active
+                </span>
+              {{else if (eq this.status "expired")}}
+                <span class="mui--bg-red-600 mui--text-white mui--padding-xs mui--rounded">
+                  Expired
+                </span>
+              {{else if (eq this.status "pending")}}
+                <span class="mui--bg-amber-600 mui--text-black mui--padding-xs mui--rounded">
+                  Pending
+                </span>
+              {{else}}
+                <span class="mui--bg-grey-500 mui--text-white mui--padding-xs mui--rounded">
+                  Cancelled
+                </span>
+              {{/if}}
+            </td>
+          </tr>
         {{else}}
-        <tr>
-          <td colspan="5" class="mui--text-dark-secondary">No subscriptions yet</td>
-        </tr>
+          <tr>
+            <td colspan="5" class="mui--text-center mui--text-dark-secondary">
+              No subscriptions yet
+            </td>
+          </tr>
         {{/each}}
       </tbody>
     </table>
@@ -133,33 +153,54 @@
   const statusLabels = {{{statusLabels}}};
   const statusData   = {{{statusData}}};
 
-  new Chart(document.getElementById('subscriptionTrendChart').getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: trendLabels,
-      datasets: [{
-        label: 'New Subscriptions',
-        data: trendData,
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 2,
-        fill: true,
-        tension: 0.4
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { display: true } }, scales: { y: { beginAtZero: true } } }
-  });
+  new Chart(
+    document.getElementById('subscriptionTrendChart'),
+    {
+      type: 'line',
+      data: {
+        labels: trendLabels,
+        datasets: [{
+          label: 'New Subscriptions',
+          data: trendData,
+          backgroundColor: 'rgba(25, 135, 84, 0.2)',
+          borderColor: '#198754',
+          borderWidth: 2,
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    }
+  );
 
-  new Chart(document.getElementById('subscriptionStatusChart').getContext('2d'), {
-    type: 'doughnut',
-    data: {
-      labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
-      datasets: [{
-        data: statusData,
-        backgroundColor: ['#198754','#dc3545','#ffc107','#6c757d']
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
-  });
+  new Chart(
+    document.getElementById('subscriptionStatusChart'),
+    {
+      type: 'doughnut',
+      data: {
+        labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
+        datasets: [{
+          data: statusData,
+          backgroundColor: [
+            '#198754',
+            '#dc3545',
+            '#ffc107',
+            '#6c757d'
+          ]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    }
+  );
 </script>
 {{/section}}
