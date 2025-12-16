@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid py-4">
 
   <!-- ================= Greeting ================= -->
   <div class="mb-4">
@@ -18,61 +18,79 @@
   <div class="row g-3 mb-4">
 
     <!-- Schools -->
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-3">
       <div class="card text-bg-primary h-100">
-        <div class="card-body">
-          <div class="small">Schools</div>
-          <div class="fs-3 fw-bold">{{stats.totalSchools}}</div>
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-building fs-1 me-3"></i>
+          <div>
+            <div class="small">Schools</div>
+            <div class="fs-3 fw-bold">{{stats.totalSchools}}</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- School Admins -->
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-3">
       <div class="card text-bg-warning h-100">
-        <div class="card-body">
-          <div class="small">School Admins</div>
-          <div class="fs-3 fw-bold">{{stats.totalSchoolAdmins}}</div>
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-person-badge fs-1 me-3"></i>
+          <div>
+            <div class="small">School Admins</div>
+            <div class="fs-3 fw-bold">{{stats.totalSchoolAdmins}}</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Staff -->
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-3">
       <div class="card text-bg-secondary h-100">
-        <div class="card-body">
-          <div class="small">Staff</div>
-          <div class="fs-3 fw-bold">{{stats.totalStaff}}</div>
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-people fs-1 me-3"></i>
+          <div>
+            <div class="small">Staff</div>
+            <div class="fs-3 fw-bold">{{stats.totalStaff}}</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Students -->
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-3">
       <div class="card text-bg-info h-100">
-        <div class="card-body">
-          <div class="small">Students</div>
-          <div class="fs-3 fw-bold">{{stats.totalStudents}}</div>
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-mortarboard fs-1 me-3"></i>
+          <div>
+            <div class="small">Students</div>
+            <div class="fs-3 fw-bold">{{stats.totalStudents}}</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Active Subscriptions -->
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-3">
       <div class="card text-bg-success h-100">
-        <div class="card-body">
-          <div class="small">Active Subscriptions</div>
-          <div class="fs-3 fw-bold">{{stats.totalSubscriptions}}</div>
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-card-checklist fs-1 me-3"></i>
+          <div>
+            <div class="small">Active Subscriptions</div>
+            <div class="fs-3 fw-bold">{{stats.totalSubscriptions}}</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Total Revenue -->
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-3">
       <div class="card text-bg-dark h-100">
-        <div class="card-body">
-          <div class="small">Total Revenue</div>
-          <div class="fs-3 fw-bold">₦{{stats.totalRevenue}}</div>
+        <div class="card-body d-flex align-items-center">
+          <i class="bi bi-currency-dollar fs-1 me-3"></i>
+          <div>
+            <div class="small">Total Revenue</div>
+            <div class="fs-3 fw-bold">₦{{stats.totalRevenue}}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -159,3 +177,55 @@
   </div>
 
 </div>
+
+<!-- ================= Scripts ================= -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<script>
+  const trendLabels  = {{{trendLabels}}};
+  const trendData    = {{{trendData}}};
+  const statusLabels = {{{statusLabels}}};
+  const statusData   = {{{statusData}}};
+
+  // Line chart: subscription trend
+  new Chart(document.getElementById('subscriptionTrendChart'), {
+    type: 'line',
+    data: {
+      labels: trendLabels,
+      datasets: [{
+        label: 'New Subscriptions',
+        data: trendData,
+        backgroundColor: 'rgba(25, 135, 84, 0.2)',
+        borderColor: '#198754',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // Doughnut chart: subscription status
+  new Chart(document.getElementById('subscriptionStatusChart'), {
+    type: 'doughnut',
+    data: {
+      labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
+      datasets: [{
+        data: statusData,
+        backgroundColor: [
+          '#198754', // active
+          '#dc3545', // expired
+          '#ffc107', // pending
+          '#6c757d'  // cancelled
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } }
+    }
+  });
+</script>
