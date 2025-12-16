@@ -60,10 +60,9 @@
 <script>
   $(document).ready(function () {
     $('#subscriptionTable').DataTable({
-      scrollX: true,
-      pageLength: 10,
-      dom: 'Bfrtip', // if you add buttons in the future
-      buttons: []    // configure DataTables buttons if needed
+      scrollX: true,       // Enable horizontal scrolling
+      pageLength: 10,      // Show 10 rows per page
+      responsive: false    // Disable responsive collapsing columns
     });
   });
 </script>
