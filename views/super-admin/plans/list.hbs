@@ -1,147 +1,102 @@
-<div class="container section">
+<div class="container py-4">
 
   <!-- Header -->
-  <div class="row valign-wrapper">
-    <div class="col s12 m8">
-      <h4 class="no-margin">All Plans</h4>
-    </div>
-    <div class="col s12 m4 right-align">
-      <a href="/super-admin/plans/create"
-         class="btn waves-effect waves-light blue">
-        <i class="material-icons left">add</i>
-        Add New Plan
-      </a>
-    </div>
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+    <h4 class="mb-3 mb-md-0">All Plans</h4>
+    <a href="/super-admin/plans/create" class="btn btn-primary">
+      <i class="bi bi-plus-lg me-1"></i> Add New Plan
+    </a>
   </div>
 
   {{> flashMessages}}
 
   <!-- Plans Grid -->
-  <div class="row">
+  <div class="row g-4">
     {{#each plans}}
-    <div class="col s12 m6 l4">
-      <div class="card hoverable">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
 
-        <div class="card-content">
+        <div class="card-body d-flex flex-column">
 
           <!-- Card Header -->
-          <div class="row valign-wrapper">
-            <div class="col s8">
-              <span class="card-title">{{this.name}}</span>
-            </div>
-            <div class="col s4 right-align">
-              {{#if this.isActive}}
-                <span class="chip green white-text">Active</span>
-              {{else}}
-                <span class="chip grey lighten-1">Inactive</span>
-              {{/if}}
-            </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">{{this.name}}</h5>
+            {{#if this.isActive}}
+              <span class="badge bg-success">Active</span>
+            {{else}}
+              <span class="badge bg-secondary">Inactive</span>
+            {{/if}}
           </div>
 
           <!-- Price -->
-          <p class="grey-text text-darken-1">
-            <i class="material-icons tiny">attach_money</i>
+          <p class="text-muted mb-2">
+            <i class="bi bi-currency-dollar me-1"></i>
             <strong>{{this.price}}</strong>
             {{#if this.billingCycle}} / {{this.billingCycle}}{{/if}}
           </p>
 
           <!-- Description -->
           {{#if this.description}}
-            <p class="grey-text text-darken-2">{{this.description}}</p>
+            <p class="text-secondary mb-2">{{this.description}}</p>
           {{/if}}
 
           <!-- Features -->
           {{#if this.features}}
-          <ul class="collection with-header">
-            <li class="collection-header">
-              <span class="grey-text text-darken-1">Features</span>
-            </li>
-            {{#each this.features}}
-              <li class="collection-item">
-                <i class="material-icons tiny green-text left">check_circle</i>
-                {{this}}
-              </li>
-            {{/each}}
-          </ul>
+            <h6 class="mt-2">Features</h6>
+            <ul class="list-unstyled mb-2">
+              {{#each this.features}}
+                <li>
+                  <i class="bi bi-check-circle-fill text-success me-2"></i>{{this}}
+                </li>
+              {{/each}}
+            </ul>
           {{/if}}
 
           <!-- Resource Limits -->
-          <div class="section small grey-text text-darken-1">
-            <div class="row no-margin">
-              <div class="col s6">
-                <i class="material-icons tiny">people</i> Students
-              </div>
-              <div class="col s6 right-align">
-                {{#if this.maxStudents}}{{this.maxStudents}}{{else}}Unlimited{{/if}}
-              </div>
+          <div class="mt-auto pt-2 border-top">
+            <div class="d-flex justify-content-between">
+              <span><i class="bi bi-people-fill me-1"></i>Students</span>
+              <span>{{#if this.maxStudents}}{{this.maxStudents}}{{else}}Unlimited{{/if}}</span>
             </div>
-
-            <div class="row no-margin">
-              <div class="col s6">
-                <i class="material-icons tiny">badge</i> Staff
-              </div>
-              <div class="col s6 right-align">
-                {{#if this.maxStaff}}{{this.maxStaff}}{{else}}Unlimited{{/if}}
-              </div>
+            <div class="d-flex justify-content-between">
+              <span><i class="bi bi-person-badge-fill me-1"></i>Staff</span>
+              <span>{{#if this.maxStaff}}{{this.maxStaff}}{{else}}Unlimited{{/if}}</span>
             </div>
-
-            <div class="row no-margin">
-              <div class="col s6">
-                <i class="material-icons tiny">school</i> Classes
-              </div>
-              <div class="col s6 right-align">
-                {{#if this.maxClasses}}{{this.maxClasses}}{{else}}Unlimited{{/if}}
-              </div>
+            <div class="d-flex justify-content-between">
+              <span><i class="bi bi-building-fill me-1"></i>Classes</span>
+              <span>{{#if this.maxClasses}}{{this.maxClasses}}{{else}}Unlimited{{/if}}</span>
             </div>
-
-            <div class="row no-margin">
-              <div class="col s6">
-                <i class="material-icons tiny">view_module</i> Sections
-              </div>
-              <div class="col s6 right-align">
-                {{#if this.maxSections}}{{this.maxSections}}{{else}}Unlimited{{/if}}
-              </div>
+            <div class="d-flex justify-content-between">
+              <span><i class="bi bi-grid-fill me-1"></i>Sections</span>
+              <span>{{#if this.maxSections}}{{this.maxSections}}{{else}}Unlimited{{/if}}</span>
             </div>
           </div>
 
         </div>
 
         <!-- Actions -->
-        <div class="card-action">
-          <div class="row no-margin">
-            <div class="col s6">
-              <a href="/super-admin/plans/edit/{{this._id}}"
-                 class="btn-flat blue-text">
-                <i class="material-icons left">edit</i>Edit
-              </a>
-            </div>
-            <div class="col s6 right-align">
-              <form action="/super-admin/plans/delete/{{this._id}}"
-                    method="POST"
-                    onsubmit="return confirm('Are you sure you want to delete this plan?');">
-                <button type="submit"
-                        class="btn-flat red-text">
-                  <i class="material-icons left">delete</i>Delete
-                </button>
-              </form>
-            </div>
-          </div>
+        <div class="card-footer bg-transparent border-top d-flex justify-content-between">
+          <a href="/super-admin/plans/edit/{{this._id}}" class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-pencil-fill me-1"></i>Edit
+          </a>
+          <form action="/super-admin/plans/delete/{{this._id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this plan?');">
+            <button type="submit" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-trash-fill me-1"></i>Delete
+            </button>
+          </form>
         </div>
 
       </div>
     </div>
     {{else}}
-
     <!-- Empty State -->
-    <div class="col s12">
-      <div class="card-panel blue lighten-5 blue-text text-darken-2">
-        No plans found.
-        <a href="/super-admin/plans/create" class="blue-text text-darken-4">
-          Add a new plan
-        </a>
+    <div class="col-12">
+      <div class="alert alert-info text-center">
+        No plans found. 
+        <a href="/super-admin/plans/create" class="alert-link">Add a new plan</a>
       </div>
     </div>
-
     {{/each}}
   </div>
+
 </div>
