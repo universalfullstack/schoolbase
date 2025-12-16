@@ -1,4 +1,3 @@
-<!-- ===================== super-admin.layout.hbs ===================== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +6,10 @@
 
   <title>{{title}}</title>
 
-  <!-- Bootstrap CSS (Latest) -->
+  <!-- Bootstrap CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous"
   />
 
   <!-- Bootstrap Icons -->
@@ -24,224 +21,197 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="/css/style.css" />
 
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Desktop sidebar */
+    .sidebar {
+      width: 260px;
+    }
+
+    @media (min-width: 992px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1030;
+      }
+
+      .content-wrapper {
+        margin-left: 260px;
+      }
+    }
+
+    .sidebar .btn {
+      border-radius: .5rem;
+    }
+  </style>
+
   {{{_sections.styles}}}
 </head>
 
 <body class="bg-light">
 
-  <!-- Admin Content -->
-<!-- ===================== Bootstrap Sidebar ===================== -->
-<ul class="list-unstyled mb-3">
+<!-- ===================== TOPBAR ===================== -->
+<nav class="navbar navbar-light bg-white border-bottom sticky-top">
+  <div class="container-fluid">
 
-  <!-- Dashboard -->
-  <li class="mb-1">
-    <a
-      href="/super-admin/dashboard"
-      class="btn w-100 text-start d-flex align-items-center
-      {{#ifActive '/super-admin/dashboard'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <i class="bi bi-speedometer2 me-2"></i>
-      Dashboard
-    </a>
-  </li>
-
-  <!-- Schools -->
-  <li class="mb-1">
+    <!-- Mobile menu toggle -->
     <button
-      class="btn w-100 text-start d-flex align-items-center"
-      data-bs-toggle="collapse"
-      data-bs-target="#schools-submenu"
-      aria-expanded="{{#ifActivePrefix currentPath '/super-admin/schools'}}true{{else}}false{{/ifActivePrefix}}">
-      <i class="bi bi-mortarboard me-2"></i>
-      <span class="flex-grow-1">Schools</span>
-      <i class="bi bi-chevron-down"></i>
+      class="btn btn-outline-secondary d-lg-none"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#mobileSidebar">
+      <i class="bi bi-list"></i>
     </button>
 
-    <div
-      class="collapse {{#ifActivePrefix currentPath '/super-admin/schools'}}show{{/ifActivePrefix}}"
-      id="schools-submenu">
-      <ul class="list-unstyled ps-4">
+    <!-- Brand -->
+    <span class="navbar-brand fw-semibold d-none d-lg-block">
+      Super Admin
+    </span>
+
+    <!-- User Dropdown -->
+    <div class="dropdown">
+      <button
+        class="btn d-flex align-items-center gap-2"
+        data-bs-toggle="dropdown">
+
+        <img
+          src="{{#if user.profileImage}}{{user.profileImage}}{{else}}/images/avatar.png{{/if}}"
+          class="rounded-circle"
+          width="36"
+          height="36"
+          alt="User">
+
+        <i class="bi bi-chevron-down"></i>
+      </button>
+
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li class="px-3 py-2">
+          <div class="fw-semibold">{{user.firstName}} {{user.lastName}}</div>
+          <small class="text-muted">{{user.role}}</small>
+        </li>
+        <li><hr class="dropdown-divider"></li>
         <li>
-          <a
-            href="/super-admin/schools"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/schools'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            All Schools
+          <a class="dropdown-item" href="/super-admin/profile">
+            <i class="bi bi-person me-2"></i> Profile
           </a>
         </li>
         <li>
-          <a
-            href="/super-admin/schools/create/new"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/schools/create/new'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            Create School
+          <a class="dropdown-item" href="/super-admin/settings">
+            <i class="bi bi-gear me-2"></i> Settings
+          </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item text-danger" href="/logout">
+            <i class="bi bi-box-arrow-right me-2"></i> Logout
           </a>
         </li>
       </ul>
     </div>
-  </li>
 
-  <!-- Sessions -->
-  <li class="mb-1">
-    <button
-      class="btn w-100 text-start d-flex align-items-center"
-      data-bs-toggle="collapse"
-      data-bs-target="#sessions-submenu">
-      <i class="bi bi-calendar-event me-2"></i>
-      <span class="flex-grow-1">Sessions</span>
-      <i class="bi bi-chevron-down"></i>
-    </button>
+  </div>
+</nav>
 
-    <div
-      class="collapse {{#ifActivePrefix currentPath '/super-admin/sessions'}}show{{/ifActivePrefix}}"
-      id="sessions-submenu">
-      <ul class="list-unstyled ps-4">
-        <li>
-          <a
-            href="/super-admin/sessions"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/sessions'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            All Sessions
-          </a>
-        </li>
-        <li>
-          <a
-            href="/super-admin/sessions/create"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/sessions/create'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            Create Session
-          </a>
-        </li>
-      </ul>
-    </div>
-  </li>
+<!-- ===================== DESKTOP SIDEBAR ===================== -->
+<aside class="sidebar bg-white border-end d-none d-lg-flex flex-column p-3">
 
-  <!-- Subjects -->
-  <li class="mb-1">
-    <button
-      class="btn w-100 text-start d-flex align-items-center"
-      data-bs-toggle="collapse"
-      data-bs-target="#subjects-submenu">
-      <i class="bi bi-book me-2"></i>
-      <span class="flex-grow-1">Subjects</span>
-      <i class="bi bi-chevron-down"></i>
-    </button>
+  <ul class="list-unstyled">
 
-    <div
-      class="collapse {{#ifActivePrefix currentPath '/super-admin/subjects'}}show{{/ifActivePrefix}}"
-      id="subjects-submenu">
-      <ul class="list-unstyled ps-4">
-        <li>
-          <a
-            href="/super-admin/subjects"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/subjects'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            All Subjects
-          </a>
-        </li>
-        <li>
-          <a
-            href="/super-admin/subjects/create"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/subjects/create'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            Create Subject
-          </a>
-        </li>
-      </ul>
-    </div>
-  </li>
+    <!-- Dashboard -->
+    <li class="mb-1">
+      <a
+        href="/super-admin/dashboard"
+        class="btn w-100 text-start d-flex align-items-center
+        {{#ifActive '/super-admin/dashboard'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+        <i class="bi bi-speedometer2 me-2"></i>
+        Dashboard
+      </a>
+    </li>
 
-  <!-- Classes -->
-  <li class="mb-1">
-    <button
-      class="btn w-100 text-start d-flex align-items-center"
-      data-bs-toggle="collapse"
-      data-bs-target="#classes-submenu">
-      <i class="bi bi-collection me-2"></i>
-      <span class="flex-grow-1">Classes</span>
-      <i class="bi bi-chevron-down"></i>
-    </button>
+    <!-- Accordion Menu -->
+    <li>
+      <div class="accordion accordion-flush" id="adminMenu">
 
-    <div
-      class="collapse {{#ifActivePrefix currentPath '/super-admin/classes'}}show{{/ifActivePrefix}}"
-      id="classes-submenu">
-      <ul class="list-unstyled ps-4">
-        <li>
-          <a
-            href="/super-admin/classes"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/classes'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            All Classes
-          </a>
-        </li>
-        <li>
-          <a
-            href="/super-admin/classes/create"
-            class="btn btn-sm w-100 text-start
-            {{#ifActive '/super-admin/classes/create'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-            Create Class
-          </a>
-        </li>
-      </ul>
-    </div>
-  </li>
+        <!-- Schools -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#schoolsMenu">
+              <i class="bi bi-mortarboard me-2"></i> Schools
+            </button>
+          </h2>
+          <div
+            id="schoolsMenu"
+            class="accordion-collapse collapse {{#ifActivePrefix currentPath '/super-admin/schools'}}show{{/ifActivePrefix}}">
+            <div class="accordion-body py-2">
+              <a href="/super-admin/schools" class="btn btn-sm w-100 text-start">All Schools</a>
+              <a href="/super-admin/schools/create/new" class="btn btn-sm w-100 text-start">Create School</a>
+            </div>
+          </div>
+        </div>
 
-</ul>
+        <!-- Sessions -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#sessionsMenu">
+              <i class="bi bi-calendar-event me-2"></i> Sessions
+            </button>
+          </h2>
+          <div id="sessionsMenu" class="accordion-collapse collapse">
+            <div class="accordion-body py-2">
+              <a href="/super-admin/sessions" class="btn btn-sm w-100 text-start">All Sessions</a>
+              <a href="/super-admin/sessions/create" class="btn btn-sm w-100 text-start">Create Session</a>
+            </div>
+          </div>
+        </div>
 
-<!-- ===================== Administration ===================== -->
-<div class="text-muted small mt-4 mb-2">
-  Administration
+      </div>
+    </li>
+
+    <!-- Administration -->
+    <li class="text-muted small mt-4 mb-2">Administration</li>
+
+    <li class="mb-1">
+      <a href="/super-admin/plans" class="btn w-100 text-start">
+        <i class="bi bi-layers me-2"></i> Plans
+      </a>
+    </li>
+
+    <li class="mb-1">
+      <a href="/super-admin/subscriptions" class="btn w-100 text-start">
+        <i class="bi bi-check2-square me-2"></i> Subscriptions
+      </a>
+    </li>
+
+  </ul>
+</aside>
+
+<!-- ===================== MOBILE OFFCANVAS ===================== -->
+<div class="offcanvas offcanvas-start" id="mobileSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    {{!-- reuse same nav partial if you want --}}
+    {{> super-admin-navLinks }}
+  </div>
 </div>
 
-<ul class="list-unstyled">
-
-  <li class="mb-1">
-    <a
-      href="/super-admin/settings"
-      class="btn w-100 text-start d-flex align-items-center
-      {{#ifActive '/super-admin/settings'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <i class="bi bi-gear me-2"></i>
-      Settings
-    </a>
-  </li>
-
-  <li class="mb-1">
-    <a
-      href="/super-admin/plans"
-      class="btn w-100 text-start d-flex align-items-center
-      {{#ifActive '/super-admin/plans'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <i class="bi bi-layers me-2"></i>
-      Plans
-    </a>
-  </li>
-
-  <li class="mb-1">
-    <a
-      href="/super-admin/subscriptions"
-      class="btn w-100 text-start d-flex align-items-center
-      {{#ifActive '/super-admin/subscriptions'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
-      <i class="bi bi-check2-square me-2"></i>
-      Subscriptions
-    </a>
-  </li>
-
-  <li class="mb-1">
-    <a href="/logout" class="btn w-100 text-start d-flex align-items-center text-danger">
-      <i class="bi bi-box-arrow-right me-2"></i>
-      Logout
-    </a>
-  </li>
-
-</ul>
-
+<!-- ===================== PAGE CONTENT ===================== -->
+<main class="content-wrapper p-4">
   {{{body}}}
+</main>
 
-  <!-- Bootstrap JS Bundle -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  {{{_sections.scripts}}}
+{{{_sections.scripts}}}
 </body>
 </html>
