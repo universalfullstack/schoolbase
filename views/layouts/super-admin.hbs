@@ -1,4 +1,4 @@
-<!-- ===================== auth.layout.hbs ===================== -->
+<!-- ===================== super-admin.layout.hbs ===================== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +29,210 @@
 
 <body class="bg-light">
 
-  <!-- Auth Content -->
+  <!-- Admin Content -->
+<!-- ===================== Bootstrap Sidebar ===================== -->
+<ul class="list-unstyled mb-3">
+
+  <!-- Dashboard -->
+  <li class="mb-1">
+    <a
+      href="/super-admin/dashboard"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/super-admin/dashboard'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-speedometer2 me-2"></i>
+      Dashboard
+    </a>
+  </li>
+
+  <!-- Schools -->
+  <li class="mb-1">
+    <button
+      class="btn w-100 text-start d-flex align-items-center"
+      data-bs-toggle="collapse"
+      data-bs-target="#schools-submenu"
+      aria-expanded="{{#ifActivePrefix currentPath '/super-admin/schools'}}true{{else}}false{{/ifActivePrefix}}">
+      <i class="bi bi-mortarboard me-2"></i>
+      <span class="flex-grow-1">Schools</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div
+      class="collapse {{#ifActivePrefix currentPath '/super-admin/schools'}}show{{/ifActivePrefix}}"
+      id="schools-submenu">
+      <ul class="list-unstyled ps-4">
+        <li>
+          <a
+            href="/super-admin/schools"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/schools'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            All Schools
+          </a>
+        </li>
+        <li>
+          <a
+            href="/super-admin/schools/create/new"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/schools/create/new'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            Create School
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <!-- Sessions -->
+  <li class="mb-1">
+    <button
+      class="btn w-100 text-start d-flex align-items-center"
+      data-bs-toggle="collapse"
+      data-bs-target="#sessions-submenu">
+      <i class="bi bi-calendar-event me-2"></i>
+      <span class="flex-grow-1">Sessions</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div
+      class="collapse {{#ifActivePrefix currentPath '/super-admin/sessions'}}show{{/ifActivePrefix}}"
+      id="sessions-submenu">
+      <ul class="list-unstyled ps-4">
+        <li>
+          <a
+            href="/super-admin/sessions"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/sessions'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            All Sessions
+          </a>
+        </li>
+        <li>
+          <a
+            href="/super-admin/sessions/create"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/sessions/create'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            Create Session
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <!-- Subjects -->
+  <li class="mb-1">
+    <button
+      class="btn w-100 text-start d-flex align-items-center"
+      data-bs-toggle="collapse"
+      data-bs-target="#subjects-submenu">
+      <i class="bi bi-book me-2"></i>
+      <span class="flex-grow-1">Subjects</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div
+      class="collapse {{#ifActivePrefix currentPath '/super-admin/subjects'}}show{{/ifActivePrefix}}"
+      id="subjects-submenu">
+      <ul class="list-unstyled ps-4">
+        <li>
+          <a
+            href="/super-admin/subjects"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/subjects'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            All Subjects
+          </a>
+        </li>
+        <li>
+          <a
+            href="/super-admin/subjects/create"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/subjects/create'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            Create Subject
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <!-- Classes -->
+  <li class="mb-1">
+    <button
+      class="btn w-100 text-start d-flex align-items-center"
+      data-bs-toggle="collapse"
+      data-bs-target="#classes-submenu">
+      <i class="bi bi-collection me-2"></i>
+      <span class="flex-grow-1">Classes</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div
+      class="collapse {{#ifActivePrefix currentPath '/super-admin/classes'}}show{{/ifActivePrefix}}"
+      id="classes-submenu">
+      <ul class="list-unstyled ps-4">
+        <li>
+          <a
+            href="/super-admin/classes"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/classes'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            All Classes
+          </a>
+        </li>
+        <li>
+          <a
+            href="/super-admin/classes/create"
+            class="btn btn-sm w-100 text-start
+            {{#ifActive '/super-admin/classes/create'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+            Create Class
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+</ul>
+
+<!-- ===================== Administration ===================== -->
+<div class="text-muted small mt-4 mb-2">
+  Administration
+</div>
+
+<ul class="list-unstyled">
+
+  <li class="mb-1">
+    <a
+      href="/super-admin/settings"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/super-admin/settings'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-gear me-2"></i>
+      Settings
+    </a>
+  </li>
+
+  <li class="mb-1">
+    <a
+      href="/super-admin/plans"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/super-admin/plans'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-layers me-2"></i>
+      Plans
+    </a>
+  </li>
+
+  <li class="mb-1">
+    <a
+      href="/super-admin/subscriptions"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/super-admin/subscriptions'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-check2-square me-2"></i>
+      Subscriptions
+    </a>
+  </li>
+
+  <li class="mb-1">
+    <a href="/logout" class="btn w-100 text-start d-flex align-items-center text-danger">
+      <i class="bi bi-box-arrow-right me-2"></i>
+      Logout
+    </a>
+  </li>
+
+</ul>
+
   {{{body}}}
 
   <!-- Bootstrap JS Bundle -->
