@@ -11,7 +11,9 @@
              alt="School Logo" 
              style="max-height:80px; margin-bottom: 12px;" />
         <h5 class="mui--text-title">{{settings.general.systemName}} Portal</h5>
-        <p class="mui--text-subhead mui--text-dark-secondary">Enter your credentials to continue</p>
+        <p class="mui--text-subhead mui--text-dark-secondary">
+          Enter your credentials to continue
+        </p>
       </div>
 
       <!-- Flash Messages -->
@@ -19,7 +21,19 @@
 
       <!-- Login Form -->
       <form action="/auth/login" method="POST">
-        <input type="hidden" name="role" value="Super Admin" />
+
+        <!-- Role -->
+        <div class="mui-select" style="margin-bottom: 8px;">
+          <select name="role" required>
+            <option value="">Login as</option>
+            <option value="Super Admin">Super Admin</option>
+            <option value="School Admin">School Admin</option>
+            <option value="Staff">Staff</option>
+            <option value="Guardian">Guardian</option>
+            <option value="Student">Student</option>
+          </select>
+          <label>Role</label>
+        </div>
 
         <!-- Email or Phone -->
         <div class="mui-textfield mui-textfield--float-label" style="text-align: left;">
@@ -45,7 +59,9 @@
 
         <!-- Submit -->
         <div class="mui--text-center" style="margin-top: 16px;">
-          <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary mui--text-uppercase" style="width: 100%;">
+          <button type="submit"
+                  class="mui-btn mui-btn--raised mui-btn--primary mui--text-uppercase"
+                  style="width: 100%;">
             Login
           </button>
         </div>
