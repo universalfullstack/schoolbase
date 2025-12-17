@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
 
       default:
         req.flash("error", "Invalid role selected");
-        return res.redirect("back");
+        return res.redirect("/register");
     }
 
     req.flash("success", "Registration successful");
@@ -77,7 +77,7 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.error(error);
     req.flash("error", error.message);
-    res.redirect("back");
+    res.redirect("/register");
   }
 });
 
