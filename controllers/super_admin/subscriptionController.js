@@ -87,7 +87,7 @@ export const editSubscriptionForm = async (req, res) => {
       return res.redirect("/super-admin/subscriptions");
     }
 
-    const schools = await School.find().lean();
+    const schools = await School.find({ deletedAt: null }).lean();
     const plans = await Plan.find({ isActive: true }).lean();
 
     res.render("super-admin/subscriptions/edit", {
