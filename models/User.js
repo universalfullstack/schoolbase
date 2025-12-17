@@ -18,16 +18,14 @@ const authUserSchema = {
     type: String,
     set: value => value.replace(/\s+/g, ''),
     required: true,
-    unique: true,
-    index: true
+    unique: true
   },
   email: {
     type: String,
     trim: true,
     lowercase: true,
     required: true,
-    unique: true,
-    index: true
+    unique: true
   },
   password: { type: String, required: true },
   emailVerified: { type: Boolean, default: false },
