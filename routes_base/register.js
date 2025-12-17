@@ -14,9 +14,9 @@ const hashPassword = async (password) => {
    Render Registration Form
 ================================ */
 router.get("/", async (req, res) => {
-  const schools = await School.find().select("name");
+  const schools = await School.find({ deletedAt: null }).select("name");
 
-  res.render("auth/register", {
+  res.render("register", {
     title: "User Registration",
     schools
   });
