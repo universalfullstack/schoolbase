@@ -1,7 +1,6 @@
 import express from 'express';
 import authRoutes from './auth.js';
 import superAdminRoutes from './super-admin.js';
-import { ensureSuperAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -20,7 +19,7 @@ router.get('/login', (req, res) => {
 });
 
 // Logout
-router.get('/logout', ensureSuperAdmin, (req, res) => {
+router.get('/logout', (req, res) => {
   req.logout(err => {
     if (err) return next(err);
     req.flash('success_msg', 'You are logged out');
