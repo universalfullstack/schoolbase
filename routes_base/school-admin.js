@@ -9,7 +9,7 @@ renderFees,
 renderInvoices,
 renderPayments,
 renderSchoolProfile
-} from '../controllers/school-admin/dashboardController.js';
+} from '../controllers/school_admin/dashboardController.js';
 
 const router = express.Router();
 
