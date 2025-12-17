@@ -116,6 +116,6 @@ export const renderSuperAdminDashboard = async (req, res) => {
 
   } catch (err) {
     console.error("Super Admin Dashboard Error:", err);
-    res.status(500).render("error", { message: "Could not load dashboard." });
+    res.status(500).render("error", { code: "500", title: "Internal Server Error", message: "Could not load dashboard." });
   }
 };
