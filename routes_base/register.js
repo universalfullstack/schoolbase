@@ -13,19 +13,11 @@ const hashPassword = async (password) => {
 /* ===============================
    Render Registration Form
 ================================ */
-router.get("/:role", async (req, res) => {
-  const { role } = req.params;
-
+router.get("/register", async (req, res) => {
   const schools = await School.find().select("name");
 
-  const allowedRoles = ["school-admin", "staff", "guardian", "student"];
-  if (!allowedRoles.includes(role)) {
-    return res.status(404).render("errors/404");
-  }
-
-  res.render("register", {
-    title: `${role.replace("-", " ")} Registration`,
-    role,
+  res.render("auth/register", {
+    title: "User Registration",
     schools
   });
 });
@@ -33,36 +25,40 @@ router.get("/:role", async (req, res) => {
 /* ===============================
    Handle Registration
 ================================ */
-router.post("/:role", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
-    const { role } = req.params;
-    const data = req.body;
+    const { role, ...data } = req.body;
+
+    if (!role) {
+      req.flash("error", "Please select a role");
+      return res.redirect("back");
+    }
 
     data.password = await hashPassword(data.password);
 
     switch (role) {
-      case "school-admin":
+      case "School Admin":
         await SchoolAdmin.create({
           ...data,
           schools: data.schools ? [data.schools] : []
         });
         break;
 
-      case "staff":
+      case "Staff":
         await Staff.create({
           ...data,
           school: data.school
         });
         break;
 
-      case "guardian":
+      case "Guardian":
         await Guardian.create({
           ...data,
           school: data.school
         });
         break;
 
-      case "student":
+      case "Student":
         await Student.create({
           ...data,
           school: data.school
@@ -70,7 +66,7 @@ router.post("/:role", async (req, res) => {
         break;
 
       default:
-        req.flash("error", "Invalid registration role");
+        req.flash("error", "Invalid role selected");
         return res.redirect("back");
     }
 
