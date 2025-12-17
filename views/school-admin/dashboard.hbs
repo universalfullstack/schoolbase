@@ -5,12 +5,12 @@
 
     <!-- Total Students -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #5a9bd4;">
-        <div class="d-flex align-items-center">
+      <div class="card shadow-sm bg-primary bg-opacity-10 border-0 p-3 h-100">
+        <div class="d-flex align-items-center text-primary">
           <i class="bi bi-people-fill fs-2 me-3"></i>
           <div>
-            <h6>Total Students</h6>
-            <h3>{{stats.totalStudents}}</h3>
+            <h6 class="mb-1">Total Students</h6>
+            <h3 class="mb-0">{{stats.totalStudents}}</h3>
           </div>
         </div>
       </div>
@@ -18,12 +18,12 @@
 
     <!-- Total Staff -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #4caf7f;">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-person-badge fs-2 me-3"></i>
+      <div class="card shadow-sm bg-success bg-opacity-10 border-0 p-3 h-100">
+        <div class="d-flex align-items-center text-success">
+          <i class="bi bi-person-badge-fill fs-2 me-3"></i>
           <div>
-            <h6>Total Staff</h6>
-            <h3>{{stats.totalStaff}}</h3>
+            <h6 class="mb-1">Total Staff</h6>
+            <h3 class="mb-0">{{stats.totalStaff}}</h3>
           </div>
         </div>
       </div>
@@ -31,12 +31,12 @@
 
     <!-- Total Guardians -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #f4c26b;">
-        <div class="d-flex align-items-center">
+      <div class="card shadow-sm bg-warning bg-opacity-10 border-0 p-3 h-100">
+        <div class="d-flex align-items-center text-warning">
           <i class="bi bi-person-lines-fill fs-2 me-3"></i>
           <div>
-            <h6>Total Guardians</h6>
-            <h3>{{stats.totalGuardians}}</h3>
+            <h6 class="mb-1">Total Guardians</h6>
+            <h3 class="mb-0">{{stats.totalGuardians}}</h3>
           </div>
         </div>
       </div>
@@ -44,12 +44,12 @@
 
     <!-- Total Invoices -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #f79e6b;">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-file-earmark-text fs-2 me-3"></i>
+      <div class="card shadow-sm bg-info bg-opacity-10 border-0 p-3 h-100">
+        <div class="d-flex align-items-center text-info">
+          <i class="bi bi-file-earmark-text-fill fs-2 me-3"></i>
           <div>
-            <h6>Total Invoices</h6>
-            <h3>{{stats.totalInvoices}}</h3>
+            <h6 class="mb-1">Total Invoices</h6>
+            <h3 class="mb-0">{{stats.totalInvoices}}</h3>
           </div>
         </div>
       </div>
@@ -57,12 +57,12 @@
 
     <!-- Total Revenue -->
     <div class="col-sm-12 col-md-6 col-lg-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #9370db;">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-currency-dollar fs-2 me-3"></i>
+      <div class="card shadow-sm bg-secondary bg-opacity-10 border-0 p-3 h-100">
+        <div class="d-flex align-items-center text-secondary">
+          <i class="bi bi-cash-coin fs-2 me-3"></i>
           <div>
-            <h6>Total Revenue</h6>
-            <h3>₦{{stats.totalRevenue}}</h3>
+            <h6 class="mb-1">Total Revenue</h6>
+            <h3 class="mb-0">₦{{stats.totalRevenue}}</h3>
           </div>
         </div>
       </div>
@@ -71,13 +71,16 @@
   </div>
 
   <!-- ================== LATEST PAYMENTS ================== -->
-  <div class="card shadow-sm mb-4">
+  <div class="card shadow-sm mb-4 border-0">
     <div class="card-body">
-      <h5 class="mb-3">Latest Payments</h5>
+      <h5 class="mb-3">
+        <i class="bi bi-clock-history me-2"></i>
+        Latest Payments
+      </h5>
 
       <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
+        <table class="table table-striped align-middle">
+          <thead class="table-light">
             <tr>
               <th>Student</th>
               <th>Invoice</th>
@@ -97,7 +100,9 @@
             </tr>
             {{else}}
             <tr>
-              <td colspan="5" class="text-center">No payments yet</td>
+              <td colspan="5" class="text-center text-muted">
+                No payments yet
+              </td>
             </tr>
             {{/each}}
           </tbody>
@@ -106,11 +111,14 @@
     </div>
   </div>
 
-  <!-- ================== REVENUE TREND CHART ================== -->
-  <div class="card shadow-sm mb-4">
+  <!-- ================== REVENUE TREND ================== -->
+  <div class="card shadow-sm border-0">
     <div class="card-body">
-      <h5 class="mb-3">Revenue Trend (Last 6 Months)</h5>
-      <canvas id="revenueChart" height="100"></canvas>
+      <h5 class="mb-3">
+        <i class="bi bi-graph-up-arrow me-2"></i>
+        Revenue Trend (Last 6 Months)
+      </h5>
+      <canvas id="revenueChart" height="110"></canvas>
     </div>
   </div>
 
@@ -128,8 +136,8 @@ new Chart(ctx, {
     datasets: [{
       label: 'Revenue',
       data: {{{trendData}}},
-      borderColor: '#5a9bd4',
-      backgroundColor: 'rgba(90,155,212,0.1)',
+      borderColor: '#0d6efd',
+      backgroundColor: 'rgba(13,110,253,0.1)',
       tension: 0.4,
       fill: true
     }]
@@ -137,14 +145,10 @@ new Chart(ctx, {
   options: {
     responsive: true,
     plugins: {
-      legend: {
-        display: false
-      }
+      legend: { display: false }
     },
     scales: {
-      y: {
-        beginAtZero: true
-      }
+      y: { beginAtZero: true }
     }
   }
 });
