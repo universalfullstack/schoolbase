@@ -8,11 +8,11 @@ import {
   deletePlan
 } from "../controllers/super_admin/planController.js";
 
-import { ensureSuperAdmin } from "../middleware/auth.js";
+import { ensureRole } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.use(ensureSuperAdmin);
+router.use(ensureRole("Super Admin"));
 
 router.get("/", listPlans);
 router.get("/create", showCreatePlan);
