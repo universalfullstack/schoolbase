@@ -10,7 +10,7 @@ import hbsHelpers from './helpers/hbsHelpers.js';
 
 import indexRoutes from './routes_base/index.js';
 import authRoutes from './routes_base/auth.js';
-import superAdminRoutes from './routes_base/superAdmin.js';
+import superAdminRoutes from './routes_base/super-admin.js';
 
 import errorHandler from './middleware/errorHandler.js';
 import appSettings from './middleware/appSettings.js';
