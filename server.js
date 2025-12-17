@@ -7,8 +7,7 @@ import MongoStore from 'connect-mongo';
 import subdomain from 'express-subdomain';
 import { engine } from 'express-handlebars';
 import hbsHelpers from './helpers/hbsHelpers.js';
-import baseRoutes from './routes_base/index.js';
-import subdomainResolver from './middleware/subdomainResolver.js';
+import indexRoutes from './routes_base/index.js';
 import errorHandler from './middleware/errorHandler.js';
 import appSettings from './middleware/appSettings.js';
 import passport from 'passport';
@@ -100,16 +99,10 @@ app.engine(
 // Set default views folder for base routes
 app.set('views', path.join(__dirname, 'views'));
 
-// Mount base routes on root domain
-app.use(baseRoutes);
+// Mount routes
+app.use(indexRoutes);
 
 // Mount subdomain routes
-app.use(
-  subdomain('*', (req, res, next) => {
-    // Dynamically set views folder for school subdomain
-    subdomainResolver(req, res, next);
-  })
-);
 
 // 404 handler
 app.use((req, res, next) => {
