@@ -1,59 +1,55 @@
 <div class="container-fluid py-4">
-<!-- Latest Payments -->
-<div class="card shadow-sm">
-<div class="card-body">
-<h5 class="mb-3">Latest Payments</h5>
+  <!-- Latest Payments -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="mb-3">Latest Payments</h5>
 
-
-<div class="table-responsive">
-<table class="table table-striped">
-<thead>
-<tr>
-<th>Student</th>
-<th>Invoice</th>
-<th>Amount</th>
-<th>Date</th>
-<th>Method</th>
-</tr>
-</thead>
-<tbody>
-{{#each latestPayments}}
-<tr>
-<td>{{this.student}}</td>
-<td>{{this.invoice}}</td>
-<td>₦{{this.amount}}</td>
-<td>{{this.date}}</td>
-<td>{{this.method}}</td>
-</tr>
-{{else}}
-<tr>
-<td colspan="5" class="text-center">No payments yet</td>
-</tr>
-{{/each}}
-</tbody>
-</table>
-</div>
-</div>
-</div>
-
-
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Invoice</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each latestPayments}}
+            <tr>
+              <td>{{this.student}}</td>
+              <td>{{this.invoice}}</td>
+              <td>₦{{this.amount}}</td>
+              <td>{{this.date}}</td>
+              <td>{{this.method}}</td>
+            </tr>
+            {{else}}
+            <tr>
+              <td colspan="5" class="text-center">No payments yet</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
-
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const ctx = document.getElementById('revenueChart');
 
-
 new Chart(ctx, {
-type: 'line',
-data: {
-labels: {{{trendLabels}}},
-datasets: [{
-label: 'Revenue',
-data: {{{trendData}}},
-tension: 0.4
-}]
-}
+  type: 'line',
+  data: {
+    labels: {{{trendLabels}}},
+    datasets: [{
+      label: 'Revenue',
+      data: {{{trendData}}},
+      tension: 0.4
+    }]
+  }
 });
 </script>
