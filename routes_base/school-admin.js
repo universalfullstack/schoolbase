@@ -1,5 +1,5 @@
 import express from 'express';
-import { ensureAuthenticated } from '../middleware/auth.js';
+import { ensureRole } from '../middleware/auth.js';
 import { schoolAlerts } from '../middleware/schoolAlerts.js';
 import {
 renderSchoolAdminDashboard,
