@@ -14,8 +14,21 @@ const baseUserSchema = {
 
 // Authentication fields
 const authUserSchema = {
-  phone: { type: String, set: value => value.replace(/\s+/g, ''), required: true },  // removes all whitespace
-  email: { type: String, trim: true, lowercase: true, required: true },
+  phone: {
+    type: String,
+    set: value => value.replace(/\s+/g, ''),
+    required: true,
+    unique: true,
+    index: true
+  },
+  email: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    required: true,
+    unique: true,
+    index: true
+  },
   password: { type: String, required: true },
   emailVerified: { type: Boolean, default: false },
   lastLoggedInAt: { type: Date, default: null },
@@ -29,10 +42,6 @@ const superAdminSchema = new mongoose.Schema({
   role: { type: String, default: 'Super Admin', immutable: true }
 }, { timestamps: true });
 
-// Unique indexes globally
-superAdminSchema.index({ email: 1 }, { unique: true });
-superAdminSchema.index({ phone: 1 }, { unique: true });
-
 // -------------------- School Admin --------------------
 const schoolAdminSchema = new mongoose.Schema({
   ...baseUserSchema,
@@ -41,23 +50,24 @@ const schoolAdminSchema = new mongoose.Schema({
   role: { type: String, default: 'School Admin', immutable: true }
 }, { timestamps: true });
 
-// Unique indexes globally
-schoolAdminSchema.index({ email: 1 }, { unique: true });
-schoolAdminSchema.index({ phone: 1 }, { unique: true });
-
 // -------------------- Staff --------------------
 const staffSchema = new mongoose.Schema({
   ...baseUserSchema,
   ...authUserSchema,
   school: { type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true },
-  section: { type: mongoose.Schema.Types.ObjectId, ref: 'Section', default: null }, // NEW: optional section
+  section: { type: mongoose.Schema.Types.ObjectId, ref: 'Section', default: null },
   role: { type: String, default: 'Staff', immutable: true },
-  staffRoles: { type: [String], enum: ['Super Admin', 'Principal', 'Teacher', 'Cashier'], default: ['Teacher'], required: true }
+  staffRoles: {
+    type: [String],
+    enum: ['Super Admin', 'Principal', 'Teacher', 'Cashier'],
+    default: ['Teacher'],
+    required: true
+  }
 }, { timestamps: true });
 
-// Unique email/phone per school
-staffSchema.index({ school: 1, email: 1 }, { unique: true, partialFilterExpression: { email: { $exists: true } } });
-staffSchema.index({ school: 1, phone: 1 }, { unique: true, partialFilterExpression: { phone: { $exists: true } } });
+// Global unique indexes
+staffSchema.index({ email: 1 }, { unique: true });
+staffSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Guardian --------------------
 const guardianSchema = new mongoose.Schema({
@@ -67,23 +77,31 @@ const guardianSchema = new mongoose.Schema({
   role: { type: String, default: 'Guardian', immutable: true },
   wards: [{
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
-    relationship: { type: String, enum: ['Father', 'Mother', 'Uncle', 'Aunt', 'Brother', 'Sister', 'Cousin', 'Sponsor'], required: true }
+    relationship: {
+      type: String,
+      enum: ['Father', 'Mother', 'Uncle', 'Aunt', 'Brother', 'Sister', 'Cousin', 'Sponsor'],
+      required: true
+    }
   }]
 }, { timestamps: true });
 
-// Unique email/phone per school
-guardianSchema.index({ school: 1, email: 1 }, { unique: true, partialFilterExpression: { email: { $exists: true } } });
-guardianSchema.index({ school: 1, phone: 1 }, { unique: true, partialFilterExpression: { phone: { $exists: true } } });
+// Global unique indexes
+guardianSchema.index({ email: 1 }, { unique: true });
+guardianSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Student --------------------
 const studentSchema = new mongoose.Schema({
   ...baseUserSchema,
   school: { type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true },
-  currentSection: { type: mongoose.Schema.Types.ObjectId, ref: 'Section', required: true }, // NEW: current section
+  currentSection: { type: mongoose.Schema.Types.ObjectId, ref: 'Section', required: true },
   role: { type: String, default: 'Student', immutable: true },
   guardians: [{
     guardian: { type: mongoose.Schema.Types.ObjectId, ref: 'Guardian', required: true },
-    relationship: { type: String, enum: ['Father','Mother','Uncle','Aunt','Brother','Sister','Cousin','Sponsor'], required: true }
+    relationship: {
+      type: String,
+      enum: ['Father','Mother','Uncle','Aunt','Brother','Sister','Cousin','Sponsor'],
+      required: true
+    }
   }],
   currentAcademicSession: { type: mongoose.Schema.Types.ObjectId, ref: "AcademicSession" },
   currentTerm: { type: mongoose.Schema.Types.ObjectId, ref: "Term" },
@@ -91,9 +109,9 @@ const studentSchema = new mongoose.Schema({
   currentClassArm: { type: mongoose.Schema.Types.ObjectId, ref: "ClassArm" }
 }, { timestamps: true });
 
-// Unique email/phone per school
-studentSchema.index({ school: 1, email: 1 }, { unique: true, partialFilterExpression: { email: { $exists: true } } });
-studentSchema.index({ school: 1, phone: 1 }, { unique: true, partialFilterExpression: { phone: { $exists: true } } });
+// Global unique indexes
+studentSchema.index({ email: 1 }, { unique: true });
+studentSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Export Models --------------------
 export const SuperAdmin = mongoose.model('SuperAdmin', superAdminSchema);
