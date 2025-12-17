@@ -14,7 +14,7 @@ renderSchoolProfile*/
 const router = express.Router();
 
 // Apply authentication and alerts middleware to all school-admin routes
-router.use(ensureAuthenticated);
+router.use(ensureRole("School Admin"));
 router.use(schoolAlerts);
 
 // Dashboard
