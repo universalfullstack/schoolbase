@@ -8,7 +8,7 @@ const baseUserSchema = {
   gender: { type: String, enum: ['Male', 'Female'], required: true },
   dateOfBirth: { type: Date },
   address: { type: String },
-  status: { type: String, enum: ['Active', 'Suspended', 'Exited'], default: 'Active' },
+  status: { type: String, enum: ['Active', 'Pending', 'Suspended', 'Exited'], default: 'Pending' },
   profileImage: { type: String, default: null }
 };
 
