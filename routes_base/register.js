@@ -14,13 +14,22 @@ const hashPassword = async (password) => {
    Render Registration Form
 ================================ */
 router.get("/", async (req, res) => {
-  const schools = await School.find({ deletedAt: null }).select("name").lean();
+  try {
+    const schools = await School.find({ deletedAt: null })
+      .select("name")
+      .lean();
 
-  res.render("register", {
-    layout: "auth",
-    title: "User Registration",
-    schools
-  });
+    res.render("register", {
+      layout: "auth",
+      title: "User Registration",
+      schools
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render("errors/500", {
+      title: "Server Error"
+    });
+  }
 });
 
 /* ===============================
@@ -33,6 +42,11 @@ router.post("/", async (req, res) => {
     if (!role) {
       req.flash("error", "Please select a role");
       return res.redirect("back");
+    }
+
+    if (!data.password) {
+      req.flash("error", "Password is required");
+      return res.redirect("/register");
     }
 
     data.password = await hashPassword(data.password);
@@ -72,12 +86,31 @@ router.post("/", async (req, res) => {
     }
 
     req.flash("success", "Registration successful");
-    res.redirect("/login");
+    return res.redirect("/login");
 
   } catch (error) {
     console.error(error);
-    req.flash("error", error.message);
-    res.redirect("/register");
+
+    /* ===============================
+       Duplicate Email / Phone Error
+    ================================ */
+    if (error.code === 11000 && error.keyValue) {
+      const field = Object.keys(error.keyValue)[0];
+
+      if (field === "email") {
+        req.flash("error", "Email address already exists");
+      } else if (field === "phone") {
+        req.flash("error", "Phone number already exists");
+      } else {
+        req.flash("error", "Duplicate value detected");
+      }
+
+      return res.redirect("/register");
+    }
+
+    // Fallback error
+    req.flash("error", "Something went wrong. Please try again.");
+    return res.redirect("/register");
   }
 });
 
