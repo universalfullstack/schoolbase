@@ -116,7 +116,7 @@ app.use('/register', registerRoutes);
 
 // Super Admin routes
 app.use('/super-admin', superAdminRoutes);
-app.use('/admin', superAdminRoutes);
+app.use('/school-admin', superAdminRoutes);
 
 
 // 404 handler
