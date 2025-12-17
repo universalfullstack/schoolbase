@@ -106,7 +106,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Index routes
 app.use('/', indexRoutes);
 // Auth routes
-router.use('/auth', authRoutes);
+app.use('/auth', authRoutes);
 
 // Super Admin routes
 app.use('/super-admin', superAdminRoutes);
