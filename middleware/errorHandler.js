@@ -5,7 +5,7 @@ export default function errorHandler(err, req, res, next) {
   if (isProd) {
     // Production: hide stack trace
     console.error(err); // log to console or a file for debugging
-    res.status(err.status || 500).render("errors/any", {
+    res.status(err.status || 500).render("error", {
       message: "Something went wrong. Please try again later.",
       error: {} // empty object hides stack trace
     });
