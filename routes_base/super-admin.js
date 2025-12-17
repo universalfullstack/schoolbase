@@ -1,5 +1,4 @@
 import express from 'express';
-import { ensureRole } from '../middleware/auth.js';
 import { renderSuperAdminDashboard } from '../controllers/super_admin/dashboardController.js';
 import { renderSuperAdminProfile } from '../controllers/super_admin/profileController.js';
 import schoolRoutes from './school.js';
@@ -8,8 +7,6 @@ import planRoutes from './plan.js';
 import subscriptionRoutes from './subscription.js';
 
 const router = express.Router();
-
-router.use(ensureRole("Super Admin"));
 
 // GET dashboard
 router.get('/dashboard', renderSuperAdminDashboard);
