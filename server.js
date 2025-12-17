@@ -7,7 +7,11 @@ import MongoStore from 'connect-mongo';
 import subdomain from 'express-subdomain';
 import { engine } from 'express-handlebars';
 import hbsHelpers from './helpers/hbsHelpers.js';
+
 import indexRoutes from './routes_base/index.js';
+import authRoutes from './routes_base/auth.js';
+import superAdminRoutes from './routes_base/superAdmin.js';
+
 import errorHandler from './middleware/errorHandler.js';
 import appSettings from './middleware/appSettings.js';
 import passport from 'passport';
@@ -99,10 +103,24 @@ app.engine(
 // Set default views folder for base routes
 app.set('views', path.join(__dirname, 'views'));
 
-// Mount routes
+// Index routes
 app.use('/', indexRoutes);
+// Auth routes
+router.use('/auth', authRoutes);
 
-// Mount subdomain routes
+// Super Admin routes
+router.use('/super-admin', superAdminRoutes);
+
+/* SUPER ADMIN 404 — MUST BE LAST */
+router.use((req, res) => {
+  res.status(404).render('errors/404', {
+    layout: 'super-admin',
+    title: 'Super Admin Page Not Found',
+    message: 'This super admin page does not exist.',
+    backUrl: '/super-admin/dashboard'
+  });
+});
+
 
 // 404 handler
 app.use((req, res, next) => {
