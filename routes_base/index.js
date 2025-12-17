@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/login', (req, res) => {
-    res.render('login', {
+    res.render('auth/login', {
         layout: 'auth',
         title: 'Login'
     })
