@@ -3,6 +3,19 @@
   <!-- ================== STATISTICS CARDS ================== -->
   <div class="row g-3 mb-4">
 
+  <div class="mb-4">
+    <h1 class="display-6 fw-semibold">
+      {{user.role}} Dashboard
+    </h1>
+  </div>
+
+  {{#unless user.emailVerified}}
+    <div class="alert alert-warning d-flex align-items-center mb-4">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      Email not verified
+    </div>
+  {{/unless}}
+
     <!-- Total Students -->
     <div class="col-sm-6 col-md-3">
       <div class="card shadow-sm bg-primary bg-opacity-10 border-0 p-3 h-100">
