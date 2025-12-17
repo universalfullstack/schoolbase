@@ -16,6 +16,7 @@ import schoolAdminRoutes from './routes_base/school-admin.js';
 
 import errorHandler from './middleware/errorHandler.js';
 import appSettings from './middleware/appSettings.js';
+import { ensureRole } from './middleware/auth.js';
 import passport from 'passport';
 import configurePassport from './config/passport.js';
 import path from 'path';
@@ -115,8 +116,8 @@ app.use('/auth', authRoutes);
 app.use('/register', registerRoutes);
 
 // Super Admin routes
-app.use('/super-admin', superAdminRoutes);
-app.use('/school-admin', superAdminRoutes);
+app.use('/super-admin', ensureRole("Super Admin"), superAdminRoutes);
+app.use('/school-admin', ensureRole("School Admin"), superAdminRoutes);
 
 
 // 404 handler
