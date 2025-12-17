@@ -1,0 +1,77 @@
+<!-- ===================== login.hbs ===================== -->
+<div class="mui-container-fluid" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+  <div class="mui-col-md-4">
+
+    <div class="mui-panel">
+
+      <!-- Header -->
+      <div class="mui--text-headline mui--text-dark-secondary" style="text-align: center;">
+        <img src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}" 
+             alt="School Logo" 
+             style="max-height:80px; margin-bottom: 12px;" />
+        <h5 class="mui--text-title">Super Admin Login</h5>
+        <p class="mui--text-subhead mui--text-dark-secondary">Enter your credentials to continue</p>
+      </div>
+
+      <!-- Flash Messages -->
+      {{> flashMessages }}
+
+      <!-- Login Form -->
+      <form action="/auth/login" method="POST">
+        <input type="hidden" name="role" value="Super Admin" />
+
+        <!-- Email or Phone -->
+        <div class="mui-textfield mui-textfield--float-label" style="text-align: left;">
+          <input id="identifier" name="identifier" type="text" required />
+          <label for="identifier">Email or Phone</label>
+        </div>
+
+        <!-- Password -->
+        <div class="mui-textfield mui-textfield--float-label" style="text-align: left; position: relative;">
+          <input id="password" name="password" type="password" required />
+          <label for="password">Password</label>
+          <span id="togglePassword" class="material-icons" 
+                style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+            visibility
+          </span>
+        </div>
+
+        <!-- Remember Me -->
+        <label style="display: block; margin-top: 12px;">
+          <input type="checkbox" name="rememberMe" />
+          <span>Remember Me</span>
+        </label>
+
+        <!-- Submit -->
+        <div class="mui--text-center" style="margin-top: 16px;">
+          <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary mui--text-uppercase" style="width: 100%;">
+            Login
+          </button>
+        </div>
+      </form>
+
+      <!-- Forgot Password -->
+      <div class="mui--text-center" style="margin-top: 12px;">
+        <a href="/forgot-password">Forgot password?</a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{{#section "scripts"}}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+
+    toggle.addEventListener('click', function () {
+      const type = password.type === 'password' ? 'text' : 'password';
+      password.type = type;
+      toggle.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+    });
+  });
+</script>
+{{/section}}
