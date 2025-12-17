@@ -100,7 +100,7 @@ app.engine(
 app.set('views', path.join(__dirname, 'views'));
 
 // Mount routes
-app.use(indexRoutes);
+app.use('/', indexRoutes);
 
 // Mount subdomain routes
 
