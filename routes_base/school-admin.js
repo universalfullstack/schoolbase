@@ -3,12 +3,12 @@ import { ensureAuthenticated } from '../middleware/auth.js';
 import { schoolAlerts } from '../middleware/schoolAlerts.js';
 import {
 renderSchoolAdminDashboard,
-renderStudents,
+/*renderStudents,
 renderStaff,
 renderFees,
 renderInvoices,
 renderPayments,
-renderSchoolProfile
+renderSchoolProfile*/
 } from '../controllers/school_admin/dashboardController.js';
 
 const router = express.Router();
@@ -20,6 +20,7 @@ router.use(schoolAlerts);
 // Dashboard
 router.get('/dashboard', renderSchoolAdminDashboard);
 
+/*
 // Students
 router.get('/students', renderStudents);
 
@@ -37,5 +38,6 @@ router.get('/payments', renderPayments);
 
 // School Profile
 router.get('/school', renderSchoolProfile);
+*/
 
 export default router;
