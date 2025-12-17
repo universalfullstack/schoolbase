@@ -258,7 +258,7 @@
 
   /* ================= Subscription Status ================= */
   new Chart(document.getElementById('subscriptionStatusChart'), {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
       datasets: [{
