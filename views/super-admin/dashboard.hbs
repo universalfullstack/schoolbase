@@ -205,3 +205,87 @@
   </section>
 
 </div>
+
+{{#section "scripts"}}
+<!-- ================= CHART.JS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+
+<script>
+  const trendLabels  = {{{trendLabels}}};
+  const trendData    = {{{trendData}}};
+  const statusLabels = {{{statusLabels}}};
+  const statusData   = {{{statusData}}};
+
+  /* ================= Subscription Trend ================= */
+  new Chart(document.getElementById('subscriptionTrendChart'), {
+    type: 'line',
+    data: {
+      labels: trendLabels,
+      datasets: [{
+        label: 'New Subscriptions',
+        data: trendData,
+        borderColor: '#198754',              // Bootstrap success
+        backgroundColor: 'rgba(25,135,84,.15)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        pointBackgroundColor: '#198754'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#212529',
+          titleColor: '#fff',
+          bodyColor: '#dee2e6'
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(0,0,0,.05)' }
+        }
+      }
+    }
+  });
+
+  /* ================= Subscription Status ================= */
+  new Chart(document.getElementById('subscriptionStatusChart'), {
+    type: 'doughnut',
+    data: {
+      labels: statusLabels.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
+      datasets: [{
+        data: statusData,
+        backgroundColor: [
+          '#198754', // Active
+          '#dc3545', // Expired
+          '#ffc107', // Pending
+          '#6c757d'  // Cancelled
+        ],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            padding: 16
+          }
+        }
+      }
+    }
+  });
+</script>
+{{/section}}
