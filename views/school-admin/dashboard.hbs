@@ -4,37 +4,62 @@
   <div class="row g-3 mb-4">
 
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-center p-3">
-        <h6>Total Students</h6>
-        <h3>{{stats.totalStudents}}</h3>
+      <div class="card shadow-sm text-white p-3" style="background-color: #0d6efd;">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-people-fill fs-2 me-3"></i>
+          <div>
+            <h6>Total Students</h6>
+            <h3>{{stats.totalStudents}}</h3>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-center p-3">
-        <h6>Total Staff</h6>
-        <h3>{{stats.totalStaff}}</h3>
+      <div class="card shadow-sm text-white p-3" style="background-color: #198754;">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-person-badge fs-2 me-3"></i>
+          <div>
+            <h6>Total Staff</h6>
+            <h3>{{stats.totalStaff}}</h3>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-center p-3">
-        <h6>Total Guardians</h6>
-        <h3>{{stats.totalGuardians}}</h3>
+      <div class="card shadow-sm text-white p-3" style="background-color: #ffc107;">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-person-lines-fill fs-2 me-3"></i>
+          <div>
+            <h6>Total Guardians</h6>
+            <h3>{{stats.totalGuardians}}</h3>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-center p-3">
-        <h6>Total Invoices</h6>
-        <h3>{{stats.totalInvoices}}</h3>
+      <div class="card shadow-sm text-white p-3" style="background-color: #dc3545;">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-file-earmark-text fs-2 me-3"></i>
+          <div>
+            <h6>Total Invoices</h6>
+            <h3>{{stats.totalInvoices}}</h3>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="col-sm-12 col-md-6 col-lg-3">
-      <div class="card shadow-sm text-center p-3">
-        <h6>Total Revenue</h6>
-        <h3>₦{{stats.totalRevenue}}</h3>
+      <div class="card shadow-sm text-white p-3" style="background-color: #6f42c1;">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-currency-dollar fs-2 me-3"></i>
+          <div>
+            <h6>Total Revenue</h6>
+            <h3>₦{{stats.totalRevenue}}</h3>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -94,10 +119,10 @@ const ctx = document.getElementById('revenueChart');
 new Chart(ctx, {
   type: 'line',
   data: {
-    labels: {{{trendLabels}}},   // Example: ["Aug 2025","Sep 2025",...]
+    labels: {{{trendLabels}}},
     datasets: [{
       label: 'Revenue',
-      data: {{{trendData}}},      // Example: [12000, 15000, ...]
+      data: {{{trendData}}},
       borderColor: '#0d6efd',
       backgroundColor: 'rgba(13,110,253,0.1)',
       tension: 0.4,
