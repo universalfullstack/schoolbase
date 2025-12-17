@@ -63,9 +63,6 @@ const staffSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Global unique indexes
-staffSchema.index({ email: 1 }, { unique: true });
-staffSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Guardian --------------------
 const guardianSchema = new mongoose.Schema({
@@ -82,10 +79,6 @@ const guardianSchema = new mongoose.Schema({
     }
   }]
 }, { timestamps: true });
-
-// Global unique indexes
-guardianSchema.index({ email: 1 }, { unique: true });
-guardianSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Student --------------------
 const studentSchema = new mongoose.Schema({
@@ -104,10 +97,6 @@ const studentSchema = new mongoose.Schema({
   currentClassLevel: { type: mongoose.Schema.Types.ObjectId, ref: "ClassLevel" },
   currentClassArm: { type: mongoose.Schema.Types.ObjectId, ref: "ClassArm" }
 }, { timestamps: true });
-
-// Global unique indexes
-studentSchema.index({ email: 1 }, { unique: true });
-studentSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Export Models --------------------
 export const SuperAdmin = mongoose.model('SuperAdmin', superAdminSchema);
