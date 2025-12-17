@@ -67,7 +67,7 @@ export default function configurePassport() {
           }
 
 // Check user status
-          if (user.status == "Active") {
+          if (user.status !== "Active") {
             return done(null, false, {
               message: `Your account is currently ${user.status}`
             });
