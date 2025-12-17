@@ -11,8 +11,11 @@ export default function errorHandler(err, req, res, next) {
     });
   } else {
     // Development: show full error
-    res.status(err.status || 500).render("errors/error", {
-      message: err.message,
+    const statusCode = err.status || 500;
+    res.status(statusCode).render("errors/error", {
+code: statusCode,
+      title: "Server Error",
+message: err.message,
       error: err
     });
   }
