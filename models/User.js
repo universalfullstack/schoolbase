@@ -91,7 +91,7 @@ guardianSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Student --------------------
 const studentSchema = new mongoose.Schema({
-  ...baseUserSchema
+  ...baseUserSchema,
   ...authUserSchema,
   school: { type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true },
   role: { type: String, default: 'Student', immutable: true },
