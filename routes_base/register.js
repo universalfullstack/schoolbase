@@ -16,7 +16,7 @@ const hashPassword = async (password) => {
 router.get("/", async (req, res) => {
   const schools = await School.find({ deletedAt: null }).select("name").lean();
 
-  res.render("auth/register", {
+  res.render("register", {
     layout: "auth",
     title: "User Registration",
     schools
