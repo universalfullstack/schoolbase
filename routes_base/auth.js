@@ -12,7 +12,7 @@ router.post(
       if (err) return next(err);
       if (!user) {
         req.flash('error', info.message);
-        return res.redirect('/super-admin/login');
+        return res.redirect('/login');
       }
 
       req.logIn(user, (err) => {
