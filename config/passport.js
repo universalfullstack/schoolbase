@@ -66,6 +66,13 @@ export default function configurePassport() {
             });
           }
 
+// Check user status
+          if (user.status !== "Active") {
+            return done(null, false, {
+              message: `Your account is currently ${user.status}`
+            });
+          }
+
           // Optional: login enabled check
           if (user.loginEnabled === false) {
             return done(null, false, {
