@@ -17,6 +17,7 @@ router.get("/", async (req, res) => {
   const schools = await School.find({ deletedAt: null }).select("name");
 
   res.render("register", {
+    layout: "auth",
     title: "User Registration",
     schools
   });
