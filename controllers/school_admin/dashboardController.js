@@ -9,9 +9,7 @@ export const renderSchoolAdminDashboard = async (req, res) => {
 
     if (!schoolId) {
       return res.status(403).render("error", {
-        title: "403 error",
-        message: "No school assigned to this admin.",
-       backUrl: "/"
+        message: "No school assigned to this admin."
       });
     }
 
