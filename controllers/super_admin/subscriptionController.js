@@ -18,7 +18,7 @@ export const listSubscriptions = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    req.flash("error_msg", "Unable to fetch subscriptions.");
+    req.flash("error", "Unable to fetch subscriptions.");
     res.redirect("/super-admin");
   }
 };
@@ -37,7 +37,7 @@ export const createSubscriptionForm = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    req.flash("error_msg", "Unable to load form.");
+    req.flash("error", "Unable to load form.");
     res.redirect("/super-admin/subscriptions");
   }
 };
@@ -49,7 +49,7 @@ export const createSubscription = async (req, res) => {
 
     // Validate endDate
     if (new Date(endDate) < new Date()) {
-      req.flash("error_msg", "End date cannot be in the past.");
+      req.flash("error", "End date cannot be in the past.");
       return res.redirect("/super-admin/subscriptions/create");
     }
 
@@ -65,11 +65,11 @@ export const createSubscription = async (req, res) => {
     });
 
     await subscription.save();
-    req.flash("success_msg", "Subscription created successfully.");
+    req.flash("success", "Subscription created successfully.");
     res.redirect("/super-admin/subscriptions");
   } catch (err) {
     console.error(err);
-    req.flash("error_msg", err.message || "Failed to create subscription.");
+    req.flash("error", err.message || "Failed to create subscription.");
     res.redirect("/super-admin/subscriptions/create");
   }
 };
@@ -83,7 +83,7 @@ export const editSubscriptionForm = async (req, res) => {
       .lean();
 
     if (!subscription) {
-      req.flash("error_msg", "Subscription not found.");
+      req.flash("error", "Subscription not found.");
       return res.redirect("/super-admin/subscriptions");
     }
 
@@ -99,7 +99,7 @@ export const editSubscriptionForm = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    req.flash("error_msg", "Unable to load subscription.");
+    req.flash("error", "Unable to load subscription.");
     res.redirect("/super-admin/subscriptions");
   }
 };
@@ -118,7 +118,7 @@ export const updateSubscription = async (req, res) => {
 
     const subscription = await Subscription.findById(req.params.id);
     if (!subscription) {
-      req.flash("error_msg", "Subscription not found.");
+      req.flash("error", "Subscription not found.");
       return res.redirect("/super-admin/subscriptions");
     }
 
@@ -140,11 +140,11 @@ export const updateSubscription = async (req, res) => {
     }
 
     await subscription.save();
-    req.flash("success_msg", "Subscription updated successfully.");
+    req.flash("success", "Subscription updated successfully.");
     res.redirect("/super-admin/subscriptions");
   } catch (err) {
     console.error(err);
-    req.flash("error_msg", err.message || "Failed to update subscription.");
+    req.flash("error", err.message || "Failed to update subscription.");
     res.redirect(`/super-admin/subscriptions/edit/${req.params.id}`);
   }
 };
@@ -153,11 +153,11 @@ export const updateSubscription = async (req, res) => {
 export const deleteSubscription = async (req, res) => {
   try {
     await Subscription.findByIdAndDelete(req.params.id);
-    req.flash("success_msg", "Subscription deleted successfully.");
+    req.flash("success", "Subscription deleted successfully.");
     res.redirect("/super-admin/subscriptions");
   } catch (err) {
     console.error(err);
-    req.flash("error_msg", "Failed to delete subscription.");
+    req.flash("error", "Failed to delete subscription.");
     res.redirect("/super-admin/subscriptions");
   }
 };
