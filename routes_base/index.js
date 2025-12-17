@@ -13,9 +13,9 @@ router.get('/', (req, res) => {
 
 
 router.get('/login', (req, res) => {
-    res.render('super-admin/login', {
-        layout: 'super-admin-auth',
-        title: 'Super Admin Login'
+    res.render('login', {
+        layout: 'auth',
+        title: 'Login'
     })
 });
 
