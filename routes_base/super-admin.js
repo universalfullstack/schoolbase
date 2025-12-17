@@ -1,6 +1,6 @@
 import express from 'express';
 import { renderSuperAdminDashboard } from '../controllers/super_admin/dashboardController.js';
-import { renderSuperAdminProfile } from '../controllers/super_admin/profileController.js';
+import { renderProfile, updateProfile } from '../controllers/user/profileController.js';
 import schoolRoutes from './school.js';
 import settingRoutes from './setting.js';
 import planRoutes from './plan.js';
@@ -11,14 +11,16 @@ const router = express.Router();
 // GET dashboard
 router.get('/dashboard', renderSuperAdminDashboard);
 
+// Profile routes
+router.get('/profile', renderProfile)
+router.post('/profile', updateProfile)
+
 // Schools routes
 router.use('/schools', schoolRoutes);
 
 // Setting routes
 router.use('/settings', settingRoutes);
 
-// Super Admin profile routes
-router.use('/profile', renderSuperAdminProfile);
 
 // Settings routes
 router.use('/settings', settingRoutes);
@@ -31,7 +33,7 @@ router.use('/subscriptions', subscriptionRoutes);
 
 /* SUPER ADMIN 404 — MUST BE LAST */
 router.use((req, res) => {
-  res.status(404).render('errors/404', {
+  res.status(404).render('error', {
     layout: 'super-admin',
     title: 'Super Admin Page Not Found',
     message: 'This super admin page does not exist.',
