@@ -3,8 +3,9 @@
   <!-- ================== STATISTICS CARDS ================== -->
   <div class="row g-3 mb-4">
 
+    <!-- Total Students -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #0d6efd;">
+      <div class="card shadow-sm text-white p-3" style="background-color: #5a9bd4;">
         <div class="d-flex align-items-center">
           <i class="bi bi-people-fill fs-2 me-3"></i>
           <div>
@@ -15,8 +16,9 @@
       </div>
     </div>
 
+    <!-- Total Staff -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #198754;">
+      <div class="card shadow-sm text-white p-3" style="background-color: #4caf7f;">
         <div class="d-flex align-items-center">
           <i class="bi bi-person-badge fs-2 me-3"></i>
           <div>
@@ -27,8 +29,9 @@
       </div>
     </div>
 
+    <!-- Total Guardians -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #ffc107;">
+      <div class="card shadow-sm text-white p-3" style="background-color: #f4c26b;">
         <div class="d-flex align-items-center">
           <i class="bi bi-person-lines-fill fs-2 me-3"></i>
           <div>
@@ -39,8 +42,9 @@
       </div>
     </div>
 
+    <!-- Total Invoices -->
     <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #dc3545;">
+      <div class="card shadow-sm text-white p-3" style="background-color: #f79e6b;">
         <div class="d-flex align-items-center">
           <i class="bi bi-file-earmark-text fs-2 me-3"></i>
           <div>
@@ -51,8 +55,9 @@
       </div>
     </div>
 
+    <!-- Total Revenue -->
     <div class="col-sm-12 col-md-6 col-lg-3">
-      <div class="card shadow-sm text-white p-3" style="background-color: #6f42c1;">
+      <div class="card shadow-sm text-white p-3" style="background-color: #9370db;">
         <div class="d-flex align-items-center">
           <i class="bi bi-currency-dollar fs-2 me-3"></i>
           <div>
@@ -123,8 +128,8 @@ new Chart(ctx, {
     datasets: [{
       label: 'Revenue',
       data: {{{trendData}}},
-      borderColor: '#0d6efd',
-      backgroundColor: 'rgba(13,110,253,0.1)',
+      borderColor: '#5a9bd4',
+      backgroundColor: 'rgba(90,155,212,0.1)',
       tension: 0.4,
       fill: true
     }]
