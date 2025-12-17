@@ -8,8 +8,8 @@ export const renderSchoolAdminDashboard = async (req, res) => {
     const schoolId = req.user.school || req.user.schools?.[0];
 
     if (!schoolId) {
-      return res.status(403).render("errors/403", {
-        message: "No school assigned to this admin."
+      return res.status(403).render("error", {
+        code: "403", title: "403 Error", message: "No school assigned to this admin."
       });
     }
 
