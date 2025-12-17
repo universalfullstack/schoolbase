@@ -1,101 +1,161 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-7 col-md-9">
+<!-- ===================== register.hbs ===================== -->
+<div class="mui-container-fluid" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
 
-      <div class="card shadow-sm">
-        <div class="card-body p-4">
+  <div class="mui-col-md-5 mui-col-sm-10">
 
-          <h4 class="text-center mb-4">
-            <i class="bi bi-person-plus"></i>
-            {{title}}
-          </h4>
+    <div class="mui-panel">
 
-          {{> flashMessages }}
+      <!-- Header -->
+      <div class="mui--text-headline mui--text-dark-secondary" style="text-align: center;">
+        <img src="{{#if settings.branding.logo}}{{settings.branding.logo}}{{else}}/images/school-default.png{{/if}}" 
+             alt="School Logo" 
+             style="max-height:80px; margin-bottom: 12px;" />
 
-          <form method="POST">
+        <h5 class="mui--text-title">{{settings.general.systemName}} Portal</h5>
+        <p class="mui--text-subhead mui--text-dark-secondary">
+          Create an account to continue
+        </p>
+      </div>
 
-            <!-- Names -->
-            <div class="row g-3">
-              <div class="col-md-4">
-                <label class="form-label">First Name</label>
-                <input name="firstName" class="form-control" required>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Middle Name</label>
-                <input name="middleName" class="form-control">
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Last Name</label>
-                <input name="lastName" class="form-control" required>
-              </div>
-            </div>
+      <!-- Flash Messages -->
+      {{> flashMessages }}
 
-            <!-- Gender -->
-            <div class="mt-3">
-              <label class="form-label">Gender</label>
-              <select name="gender" class="form-select" required>
-                <option value="">Select</option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-            </div>
+      <!-- Registration Form -->
+      <form action="/register" method="POST">
 
-            <!-- Contact -->
-            <div class="row mt-3 g-3">
-              <div class="col-md-6">
-                <label class="form-label">Phone</label>
-                <input name="phone" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Email</label>
-                <input name="email" type="email" class="form-control" required>
-              </div>
-            </div>
-
-            <!-- Password -->
-            <div class="mt-3">
-              <label class="form-label">Password</label>
-              <input name="password" type="password" class="form-control" required>
-            </div>
-
-            <!-- School -->
-            {{#if (or (eq role "staff") (eq role "guardian") (eq role "student"))}}
-            <div class="mt-3">
-              <label class="form-label">School</label>
-              <select name="school" class="form-select" required>
-                <option value="">Select School</option>
-                {{#each schools}}
-                  <option value="{{_id}}">{{name}}</option>
-                {{/each}}
-              </select>
-            </div>
-            {{/if}}
-
-            <!-- School Admin -->
-            {{#if (eq role "school-admin")}}
-            <div class="mt-3">
-              <label class="form-label">Assign School</label>
-              <select name="schools" class="form-select">
-                <option value="">Select School</option>
-                {{#each schools}}
-                  <option value="{{_id}}">{{name}}</option>
-                {{/each}}
-              </select>
-            </div>
-            {{/if}}
-
-            <div class="d-grid mt-4">
-              <button class="btn btn-primary">
-                <i class="bi bi-check-circle"></i>
-                Register
-              </button>
-            </div>
-
-          </form>
-
+        <!-- Role -->
+        <div class="mui-select" style="margin-top: 16px;">
+          <select name="role" id="roleSelect" required>
+            <option value="">Register As</option>
+            <option value="School Admin">School Admin</option>
+            <option value="Staff">Staff</option>
+            <option value="Guardian">Guardian</option>
+            <option value="Student">Student</option>
+          </select>
+          <label>Role</label>
         </div>
+
+        <!-- Names -->
+        <div class="mui-textfield mui-textfield--float-label">
+          <input name="firstName" required />
+          <label>First Name</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+          <input name="middleName" />
+          <label>Middle Name</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+          <input name="lastName" required />
+          <label>Last Name</label>
+        </div>
+
+        <!-- Gender -->
+        <div class="mui-select">
+          <select name="gender" required>
+            <option value=""></option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+          <label>Gender</label>
+        </div>
+
+        <!-- Phone -->
+        <div class="mui-textfield mui-textfield--float-label">
+          <input name="phone" required />
+          <label>Phone Number</label>
+        </div>
+
+        <!-- Email -->
+        <div class="mui-textfield mui-textfield--float-label">
+          <input name="email" type="email" required />
+          <label>Email Address</label>
+        </div>
+
+        <!-- Password -->
+        <div class="mui-textfield mui-textfield--float-label" style="position: relative;">
+          <input id="password" name="password" type="password" required />
+          <label>Password</label>
+          <span id="togglePassword" class="material-icons"
+                style="position:absolute; right:8px; top:50%; transform:translateY(-50%); cursor:pointer;">
+            visibility
+          </span>
+        </div>
+
+        <!-- School (Staff / Guardian / Student) -->
+        <div class="mui-select mui--hide" id="schoolField">
+          <select name="school">
+            <option value=""></option>
+            {{#each schools}}
+              <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+          </select>
+          <label>School</label>
+        </div>
+
+        <!-- Schools (School Admin) -->
+        <div class="mui-select mui--hide" id="schoolsField">
+          <select name="schools">
+            <option value=""></option>
+            {{#each schools}}
+              <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+          </select>
+          <label>Assign School</label>
+        </div>
+
+        <!-- Submit -->
+        <div class="mui--text-center" style="margin-top: 20px;">
+          <button type="submit"
+                  class="mui-btn mui-btn--raised mui-btn--primary mui--text-uppercase"
+                  style="width:100%;">
+            Register
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Login Link -->
+      <div class="mui--text-center" style="margin-top: 14px;">
+        Already have an account?
+        <a href="/login">Login</a>
       </div>
 
     </div>
+
   </div>
 </div>
+
+{{#section "scripts"}}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const roleSelect   = document.getElementById('roleSelect');
+    const schoolField  = document.getElementById('schoolField');
+    const schoolsField = document.getElementById('schoolsField');
+    const toggle       = document.getElementById('togglePassword');
+    const password     = document.getElementById('password');
+
+    roleSelect.addEventListener('change', function () {
+      schoolField.classList.add('mui--hide');
+      schoolsField.classList.add('mui--hide');
+
+      if (['Staff', 'Guardian', 'Student'].includes(this.value)) {
+        schoolField.classList.remove('mui--hide');
+      }
+
+      if (this.value === 'School Admin') {
+        schoolsField.classList.remove('mui--hide');
+      }
+    });
+
+    toggle.addEventListener('click', function () {
+      const type = password.type === 'password' ? 'text' : 'password';
+      password.type = type;
+      toggle.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+    });
+
+  });
+</script>
+{{/section}}
