@@ -10,6 +10,7 @@ import hbsHelpers from './helpers/hbsHelpers.js';
 
 import indexRoutes from './routes_base/index.js';
 import authRoutes from './routes_base/auth.js';
+import registerRoutes from './routes_base/register.js';
 import superAdminRoutes from './routes_base/super-admin.js';
 
 import errorHandler from './middleware/errorHandler.js';
@@ -105,8 +106,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Index routes
 app.use('/', indexRoutes);
+
 // Auth routes
 app.use('/auth', authRoutes);
+
+// Register routes
+app.use('/register', registerRoutes);
 
 // Super Admin routes
 app.use('/super-admin', superAdminRoutes);
