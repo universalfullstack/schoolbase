@@ -109,7 +109,7 @@ app.use('/', indexRoutes);
 router.use('/auth', authRoutes);
 
 // Super Admin routes
-router.use('/super-admin', superAdminRoutes);
+app.use('/super-admin', superAdminRoutes);
 
 
 // 404 handler
