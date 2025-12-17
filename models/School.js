@@ -9,7 +9,7 @@ const SchoolSchema = new mongoose.Schema({
   logo: { type: String },
   status: { type: String, enum: ["Active", "Inactive", "Suspended"], default: "Active" },
 
-  sections: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Section' } ], // A school may have multiple sections or branches
+  subjects: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Subject' } ], // A school may have multiple subjects
 
   // Core academic references
   currentAcademicSession: { type: mongoose.Schema.Types.ObjectId, ref: "AcademicSession" },
