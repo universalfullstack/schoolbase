@@ -1,48 +1,142 @@
+<!-- ===================== Bootstrap Sidebar ===================== -->
+<ul class="list-unstyled mb-3">
+
+  <!-- Dashboard -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/dashboard"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/dashboard'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-speedometer2 me-2"></i>
+      Dashboard
+    </a>
+  </li>
+
+  <!-- Students -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/students"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/students'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-people me-2"></i>
+      Students
+    </a>
+  </li>
+
+  <!-- Staff -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/staff"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/staff'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-person-badge me-2"></i>
+      Staff
+    </a>
+  </li>
+
+  <!-- ===================== Academics ===================== -->
+  <div class="text-muted small mt-4 mb-2">
+    Academics
+  </div>
+
+  <!-- Classes -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/classes"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/classes'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-collection me-2"></i>
+      Classes
+    </a>
+  </li>
+
+  <!-- Subjects -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/subjects"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/subjects'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-book me-2"></i>
+      Subjects
+    </a>
+  </li>
+
+  <!-- Sessions -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/sessions"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/sessions'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-calendar-event me-2"></i>
+      Sessions
+    </a>
+  </li>
+
+  <!-- ===================== Finance ===================== -->
+  <div class="text-muted small mt-4 mb-2">
+    Finance
+  </div>
+
+  <!-- Fees -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/fees"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/fees'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-cash-coin me-2"></i>
+      Fees
+    </a>
+  </li>
+
+  <!-- Invoices -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/invoices"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/invoices'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-receipt me-2"></i>
+      Invoices
+    </a>
+  </li>
+
+  <!-- Payments -->
+  <li class="mb-1">
+    <a
+      href="/school-admin/payments"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/payments'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-credit-card me-2"></i>
+      Payments
+    </a>
+  </li>
+
+</ul>
+
+<!-- ===================== Settings ===================== -->
+<div class="text-muted small mt-4 mb-2">
+  Settings
+</div>
+
 <ul class="list-unstyled">
 
+  <!-- School Profile -->
   <li class="mb-1">
-    <a href="/school-admin/dashboard" class="btn w-100 text-start">
-      <i class="bi bi-speedometer2 me-2"></i> Dashboard
+    <a
+      href="/school-admin/school"
+      class="btn w-100 text-start d-flex align-items-center
+      {{#ifActive '/school-admin/school'}}bg-primary bg-opacity-10 text-primary{{/ifActive}}">
+      <i class="bi bi-building me-2"></i>
+      School Profile
     </a>
   </li>
 
+  <!-- Logout -->
   <li class="mb-1">
-    <a href="/school-admin/students" class="btn w-100 text-start">
-      <i class="bi bi-people me-2"></i> Students
-    </a>
-  </li>
-
-  <li class="mb-1">
-    <a href="/school-admin/staff" class="btn w-100 text-start">
-      <i class="bi bi-person-badge me-2"></i> Staff
-    </a>
-  </li>
-
-  <li class="text-muted small mt-4 mb-2">Finance</li>
-
-  <li class="mb-1">
-    <a href="/school-admin/fees" class="btn w-100 text-start">
-      <i class="bi bi-cash-coin me-2"></i> Fees
-    </a>
-  </li>
-
-  <li class="mb-1">
-    <a href="/school-admin/invoices" class="btn w-100 text-start">
-      <i class="bi bi-receipt me-2"></i> Invoices
-    </a>
-  </li>
-
-  <li class="mb-1">
-    <a href="/school-admin/payments" class="btn w-100 text-start">
-      <i class="bi bi-credit-card me-2"></i> Payments
-    </a>
-  </li>
-
-  <li class="text-muted small mt-4 mb-2">Settings</li>
-
-  <li class="mb-1">
-    <a href="/school-admin/school" class="btn w-100 text-start">
-      <i class="bi bi-building me-2"></i> School Profile
+    <a
+      href="/logout"
+      class="btn w-100 text-start d-flex align-items-center text-danger">
+      <i class="bi bi-box-arrow-right me-2"></i>
+      Logout
     </a>
   </li>
 
