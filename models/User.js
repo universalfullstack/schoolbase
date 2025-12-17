@@ -91,9 +91,9 @@ guardianSchema.index({ phone: 1 }, { unique: true });
 
 // -------------------- Student --------------------
 const studentSchema = new mongoose.Schema({
-  ...baseUserSchema,
+  ...baseUserSchema
+  ...authUserSchema,
   school: { type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true },
-  currentSection: { type: mongoose.Schema.Types.ObjectId, ref: 'Section', required: true },
   role: { type: String, default: 'Student', immutable: true },
   guardians: [{
     guardian: { type: mongoose.Schema.Types.ObjectId, ref: 'Guardian', required: true },
@@ -103,8 +103,6 @@ const studentSchema = new mongoose.Schema({
       required: true
     }
   }],
-  currentAcademicSession: { type: mongoose.Schema.Types.ObjectId, ref: "AcademicSession" },
-  currentTerm: { type: mongoose.Schema.Types.ObjectId, ref: "Term" },
   currentClassLevel: { type: mongoose.Schema.Types.ObjectId, ref: "ClassLevel" },
   currentClassArm: { type: mongoose.Schema.Types.ObjectId, ref: "ClassArm" }
 }, { timestamps: true });
