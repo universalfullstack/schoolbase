@@ -23,7 +23,7 @@ router.get("/register/:role", async (req, res) => {
     return res.status(404).render("errors/404");
   }
 
-  res.render("auth/register", {
+  res.render("register", {
     title: `${role.replace("-", " ")} Registration`,
     role,
     schools
