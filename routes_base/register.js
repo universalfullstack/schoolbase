@@ -13,7 +13,7 @@ const hashPassword = async (password) => {
 /* ===============================
    Render Registration Form
 ================================ */
-router.get("/register/:role", async (req, res) => {
+router.get("/:role", async (req, res) => {
   const { role } = req.params;
 
   const schools = await School.find().select("name");
@@ -33,7 +33,7 @@ router.get("/register/:role", async (req, res) => {
 /* ===============================
    Handle Registration
 ================================ */
-router.post("/register/:role", async (req, res) => {
+router.post("/:role", async (req, res) => {
   try {
     const { role } = req.params;
     const data = req.body;
