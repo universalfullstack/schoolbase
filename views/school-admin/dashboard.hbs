@@ -1,139 +1,168 @@
 <div class="container-fluid py-4">
 
-  <!-- ================== STATISTICS CARDS ================== -->
-  <div class="row g-3 mb-4">
-
-  <div class="mb-4">
-    <h1 class="display-6 fw-semibold">
-      {{user.role}} Dashboard
-    </h1>
+  <!-- ================== PAGE HEADER ================== -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+    <div>
+      <h1 class="h3 fw-semibold mb-1">{{user.role}} Dashboard</h1>
+      <p class="text-muted mb-0">Overview of your school activity</p>
+    </div>
   </div>
 
   {{#unless user.emailVerified}}
     <div class="alert alert-warning d-flex align-items-center mb-4">
-      <i class="bi bi-exclamation-triangle-fill me-2"></i>
-      Email not verified
+      <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+      <span>Email not verified. Please verify your email to unlock all features.</span>
     </div>
   {{/unless}}
 
-    <!-- Total Students -->
-    <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm bg-primary bg-opacity-10 border-0 p-3 h-100">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-people-fill fs-2 me-3"></i>
-          <div>
-            <h6 class="mb-1">Total Students</h6>
-            <h3 class="mb-0">{{stats.totalStudents}}</h3>
+  <!-- ================== STATISTICS ================== -->
+  <section class="mb-5">
+    <div class="row g-3">
+
+      <!-- Card Template Pattern -->
+      <!-- Icon (muted) | Value (bold) | Label (small) -->
+
+      <!-- Total Students -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm bg-primary bg-opacity-10 h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small mb-1">Total Students</div>
+              <div class="fs-3 fw-bold text-primary">
+                {{stats.totalStudents}}
+              </div>
+            </div>
+            <i class="bi bi-people-fill fs-1 text-primary opacity-75"></i>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Total Staff -->
-    <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm bg-success bg-opacity-10 border-0 p-3 h-100">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-person-badge-fill fs-2 me-3"></i>
-          <div>
-            <h6 class="mb-1">Total Staff</h6>
-            <h3 class="mb-0">{{stats.totalStaff}}</h3>
+      <!-- Total Staff -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm bg-success bg-opacity-10 h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small mb-1">Total Staff</div>
+              <div class="fs-3 fw-bold text-success">
+                {{stats.totalStaff}}
+              </div>
+            </div>
+            <i class="bi bi-person-badge-fill fs-1 text-success opacity-75"></i>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Total Guardians -->
-    <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm bg-warning bg-opacity-10 border-0 p-3 h-100">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-person-lines-fill fs-2 me-3"></i>
-          <div>
-            <h6 class="mb-1">Total Guardians</h6>
-            <h3 class="mb-0">{{stats.totalGuardians}}</h3>
+      <!-- Total Guardians -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm bg-warning bg-opacity-10 h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small mb-1">Total Guardians</div>
+              <div class="fs-3 fw-bold text-warning">
+                {{stats.totalGuardians}}
+              </div>
+            </div>
+            <i class="bi bi-person-lines-fill fs-1 text-warning opacity-75"></i>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Total Invoices -->
-    <div class="col-sm-6 col-md-3">
-      <div class="card shadow-sm bg-info bg-opacity-10 border-0 p-3 h-100">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-file-earmark-text-fill fs-2 me-3"></i>
-          <div>
-            <h6 class="mb-1">Total Invoices</h6>
-            <h3 class="mb-0">{{stats.totalInvoices}}</h3>
+      <!-- Total Invoices -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm bg-info bg-opacity-10 h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small mb-1">Total Invoices</div>
+              <div class="fs-3 fw-bold text-info">
+                {{stats.totalInvoices}}
+              </div>
+            </div>
+            <i class="bi bi-file-earmark-text-fill fs-1 text-info opacity-75"></i>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Total Revenue -->
-    <div class="col-sm-12 col-md-6 col-lg-3">
-      <div class="card shadow-sm bg-secondary bg-opacity-10 border-0 p-3 h-100">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-cash-coin fs-2 me-3"></i>
-          <div>
-            <h6 class="mb-1">Total Revenue</h6>
-            <h3 class="mb-0">₦{{stats.totalRevenue}}</h3>
+      <!-- Total Revenue -->
+      <div class="col-sm-12 col-lg-4">
+        <div class="card border-0 shadow-sm bg-secondary bg-opacity-10 h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small mb-1">Total Revenue</div>
+              <div class="fs-3 fw-bold text-secondary">
+                ₦{{stats.totalRevenue}}
+              </div>
+            </div>
+            <i class="bi bi-cash-coin fs-1 text-secondary opacity-75"></i>
           </div>
         </div>
       </div>
-    </div>
 
-  </div>
+    </div>
+  </section>
 
   <!-- ================== LATEST PAYMENTS ================== -->
-  <div class="card shadow-sm mb-4 border-0">
-    <div class="card-body">
-      <h5 class="mb-3">
-        <i class="bi bi-clock-history me-2"></i>
-        Latest Payments
-      </h5>
+  <section class="mb-5">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-transparent border-bottom-0 pb-0">
+        <h5 class="fw-semibold mb-0">
+          <i class="bi bi-clock-history me-2 text-primary"></i>
+          Latest Payments
+        </h5>
+      </div>
 
-      <div class="table-responsive">
-        <table class="table table-striped align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>Student</th>
-              <th>Invoice</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Method</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each latestPayments}}
-            <tr>
-              <td>{{this.student}}</td>
-              <td>{{this.invoice}}</td>
-              <td>₦{{this.amount}}</td>
-              <td>{{this.date}}</td>
-              <td>{{this.method}}</td>
-            </tr>
-            {{else}}
-            <tr>
-              <td colspan="5" class="text-center text-muted">
-                No payments yet
-              </td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
+      <div class="card-body pt-2">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light small text-uppercase">
+              <tr>
+                <th>Student</th>
+                <th>Invoice</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each latestPayments}}
+              <tr>
+                <td class="fw-medium">{{this.student}}</td>
+                <td>{{this.invoice}}</td>
+                <td class="fw-semibold">₦{{this.amount}}</td>
+                <td>{{this.date}}</td>
+                <td>
+                  <span class="badge bg-light text-dark">
+                    {{this.method}}
+                  </span>
+                </td>
+              </tr>
+              {{else}}
+              <tr>
+                <td colspan="5" class="text-center text-muted py-4">
+                  No payments recorded yet
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ================== REVENUE TREND ================== -->
-  <div class="card shadow-sm border-0">
-    <div class="card-body">
-      <h5 class="mb-3">
-        <i class="bi bi-graph-up-arrow me-2"></i>
-        Revenue Trend (Last 6 Months)
-      </h5>
-      <canvas id="revenueChart" height="110"></canvas>
+  <section>
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-transparent border-bottom-0 pb-0">
+        <h5 class="fw-semibold mb-0">
+          <i class="bi bi-graph-up-arrow me-2 text-primary"></i>
+          Revenue Trend (Last 6 Months)
+        </h5>
+      </div>
+      <div class="card-body pt-2">
+        <canvas id="revenueChart" height="110"></canvas>
+      </div>
     </div>
-  </div>
+  </section>
 
 </div>
 
@@ -147,10 +176,9 @@ new Chart(ctx, {
   data: {
     labels: {{{trendLabels}}},
     datasets: [{
-      label: 'Revenue',
       data: {{{trendData}}},
       borderColor: '#0d6efd',
-      backgroundColor: 'rgba(13,110,253,0.1)',
+      backgroundColor: 'rgba(13,110,253,0.12)',
       tension: 0.4,
       fill: true
     }]
