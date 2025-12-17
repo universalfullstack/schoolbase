@@ -12,6 +12,7 @@ import indexRoutes from './routes_base/index.js';
 import authRoutes from './routes_base/auth.js';
 import registerRoutes from './routes_base/register.js';
 import superAdminRoutes from './routes_base/super-admin.js';
+import schoolAdminRoutes from './routes_base/school-admin.js';
 
 import errorHandler from './middleware/errorHandler.js';
 import appSettings from './middleware/appSettings.js';
@@ -115,6 +116,7 @@ app.use('/register', registerRoutes);
 
 // Super Admin routes
 app.use('/super-admin', superAdminRoutes);
+app.use('/admin', superAdminRoutes);
 
 
 // 404 handler
