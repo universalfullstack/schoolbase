@@ -11,7 +11,7 @@ export default function errorHandler(err, req, res, next) {
     });
   } else {
     // Development: show full error
-    res.status(err.status || 500).render("error", {
+    res.status(err.status || 500).render("errors/error", {
       message: err.message,
       error: err
     });
