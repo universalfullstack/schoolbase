@@ -123,7 +123,7 @@ app.use('/school-admin', ensureRole("School Admin"), schoolAdminRoutes);
 
 // 404 handler
 app.use((req, res, next) => {
-  res.status(404).render("errors/404", { title: "Page not found", message: `This link doesn’t point to anything anymore — it may be outdated, mistyped,
+  res.status(404).render("errors", { code: "404 Not Found", title: "Page not found", message: `This link doesn’t point to anything anymore — it may be outdated, mistyped,
     or no longer available.`, backUrl: "/" });
 });
 
