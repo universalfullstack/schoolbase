@@ -119,7 +119,7 @@ app.use('/super-admin', superAdminRoutes);
 
 // 404 handler
 app.use((req, res, next) => {
-  res.status(404).render("error", { message: "Page not found", error: {} });
+  res.status(404).render("errors/404", { message: "Page not found", error: {} });
 });
 
 // Error handler
