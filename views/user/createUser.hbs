@@ -1,0 +1,61 @@
+<div class="container-fluid py-4">
+  <h1 class="h3 mb-4">{{title}}</h1>
+
+  {{#if success}}
+    <div class="alert alert-success">{{success}}</div>
+  {{/if}}
+  {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+  {{/if}}
+
+  <form 
+    action="{{#if user}}/manage/{{role === 'Staff' ? 'staff' : 'school-admins'}}/{{user._id}}/edit{{else}}/manage/{{role === 'Staff' ? 'staff/create' : 'school-admins/create'}}{{/if}}" 
+    method="POST" 
+    class="row g-3"
+  >
+    <div class="col-md-6">
+      <label class="form-label">First Name</label>
+      <input type="text" name="firstName" class="form-control" value="{{user.firstName}}" required>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Last Name</label>
+      <input type="text" name="lastName" class="form-control" value="{{user.lastName}}" required>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input type="email" name="email" class="form-control" value="{{user.email}}" required>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Phone</label>
+      <input type="text" name="phone" class="form-control" value="{{user.phone}}" required>
+    </div>
+
+    {{#if (eq role "Staff")}}
+    <div class="col-md-12">
+      <label class="form-label">Staff Roles</label>
+      <select name="staffRoles" class="form-select" multiple required>
+        <option value="Super Admin" {{#if user.staffRoles.includes "Super Admin"}}selected{{/if}}>Super Admin</option>
+        <option value="Principal" {{#if user.staffRoles.includes "Principal"}}selected{{/if}}>Principal</option>
+        <option value="Teacher" {{#if user.staffRoles.includes "Teacher"}}selected{{/if}}>Teacher</option>
+        <option value="Cashier" {{#if user.staffRoles.includes "Cashier"}}selected{{/if}}>Cashier</option>
+      </select>
+      <small class="text-muted">Hold Ctrl (Windows) or Command (Mac) to select multiple roles.</small>
+    </div>
+    {{/if}}
+
+    {{#unless user}}
+    <div class="col-md-6">
+      <label class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" required>
+    </div>
+    {{/unless}}
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">{{#if user}}Update{{else}}Create{{/if}} {{role}}</button>
+      <a href="/manage/{{role === 'Staff' ? 'staff' : 'school-admins'}}" class="btn btn-secondary ms-2">Cancel</a>
+    </div>
+  </form>
+</div>
