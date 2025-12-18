@@ -5,7 +5,7 @@ import schoolRoutes from './school.js';
 import settingRoutes from './setting.js';
 import planRoutes from './plan.js';
 import subscriptionRoutes from './subscription.js';
-import { uploadSingle } from "../utils/imageUploader";
+import { uploadSingle } from "../utils/imageUploader.js";
 const router = express.Router();
 
 // GET dashboard
