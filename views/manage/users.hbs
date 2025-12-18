@@ -1,0 +1,39 @@
+<div class="container-fluid py-4">
+  <h1 class="h3 mb-4">{{title}}</h1>
+
+  <a href="/manage/{{role}}/create" class="btn btn-primary mb-3">Create New {{role}}</a>
+
+  <table class="table table-bordered align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        {{#if (eq role "Staff")}}<th>Roles</th>{{/if}}
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+        <tr>
+          <td>{{this.firstName}} {{this.lastName}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.phone}}</td>
+          {{#if (eq ../role "Staff")}}
+            <td>{{this.staffRoles.join ", "}}</td>
+          {{/if}}
+          <td>
+            <a href="/manage/{{../role}}/{{this._id}}/edit" class="btn btn-sm btn-warning">Edit</a>
+            <form action="/manage/{{../role}}/{{this._id}}/delete" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="5" class="text-center text-muted">No users found</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
