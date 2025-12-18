@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-// Base user schema
+// -------------------- Base User Schema --------------------
 const baseUserSchema = {
   firstName: { type: String, trim: true, required: true },
-  middleName: { type: String, trim: true, required: false },
+  middleName: { type: String, trim: true },
   lastName: { type: String, trim: true, required: true },
   gender: { type: String, enum: ['Male', 'Female'], required: true },
   dateOfBirth: { type: Date },
@@ -12,7 +12,7 @@ const baseUserSchema = {
   profileImage: { type: String, default: null }
 };
 
-// Authentication fields
+// -------------------- Auth Schema --------------------
 const authUserSchema = {
   phone: {
     type: String,
@@ -57,12 +57,36 @@ const staffSchema = new mongoose.Schema({
   role: { type: String, default: 'Staff', immutable: true },
   staffRoles: {
     type: [String],
-    enum: ['Super Admin', 'Principal', 'Teacher', 'Cashier'],
+    enum: ['Principal', 'Teacher', 'Cashier', 'Librarian', 'Counselor'],
     default: ['Teacher'],
     required: true
+  },
+  permissions: {
+    type: [String],
+    default: [],
   }
 }, { timestamps: true });
 
+// Auto-assign permissions based on staffRoles
+staffSchema.pre('save', function () {
+  if (!this.permissions || this.permissions.length === 0) {
+    const rolePermMap = {
+      Principal: ['manage_staff', 'manage_students', 'manage_classes', 'view_reports'],
+      Teacher: ['manage_classes', 'view_students', 'submit_grades'],
+      Cashier: ['manage_fees', 'view_payments'],
+      Librarian: ['manage_library', 'view_books'],
+      Counselor: ['view_students', 'counsel_students']
+    };
+
+    const perms = new Set();
+    this.staffRoles.forEach(role => {
+      if (rolePermMap[role]) {
+        rolePermMap[role].forEach(p => perms.add(p));
+      }
+    });
+    this.permissions = Array.from(perms);
+  }
+});
 
 // -------------------- Guardian --------------------
 const guardianSchema = new mongoose.Schema({
