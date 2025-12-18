@@ -71,8 +71,7 @@ export const renderProfile = (req, res) => {
 
   res.render("user/profile", {
     layout: config.layout,
-    title: "My Profile",
-    user: req.user
+    title: "My Profile"
   });
 };
 
