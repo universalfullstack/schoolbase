@@ -24,37 +24,27 @@ const ROLE_MODEL_MAP = {
 };
 
 /* =========================================
-   ROLE → VIEW / LAYOUT / PATH MAP
+   ROLE → LAYOUT / REDIRECT MAP
 ========================================= */
 const ROLE_CONFIG_MAP = {
   "Super Admin": {
-    view: "super-admin/profile",
     layout: "super-admin",
-    title: "Profile",
     redirect: "/super-admin/profile"
   },
   "School Admin": {
-    view: "school-admin/profile",
     layout: "school-admin",
-    title: "Profile",
     redirect: "/school-admin/profile"
   },
   "Staff": {
-    view: "staff/profile",
     layout: "staff",
-    title: "Profile",
     redirect: "/staff/profile"
   },
   "Guardian": {
-    view: "guardian/profile",
     layout: "guardian",
-    title: "Profile",
     redirect: "/guardian/profile"
   },
   "Student": {
-    view: "student/profile",
     layout: "student",
-    title: "Profile",
     redirect: "/student/profile"
   }
 };
@@ -66,7 +56,7 @@ const getUserModel = (role) => ROLE_MODEL_MAP[role] || null;
 const getRoleConfig = (role) => ROLE_CONFIG_MAP[role] || null;
 
 /* =========================================
-   RENDER PROFILE
+   RENDER PROFILE (SINGLE VIEW)
 ========================================= */
 export const renderProfile = (req, res) => {
   const config = getRoleConfig(req.user.role);
@@ -79,9 +69,10 @@ export const renderProfile = (req, res) => {
     });
   }
 
-  res.render(config.view, {
+  res.render("user/profile", {
     layout: config.layout,
-    title: config.title,
+    title: "My Profile",
+    user: req.user
   });
 };
 
@@ -93,6 +84,7 @@ export const updateProfile = async (req, res) => {
 
   try {
     const UserModel = getUserModel(req.user.role);
+
     if (!UserModel || !config) {
       req.flash("error", "Invalid user role");
       return res.redirect("/profile");
