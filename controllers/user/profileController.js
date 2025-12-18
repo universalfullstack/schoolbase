@@ -24,33 +24,38 @@ const ROLE_MODEL_MAP = {
 };
 
 /* =========================================
-   ROLE → VIEW / LAYOUT MAP
+   ROLE → VIEW / LAYOUT / PATH MAP
 ========================================= */
-const ROLE_VIEW_MAP = {
+const ROLE_CONFIG_MAP = {
   "Super Admin": {
     view: "super-admin/profile",
     layout: "super-admin",
-    title: "Profile"
+    title: "Profile",
+    redirect: "/super-admin/profile"
   },
   "School Admin": {
     view: "school-admin/profile",
     layout: "school-admin",
-    title: "Profile"
+    title: "Profile",
+    redirect: "/school-admin/profile"
   },
   "Staff": {
     view: "staff/profile",
     layout: "staff",
-    title: "Profile"
+    title: "Profile",
+    redirect: "/staff/profile"
   },
   "Guardian": {
     view: "guardian/profile",
     layout: "guardian",
-    title: "Profile"
+    title: "Profile",
+    redirect: "/guardian/profile"
   },
   "Student": {
     view: "student/profile",
     layout: "student",
-    title: "Profile"
+    title: "Profile",
+    redirect: "/student/profile"
   }
 };
 
@@ -58,15 +63,15 @@ const ROLE_VIEW_MAP = {
    HELPERS
 ========================================= */
 const getUserModel = (role) => ROLE_MODEL_MAP[role] || null;
-const getViewConfig = (role) => ROLE_VIEW_MAP[role] || null;
+const getRoleConfig = (role) => ROLE_CONFIG_MAP[role] || null;
 
 /* =========================================
    RENDER PROFILE
 ========================================= */
 export const renderProfile = (req, res) => {
-  const viewConfig = getViewConfig(req.user.role);
+  const config = getRoleConfig(req.user.role);
 
-  if (!viewConfig) {
+  if (!config) {
     return res.status(403).render("error", {
       code: "403",
       title: "Access Denied",
@@ -74,9 +79,10 @@ export const renderProfile = (req, res) => {
     });
   }
 
-  res.render(viewConfig.view, {
-    layout: viewConfig.layout,
-    title: viewConfig.title
+  res.render(config.view, {
+    layout: config.layout,
+    title: config.title,
+    user: req.user
   });
 };
 
@@ -84,9 +90,11 @@ export const renderProfile = (req, res) => {
    UPDATE PROFILE
 ========================================= */
 export const updateProfile = async (req, res) => {
+  const config = getRoleConfig(req.user.role);
+
   try {
     const UserModel = getUserModel(req.user.role);
-    if (!UserModel) {
+    if (!UserModel || !config) {
       req.flash("error", "Invalid user role");
       return res.redirect("/profile");
     }
@@ -122,11 +130,11 @@ export const updateProfile = async (req, res) => {
     });
 
     req.flash("success", "Profile updated successfully");
-    res.redirect("/profile");
+    res.redirect(config.redirect);
 
   } catch (err) {
     console.error("Profile Update Error:", err);
     req.flash("error", "Could not update profile");
-    res.redirect("/profile");
+    res.redirect(config?.redirect || "/profile");
   }
 };
