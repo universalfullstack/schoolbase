@@ -5,7 +5,7 @@ import schoolRoutes from './school.js';
 import settingRoutes from './setting.js';
 import planRoutes from './plan.js';
 import subscriptionRoutes from './subscription.js';
-
+import { uploadSingle } from "../../utils/imageUploader";
 const router = express.Router();
 
 // GET dashboard
@@ -13,7 +13,7 @@ router.get('/dashboard', renderSuperAdminDashboard);
 
 // Profile routes
 router.get('/profile', renderProfile)
-router.post('/profile', updateProfile)
+router.post('/profile', uploadSingle("profileImage"), updateProfile)
 
 // Schools routes
 router.use('/schools', schoolRoutes);
