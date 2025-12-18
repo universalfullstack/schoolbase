@@ -82,7 +82,6 @@ export const renderProfile = (req, res) => {
   res.render(config.view, {
     layout: config.layout,
     title: config.title,
-    user: req.user
   });
 };
 
