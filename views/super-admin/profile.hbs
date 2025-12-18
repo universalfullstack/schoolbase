@@ -127,56 +127,86 @@
   </div>
 </div>
 
-<!-- ================= SCRIPTS ================= -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!-- ================= DATE PICKER (Tempus Dominus - Bootstrap 5) ================= -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js"></script>
+
 <script>
-  // Initialize Flatpickr
-  flatpickr("#dobPicker", {
-    dateFormat: "Y-m-d",
-    maxDate: "today",
-    altInput: true,
-    altFormat: "F j, Y"
-  });
+  document.addEventListener("DOMContentLoaded", function () {
 
-  // Drag & Drop Profile Image
-  const dropzone = document.getElementById('profile-dropzone');
-  const fileInput = document.getElementById('profileImageInput');
-  const preview = document.getElementById('profilePreview');
-  const overlay = dropzone.querySelector('.overlay');
+    /* ================= DATE OF BIRTH PICKER ================= */
+    new tempusDominus.TempusDominus(
+      document.getElementById("dobPicker"),
+      {
+        display: {
+          components: {
+            calendar: true,
+            date: true,
+            month: true,
+            year: true,
+            decades: true,
+            clock: false
+          },
+          buttons: {
+            today: true,
+            clear: true,
+            close: true
+          }
+        },
+        localization: {
+          format: "yyyy-MM-dd"
+        },
+        restrictions: {
+          maxDate: new Date()
+        }
+      }
+    );
 
-  dropzone.addEventListener('click', () => fileInput.click());
-  dropzone.addEventListener('mouseenter', () => overlay.style.opacity = 1);
-  dropzone.addEventListener('mouseleave', () => overlay.style.opacity = 0);
+    /* ================= DRAG & DROP PROFILE IMAGE ================= */
+    const dropzone = document.getElementById('profile-dropzone');
+    const fileInput = document.getElementById('profileImageInput');
+    const preview = document.getElementById('profilePreview');
+    const overlay = dropzone.querySelector('.overlay');
 
-  fileInput.addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = e => preview.src = e.target.result;
-      reader.readAsDataURL(file);
-    }
-  });
+    dropzone.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('mouseenter', () => overlay.style.opacity = 1);
+    dropzone.addEventListener('mouseleave', () => overlay.style.opacity = 0);
 
-  dropzone.addEventListener('dragover', e => {
-    e.preventDefault();
-    overlay.style.opacity = 1;
-  });
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = e => preview.src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
 
-  dropzone.addEventListener('dragleave', e => {
-    e.preventDefault();
-    overlay.style.opacity = 0;
-  });
+    dropzone.addEventListener('dragover', e => {
+      e.preventDefault();
+      overlay.style.opacity = 1;
+    });
 
-  dropzone.addEventListener('drop', e => {
-    e.preventDefault();
-    overlay.style.opacity = 0;
+    dropzone.addEventListener('dragleave', e => {
+      e.preventDefault();
+      overlay.style.opacity = 0;
+    });
 
-    const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith('image/')) {
-      fileInput.files = e.dataTransfer.files;
-      const reader = new FileReader();
-      reader.onload = e => preview.src = e.target.result;
-      reader.readAsDataURL(file);
-    }
+    dropzone.addEventListener('drop', e => {
+      e.preventDefault();
+      overlay.style.opacity = 0;
+
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        fileInput.files = e.dataTransfer.files;
+        const reader = new FileReader();
+        reader.onload = e => preview.src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
+
   });
 </script>
