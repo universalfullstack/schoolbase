@@ -5,7 +5,6 @@ import schoolRoutes from './school.js';
 import settingRoutes from './setting.js';
 import planRoutes from './plan.js';
 import subscriptionRoutes from './subscription.js';
-import registerRoutes from './register.js';
 import { uploadSingle } from "../utils/imageUploader.js";
 const router = express.Router();
 
@@ -31,9 +30,6 @@ router.use('/plans', planRoutes);
 
 // Subscription routes
 router.use('/subscriptions', subscriptionRoutes);
-
-// Registration routes
-router.use('/register', registerRoutes);
 
 /* SUPER ADMIN 404 — MUST BE LAST */
 router.use((req, res) => {
