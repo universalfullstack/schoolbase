@@ -48,7 +48,9 @@
               <i class="bi bi-camera fs-1"></i>
             </div>
           </div>
-         <input type="hidden" name="role" value="Super Admin">
+
+          <input type="hidden" name="role" value="Super Admin">
+
           <input
             type="file"
             id="profileImageInput"
@@ -94,9 +96,18 @@
                 </select>
               </div>
 
+              <!-- ✅ DATE PICKER FIX -->
               <div class="col-md-6">
                 <label class="form-label">Date of Birth</label>
-                <input type="text" id="dobPicker" name="dateOfBirth" class="form-control" value="{{#if user.dateOfBirth}}{{user.dateOfBirth}}{{/if}}" placeholder="Select date">
+                <input
+                  type="text"
+                  id="dobPicker"
+                  name="dateOfBirth"
+                  class="form-control"
+                  value="{{#if user.dateOfBirth}}{{user.dateOfBirth}}{{/if}}"
+                  data-default-date="{{#if user.dateOfBirth}}{{user.dateOfBirth}}{{/if}}"
+                  placeholder="Select date"
+                >
               </div>
 
               <div class="col-md-6">
@@ -116,7 +127,9 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary mt-4 w-100">Update Profile</button>
+            <button type="submit" class="btn btn-primary mt-4 w-100">
+              Update Profile
+            </button>
 
           </div>
         </div>
@@ -127,18 +140,25 @@
   </div>
 </div>
 
+{{#section "styles"}}
+<!-- ================= FLATPICKR CSS ================= -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{{/section}}
+
+{{#section "scripts"}}
 <!-- ================= SCRIPTS ================= -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-  // Initialize Flatpickr
+  /* ================= DATE PICKER ================= */
   flatpickr("#dobPicker", {
     dateFormat: "Y-m-d",
-    maxDate: "today",
     altInput: true,
-    altFormat: "F j, Y"
+    altFormat: "F j, Y",
+    maxDate: "today",
+    defaultDate: document.getElementById("dobPicker").dataset.defaultDate || null
   });
 
-  // Drag & Drop Profile Image
+  /* ================= IMAGE UPLOAD ================= */
   const dropzone = document.getElementById('profile-dropzone');
   const fileInput = document.getElementById('profileImageInput');
   const preview = document.getElementById('profilePreview');
@@ -180,3 +200,4 @@
     }
   });
 </script>
+{{/section}}
